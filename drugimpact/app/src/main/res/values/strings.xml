@@ -1,8 +1,17 @@
 <resources>
-    <string name="app_name">drugimpact</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <!--Activity strings-->
+    <string name="app_name">Drug Impact</string>
+    <string name="tab_text_1">Home</string>
+    <string name="tab_text_2">Drugs</string>
+    <string name="tab_text_3">Reminders</string>
+    <string name="tab_text_4">Community</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <!--Fragment strings-->
+    <string name="frag_button1">Separate Class</string>
+    <string name="frag_button2">Inner Class</string>
+    <string name="frag_button3">Anonymous Inner Class</string>
+    <string name="action_above">Above</string>
+    <string name="action_below">Below</string>
+    <string name="action_as_action">See me?</string>
 </resources>
