@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="welcome_reminder">#95edba</color>
+    <color name="welcome_newcomment">#dbe3ff</color>
+    <color name="welcome_selfpost">#ffebdb</color>
 </resources>
