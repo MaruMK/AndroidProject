@@ -81,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 break;
-            case R.id.action_as_action:
-                break;
         }
 
 
