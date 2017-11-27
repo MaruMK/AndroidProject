@@ -2,6 +2,8 @@ package net.caesarlegion.drugimpact.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ public class BrowseDrugsFragment extends Fragment {
     private Spinner sortOptions;
     private TextView searchTerm;
     private ListView drugList;
+    private DrugListAdapter drugListAdapter;
 
     //sample data
     List<Drug> sampleDrugs = Druglist.getData();
@@ -42,17 +45,35 @@ public class BrowseDrugsFragment extends Fragment {
 
         sortOptions = (Spinner) rootView.findViewById(R.id.sortBySpinner);
         drugList = rootView.findViewById(R.id.drugListView);
+        searchTerm = rootView.findViewById(R.id.searchText);
+        drugListAdapter = new DrugListAdapter(getContext());
+
+
 
         refreshListView(sampleDrugs);
+
+        searchTerm.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                drugListAdapter.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         return rootView;
     }
 
     private void refreshListView(List<Drug> data) {
-        //Create a new adapter
-        final DrugListAdapter drugListAdapter = new DrugListAdapter(getContext());
-
-        //Populate the adapter
+        drugListAdapter = new DrugListAdapter(getContext());
         drugListAdapter.addAll(data);
         //Fill list with the adapter's content
         drugList.setAdapter(drugListAdapter);
@@ -61,8 +82,11 @@ public class BrowseDrugsFragment extends Fragment {
         sortOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                final int ALPHABETICAL_ASC=0;
+                final int ALPHABETICAL_DESC=1;
+
                 switch (pos) {
-                    case 0:
+                    case ALPHABETICAL_ASC:
                         drugListAdapter.sort(new Comparator<Drug>() {
                             @Override
                             public int compare(Drug o1, Drug o2) {
@@ -70,7 +94,7 @@ public class BrowseDrugsFragment extends Fragment {
                             }
                         });
                         break;
-                    case 1:
+                    case ALPHABETICAL_DESC:
                         drugListAdapter.sort(new Comparator<Drug>() {
                             @Override
                             public int compare(Drug o1, Drug o2) {
