@@ -15,6 +15,7 @@ import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.Druglist;
 import net.caesarlegion.drugimpact.R;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -42,16 +43,43 @@ public class BrowseDrugsFragment extends Fragment {
         sortOptions = (Spinner) rootView.findViewById(R.id.sortBySpinner);
         drugList = rootView.findViewById(R.id.drugListView);
 
-        // Initial display list
-        DrugListAdapter drugListAdapter = new DrugListAdapter(getContext());
-        drugListAdapter.addAll(sampleDrugs);
+        refreshListView(sampleDrugs);
+
+        return rootView;
+    }
+
+    private void refreshListView(List<Drug> data) {
+        //Create a new adapter
+        final DrugListAdapter drugListAdapter = new DrugListAdapter(getContext());
+
+        //Populate the adapter
+        drugListAdapter.addAll(data);
+        //Fill list with the adapter's content
         drugList.setAdapter(drugListAdapter);
 
         // EventListener for sorting
         sortOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                String sortingChoice = (String) parent.getItemAtPosition(pos);
+                switch (pos) {
+                    case 0:
+                        drugListAdapter.sort(new Comparator<Drug>() {
+                            @Override
+                            public int compare(Drug o1, Drug o2) {
+                                return o1.getName().compareTo(o2.getName());
+                            }
+                        });
+                        break;
+                    case 1:
+                        drugListAdapter.sort(new Comparator<Drug>() {
+                            @Override
+                            public int compare(Drug o1, Drug o2) {
+                                return o2.getName().compareTo(o1.getName());
+                            }
+                        });
+                        break;
+                }
+
             }
 
             @Override
@@ -59,8 +87,6 @@ public class BrowseDrugsFragment extends Fragment {
 
             }
         });
-
-        return rootView;
     }
 
 }
