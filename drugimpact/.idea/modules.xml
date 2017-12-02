@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\kajif\Documents\GitHub\AndroidProject\drugimpact\app\app.iml" filepath="C:\Users\kajif\Documents\GitHub\AndroidProject\drugimpact\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/drugimpact.iml" filepath="$PROJECT_DIR$/drugimpact.iml" />
     </modules>
   </component>

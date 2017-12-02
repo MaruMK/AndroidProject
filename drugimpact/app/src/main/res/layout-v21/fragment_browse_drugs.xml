@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="text"
-            android:text="Search Term..." />
+            android:hint="Search Term..."
+            android:inputType="text" />
     </LinearLayout>
 
     <ListView
