@@ -52,6 +52,11 @@ public class BrowseDrugsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 String sortingChoice = (String) parent.getItemAtPosition(pos);
+
+                switch (sortingChoice) {
+                    case "Alphabetical Ascending":
+                        sampleDrugs;
+                }
             }
 
             @Override
