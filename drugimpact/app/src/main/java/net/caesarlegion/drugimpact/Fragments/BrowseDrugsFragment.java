@@ -61,6 +61,7 @@ public class BrowseDrugsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 drugListAdapter.getFilter().filter(s.toString());
+
             }
 
             @Override
@@ -82,14 +83,7 @@ public class BrowseDrugsFragment extends Fragment {
         sortOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-<<<<<<< HEAD
-                String sortingChoice = (String) parent.getItemAtPosition(pos);
 
-                switch (sortingChoice) {
-                    case "Alphabetical Ascending":
-                        sampleDrugs;
-                }
-=======
                 final int ALPHABETICAL_ASC=0;
                 final int ALPHABETICAL_DESC=1;
 
@@ -111,8 +105,6 @@ public class BrowseDrugsFragment extends Fragment {
                         });
                         break;
                 }
-
->>>>>>> 7dcbc0defc65083f43a1693db115fcae1a3ae307
             }
 
             @Override

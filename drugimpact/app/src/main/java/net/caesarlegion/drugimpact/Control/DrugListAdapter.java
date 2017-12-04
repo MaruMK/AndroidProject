@@ -72,24 +72,25 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            String filterString = constraint.toString().toLowerCase();
+            String filterableString = constraint.toString().toLowerCase();
 
             FilterResults results = new FilterResults();
 
             final List<Drug> list = fullDrugList;
-
             int count = list.size();
-            final ArrayList<Drug> nlist = new ArrayList<>(count);
 
-            String filterableString;
+            ArrayList<Drug> newList = new ArrayList<>(count);
 
             for (int i = 0; i < count; i++) {
-                filterableString = list.get(i);
+                filterableString = list.get(i).getName();
                 if (filterableString.toLowerCase().contains(filterableString)) {
-                    nlist.add(filterableString);
+                    newList.add(list.get(i));
                 }
             }
+        results.values = newList;
+        results.count = count;
 
+        return results;
 
         }
 
@@ -98,29 +99,11 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
 
         }
     }
-/*
+
     @NonNull
     @Override
     public Filter getFilter() {
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                ArrayList<Drug> tempList = new ArrayList<>();
-
-                if(constraint != null && )
-
-
-                return null;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                return;
-            }
-        };
-
-
+        Filter filter = new DrugFilter();
         return filter;
-    }*/
+    }
 }
