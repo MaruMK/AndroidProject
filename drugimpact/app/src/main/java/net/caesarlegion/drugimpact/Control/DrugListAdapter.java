@@ -24,8 +24,8 @@ import java.util.List;
 
 public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
     /*=========== Private fields =======================================================================*/
-    private List<Drug> fullDrugList = null;
-    private List<Drug> filteredDrugList = null;
+    private List<Drug> fullDrugList;
+    private List<Drug> filteredDrugList;
     private LayoutInflater inflater;
     private DrugFilter filter = new DrugFilter();
     /*==================================================================================================*/
@@ -63,7 +63,6 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
 
         drugName.setText(drug.getName());
 
-
         return root;
     }
 
@@ -72,7 +71,7 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            String filterableString = constraint.toString().toLowerCase();
+            String constraintStr = constraint.toString().toLowerCase();
 
             FilterResults results = new FilterResults();
 
@@ -82,8 +81,8 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
             ArrayList<Drug> newList = new ArrayList<>(count);
 
             for (int i = 0; i < count; i++) {
-                filterableString = list.get(i).getName();
-                if (filterableString.toLowerCase().contains(filterableString)) {
+                String filterableString = list.get(i).getName().toLowerCase();
+                if (filterableString.contains(constraintStr)) {
                     newList.add(list.get(i));
                 }
             }
@@ -103,7 +102,6 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
     @NonNull
     @Override
     public Filter getFilter() {
-        Filter filter = new DrugFilter();
-        return filter;
+        return new DrugFilter();
     }
 }

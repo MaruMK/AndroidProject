@@ -46,7 +46,7 @@ public class BrowseDrugsFragment extends Fragment {
         sortOptions = (Spinner) rootView.findViewById(R.id.sortBySpinner);
         drugList = rootView.findViewById(R.id.drugListView);
         searchTerm = rootView.findViewById(R.id.searchText);
-        drugListAdapter = new DrugListAdapter(getContext());
+        drugListAdapter = new DrugListAdapter(getContext(), sampleDrugs);
 
 
 
