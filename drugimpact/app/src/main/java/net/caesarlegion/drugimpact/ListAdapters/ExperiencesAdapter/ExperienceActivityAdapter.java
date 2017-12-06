@@ -24,7 +24,7 @@ public class ExperienceActivityAdapter extends ArrayAdapter<ExperienceActivity> 
     }
 
 
-    /*@NonNull
+    @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View root;
@@ -34,16 +34,16 @@ public class ExperienceActivityAdapter extends ArrayAdapter<ExperienceActivity> 
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             root = inflater.inflate(R.layout.partial_welcome_recent_activity, parent, false);
         }
-        TextView textViewTitle = root.findViewById(R.id. );
-        TextView textViewStamp = root.findViewById(R.id.recent_activity_stamp);
-        TextView textViewAbstract = root.findViewById(R.id.recent_activity_abstract);
-        ImageView image = root.findViewById(R.id.imageView_recent);
+        //TextView textViewTitle = root.findViewById(R.id. );
+        //TextView textViewStamp = root.findViewById(R.id.recent_activity_stamp);
+        //TextView textViewAbstract = root.findViewById(R.id.recent_activity_abstract);
+        //ImageView image = root.findViewById(R.id.imageView_recent);
 
-        ExperienceActivity item = getItem(position);
+        //ExperienceActivity item = getItem(position);
 
         //textViewStamp.setText( item.stamp.toString());
         //textViewAbstract.setText(item.abstrct);
 
-        return root;*/
+        return root;
     }
 }

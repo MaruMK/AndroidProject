@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import net.caesarlegion.drugimpact.ExperienceData;
+import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
+import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivityAdapter;
 import net.caesarlegion.drugimpact.ListAdapters.RecentActivityAdapter.RecentActivity;
 import net.caesarlegion.drugimpact.ListAdapters.RecentActivityAdapter.RecentActivityAdapter;
 import net.caesarlegion.drugimpact.R;
@@ -29,10 +32,10 @@ public class BrowseExperiencesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_browse_exps, container, false);
 
         ListView experienceList = rootView.findViewById(R.id.listView_experiences);
-        //List<RecentActivity> data = RecentActivityData.getData();
-        //RecentActivityAdapter adapter = new RecentActivityAdapter(getContext());
-        //adapter.addAll(data);
-        //listViewRecent.setAdapter(adapter);
+        List<ExperienceActivity> data = ExperienceData.getData();
+        ExperienceActivityAdapter adapter = new ExperienceActivityAdapter(getContext());
+        adapter.addAll(data);
+        experienceList.setAdapter(adapter);
         return rootView;
     }
 }
