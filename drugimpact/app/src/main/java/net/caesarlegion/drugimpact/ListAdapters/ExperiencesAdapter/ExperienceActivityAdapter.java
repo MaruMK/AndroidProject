@@ -32,17 +32,19 @@ public class ExperienceActivityAdapter extends ArrayAdapter<ExperienceActivity> 
             root = convertView;
         else {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            root = inflater.inflate(R.layout.partial_welcome_recent_activity, parent, false);
+            root = inflater.inflate(R.layout.partial_experience_activity, parent, false);
         }
-        //TextView textViewTitle = root.findViewById(R.id. );
-        //TextView textViewStamp = root.findViewById(R.id.recent_activity_stamp);
-        //TextView textViewAbstract = root.findViewById(R.id.recent_activity_abstract);
-        //ImageView image = root.findViewById(R.id.imageView_recent);
+        TextView textViewName = root.findViewById(R.id.experience_name);
+        TextView textViewDrug = root.findViewById(R.id.experience_drug);
+        TextView textViewDesc = root.findViewById(R.id.experience_descriction);
+        TextView textViewTime = root.findViewById(R.id.experience_drug);
 
-        //ExperienceActivity item = getItem(position);
+        ExperienceActivity item = getItem(position);
 
-        //textViewStamp.setText( item.stamp.toString());
-        //textViewAbstract.setText(item.abstrct);
+        textViewName.setText(item.Username.toString());
+        textViewDrug.setText(item.Drug.toString());
+        textViewDesc.setText( item.Description.toString());
+        textViewTime.setText(item.TimeWritten.toString());
 
         return root;
     }

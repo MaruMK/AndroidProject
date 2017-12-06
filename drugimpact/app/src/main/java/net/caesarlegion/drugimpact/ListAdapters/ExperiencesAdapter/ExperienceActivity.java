@@ -7,11 +7,13 @@ import java.util.Date;
 
 public class ExperienceActivity {
     public String Username;
+    public String Drug;
     public String Description;
     public Date TimeWritten;
 
-    public ExperienceActivity(String username,String Description,Date TimeWritten) {
+    public ExperienceActivity(String username,String drug,String Description,Date TimeWritten) {
         this.Username = username;
+        this.Drug = drug;
         this.Description = Description;
         this.TimeWritten = TimeWritten;
     }

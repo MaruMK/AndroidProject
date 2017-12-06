@@ -14,7 +14,9 @@ import java.util.List;
 public class ExperienceData {
     public static List<ExperienceActivity> getData() {
         List<ExperienceActivity> data = new ArrayList<>();
-        data.add(new ExperienceActivity("Timmy","This stuff was pretty good",new Date()));
+        data.add(new ExperienceActivity("Timmy","Weed","This stuff was pretty good",new Date()));
+        data.add(new ExperienceActivity("Bill","Coco","We going back to the future",new Date()));
+        data.add(new ExperienceActivity("KABOOM","OXY CLEAN","WASH YOUR DETERGENT NOW",new Date()));
         return data;
     }
 }
