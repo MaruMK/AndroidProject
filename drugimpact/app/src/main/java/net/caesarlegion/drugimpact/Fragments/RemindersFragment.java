@@ -31,7 +31,7 @@ public class RemindersFragment extends Fragment {
 
     private View root;
     private String[] subsArray = new String[]{"Alcohol", "Potatoes", "Salad"};
-    private ArrayList<String> sTakenArray = new ArrayList<String>(Arrays.asList(new String[]{"Salad"}));
+    public static ArrayList<String> sTakenArray = new ArrayList<>(Arrays.asList(new String[]{"Salad"}));
 
 
     public onDrugClickedListener adapterListener = new onDrugClickedListener() {
@@ -119,8 +119,7 @@ public class RemindersFragment extends Fragment {
 
         //Toast.makeText(getContext(), "Yay", Toast.LENGTH_SHORT).show();
         drugList.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
-
+        updateTime();
     }
     //=======================================================================================================================================
 
