@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ExperienceData {
     public static List<ExperienceActivity> getData() {
+        //CHANGE THIS LATER
         List<ExperienceActivity> data = new ArrayList<>();
         data.add(new ExperienceActivity("Timmy","Weed","This stuff was pretty good",new Date()));
         data.add(new ExperienceActivity("Bill","Coco","We going back to the future",new Date()));
