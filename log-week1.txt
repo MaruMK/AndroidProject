@@ -1,0 +1,17 @@
+commit 80d7bc736719d66630743821a2c5c4b662837686
+Merge: a7573eb dafd83b
+Author: lachmax <laxhmax@hotmail.com>
+Date:   Mon Nov 27 01:01:32 2017 -0500
+
+    Merge branch 'master' into MaximeBranch
+	
+	The branches are now merged and the application works fine with all the new functionalities
+
+commit a7573eb221b4e169a2ec3d1252e8c68dc935428f
+Author: lachmax <laxhmax@hotmail.com>
+Date:   Mon Nov 27 01:01:02 2017 -0500
+
+    Added the protoype for reminders
+	
+	The reminders protoype page for the application is now functional, and outputs calculation
+	results, using dummy values
