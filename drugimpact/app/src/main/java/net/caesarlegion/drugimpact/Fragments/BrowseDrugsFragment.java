@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,30 +44,33 @@ public class BrowseDrugsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_drugs, container, false);
 
-        sortOptions = (Spinner) rootView.findViewById(R.id.sortBySpinner);
+        sortOptions = rootView.findViewById(R.id.sortBySpinner);
         drugList = rootView.findViewById(R.id.drugListView);
         searchTerm = rootView.findViewById(R.id.searchText);
         drugListAdapter = new DrugListAdapter(getContext(), sampleDrugs);
 
-
+        final DrugListAdapter dl = drugListAdapter;
 
         refreshListView(sampleDrugs);
 
         searchTerm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                drugListAdapter.getFilter().filter(s.toString());
-
+                if (dl != null) {
+                    dl.getFilter().filter(s);
+                    refreshListView(dl.filteredDrugList);
+                }
+                else {
+                    Log.d("filter", "no filter available");
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 

@@ -3,6 +3,7 @@ package net.caesarlegion.drugimpact.Control;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,23 +61,24 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
             for (int i = 0; i < count; i++) {
                 String filterableString = list.get(i).getName().toLowerCase();
                 if (filterableString.contains(constraintStr)) {
+                    Log.d("INSIDE","INSIDE");
                     newList.add(list.get(i));
                 }
             }
             results.values = newList;
-            results.count = count;
+            results.count = newList.size();
 
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filteredDrugList = (List<Drug>) results.values;
-
-            if(results.count > 0)
+            if(results.count > 0) {
                 notifyDataSetChanged();
+                filteredDrugList = (List<Drug>) results.values;
+            }
             else
-                notifyDataSetInvalidated();
+                notifyDataSetChanged();
         }
     }
     /*==================================================================================================*/
