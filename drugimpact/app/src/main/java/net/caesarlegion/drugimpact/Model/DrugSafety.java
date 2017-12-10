@@ -9,22 +9,23 @@ package net.caesarlegion.drugimpact.Model;
 
 public class DrugSafety {
 
-    public int SubstanceId;
+    public long SubstanceId;
     public double Amount;
-    public double WeightRangeMin;
-    public double WeightRangeMax;
+    public double MetabolizationRate;
+    public double WeightMin;
     public int WarningLevel;
     public String WarningMessage;
+
 
     //Default Constructor
     public DrugSafety(){}
 
     //Constructor used to create a working DrugSafety Entry
-    public DrugSafety(int substanceId, double amount, double weightRangeMin, double weightRangeMax, int warningLevel, String warningMessage) {
+    public DrugSafety(long substanceId, double amount, double metabolizationRate, double weightMin, int warningLevel, String warningMessage) {
         SubstanceId = substanceId;
         Amount = amount;
-        WeightRangeMin = weightRangeMin;
-        WeightRangeMax = weightRangeMax;
+        MetabolizationRate = metabolizationRate;
+        WeightMin = weightMin;
         WarningLevel = warningLevel;
         WarningMessage = warningMessage;
     }

@@ -17,7 +17,8 @@ public class DrugSafetyData {
     final static int MIN_REALISTIC_WEIGHT = 0;
     final static int MAX_REALISTIC_WEIGHT = 1000;
 
-    final static int ALCOHOL_ID = 1;
+    //This part will contain the constants for every drugs
+    final static long ALCOHOL_ID = 1;
 
     final static double OZ_TO_ML = 29.5735;
 
@@ -27,15 +28,15 @@ public class DrugSafetyData {
         data = new ArrayList<>();
         data.add(new DrugSafety(ALCOHOL_ID,
                                 2,
+                                0.016,
                                 0,
-                                120,
                                 1,
                                 "Driving significantly impaired"
                 ));
         data.add(new DrugSafety(ALCOHOL_ID,
                 3,
+                0.016,
                 121,
-                ,
                 1,
                 "Driving significantly impaired"
         ));
@@ -61,7 +62,7 @@ public class DrugSafetyData {
     //12oz of 5% alcohol (beer)
     //5oz of 12% alcohol (wine)
     //1.5oz of 40% alcohol (hard liquor)
-    public double ConvertAlcoholVolumeToDrinks(double milliliters, double percentage){
+    public static double ConvertAlcoholVolumeToDrinks(double milliliters, double percentage){
         return milliliters*percentage/ALCOHOL_PER_DRINK;
     }
     //*************************************************************************************************************************************************

@@ -1,5 +1,6 @@
 package net.caesarlegion.drugimpact.Fragments;
 
+import android.app.Fragment;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
