@@ -27,16 +27,16 @@ public class DrugSafetyData {
     static {
         data = new ArrayList<>();
         data.add(new DrugSafety(ALCOHOL_ID,
-                                2,
-                                0.016,
-                                0,
-                                1,
-                                "Driving significantly impaired"
+                2,
+                0.016,
+                0,
+                1,
+                "Driving significantly impaired"
                 ));
         data.add(new DrugSafety(ALCOHOL_ID,
                 3,
                 0.016,
-                121,
+                120,
                 1,
                 "Driving significantly impaired"
         ));
