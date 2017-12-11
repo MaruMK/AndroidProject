@@ -8,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
 import net.caesarlegion.drugimpact.Model.onDrugClickedListener;
 import net.caesarlegion.drugimpact.R;
+
+import net.caesarlegion.drugimpact.Model.DatabaseException;
 
 
 /**
@@ -44,6 +48,24 @@ public class CustomDrugReminderAdapter extends ArrayAdapter<String> {
         }
 
         TextView substanceTxt = root.findViewById(R.id.substanceTxt);
+        final TextView substanceTxt = root.findViewById(R.id.substanceTxt);
+        Button removeButton = root.findViewById(R.id.deleteSubstanceBtn);
+
+        View.OnClickListener removePressedListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RemindersFragment.sTakenArray.remove(substanceTxt.getText());
+
+                try{
+                    adapterListener.onDrugClicked();
+                }
+                catch (Exception e){
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        };
+        removeButton.setOnClickListener(removePressedListener);
 
         substanceTxt.setText(getItem(position));
 
