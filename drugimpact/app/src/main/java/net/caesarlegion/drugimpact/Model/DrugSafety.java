@@ -9,12 +9,12 @@ package net.caesarlegion.drugimpact.Model;
 
 public class DrugSafety {
 
-    public long SubstanceId;
-    public double Amount;
-    public double MetabolizationRate;
-    public double WeightMin;
-    public int WarningLevel;
-    public String WarningMessage;
+    private long SubstanceId;
+    private double Amount;
+    private double MetabolizationRate;
+    private double WeightMin;
+    private int WarningLevel;
+    private String WarningMessage;
 
 
     //Default Constructor
@@ -29,4 +29,54 @@ public class DrugSafety {
         WarningLevel = warningLevel;
         WarningMessage = warningMessage;
     }
+
+    //Getters-Setters ****************************************************************************************************************************
+    public long getSubstanceId() {
+        return SubstanceId;
+    }
+
+    public void setSubstanceId(long substanceId) {
+        SubstanceId = substanceId;
+    }
+
+    public double getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(double amount) {
+        Amount = amount;
+    }
+
+    public double getMetabolizationRate() {
+        return MetabolizationRate;
+    }
+
+    public void setMetabolizationRate(double metabolizationRate) {
+        MetabolizationRate = metabolizationRate;
+    }
+
+    public double getWeightMin() {
+        return WeightMin;
+    }
+
+    public void setWeightMin(double weightMin) {
+        WeightMin = weightMin;
+    }
+
+    public int getWarningLevel() {
+        return WarningLevel;
+    }
+
+    public void setWarningLevel(int warningLevel) {
+        WarningLevel = warningLevel;
+    }
+
+    public String getWarningMessage() {
+        return WarningMessage;
+    }
+
+    public void setWarningMessage(String warningMessage) {
+        WarningMessage = warningMessage;
+    }
+    //********************************************************************************************************************************************
 }
