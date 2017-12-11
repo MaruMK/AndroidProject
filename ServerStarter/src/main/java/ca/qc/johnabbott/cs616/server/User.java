@@ -1,9 +1,8 @@
 package ca.qc.johnabbott.cs616.server;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Gabriel Charlebois on 2017-12-09.
@@ -22,6 +21,27 @@ public class User {
     private double weight;
     private String encryptionKey;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments = new HashSet<Comment>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Experience> experiences = new HashSet<Experience>();
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Set<Experience> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(Set<Experience> experiences) {
+        this.experiences = experiences;
+    }
 
     public long getUserId() {
         return userId;
