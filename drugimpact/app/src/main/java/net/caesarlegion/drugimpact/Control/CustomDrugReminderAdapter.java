@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
+import net.caesarlegion.drugimpact.Model.DrugSafetyData;
+import net.caesarlegion.drugimpact.Model.History;
 import net.caesarlegion.drugimpact.Model.onDrugClickedListener;
 import net.caesarlegion.drugimpact.R;
 
@@ -25,7 +27,7 @@ import net.caesarlegion.drugimpact.Model.DatabaseException;
  * Created by Main on 2017-11-26.
  */
 
-public class CustomDrugReminderAdapter extends ArrayAdapter<String> {
+public class CustomDrugReminderAdapter extends ArrayAdapter<History> {
 
     public onDrugClickedListener adapterListener;
 
@@ -47,14 +49,20 @@ public class CustomDrugReminderAdapter extends ArrayAdapter<String> {
             root = inflater.inflate(R.layout.drug_reminder_listitem, parent, false);
         }
 
-        final TextView substanceTxt = root.findViewById(R.id.substanceTxt);
+        final TextView substanceTxt = root.findViewById(R.id.substance_text);
+        final TextView amountTxt = root.findViewById(R.id.quantity_text);
         Button removeButton = root.findViewById(R.id.deleteSubstanceBtn);
 
+        History h = getItem(position);
+
+        substanceTxt.setText(DrugSafetyData.GetDrugById(h.getDrugId()).getName());
+        amountTxt.setText(Double.toString(h.getAmount()));
+
+        //When the removebutton is clicked, remove that particular element
         View.OnClickListener removePressedListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RemindersFragment.sTakenArray.remove(substanceTxt.getText());
-
+                RemindersFragment.historyData.remove(getItem(position));
                 try{
                     adapterListener.onDrugClicked();
                 }
@@ -65,8 +73,6 @@ public class CustomDrugReminderAdapter extends ArrayAdapter<String> {
             }
         };
         removeButton.setOnClickListener(removePressedListener);
-
-        substanceTxt.setText(getItem(position));
 
         return root;
     }
