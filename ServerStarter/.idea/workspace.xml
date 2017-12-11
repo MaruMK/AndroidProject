@@ -171,22 +171,69 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Application.java">
+          <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/User.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-                  <folding />
+                <state relative-caret-position="238">
+                  <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#538#547#0" expanded="true" />
+                    <element signature="e#639#651#0" expanded="true" />
+                    <element signature="e#694#695#0" expanded="true" />
+                    <element signature="e#725#726#0" expanded="true" />
+                    <element signature="e#779#780#0" expanded="true" />
+                    <element signature="e#819#820#0" expanded="true" />
+                    <element signature="e#866#867#0" expanded="true" />
+                    <element signature="e#900#901#0" expanded="true" />
+                    <element signature="e#963#964#0" expanded="true" />
+                    <element signature="e#1009#1010#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="UserRepository.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/UserRepository.java">
+          <file leaf-file-name="DrugData.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/DrugData.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="3" column="55" lean-forward="false" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-                  <folding />
+                <state relative-caret-position="221">
+                  <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DrugDataRepository.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/DrugDataRepository.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                  <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Experience.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Experience.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="238">
+                  <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#934#943#0" expanded="true" />
+                    <element signature="e#1080#1081#0" expanded="true" />
+                    <element signature="e#1111#1112#0" expanded="true" />
+                    <element signature="e#1165#1166#0" expanded="true" />
+                    <element signature="e#1205#1206#0" expanded="true" />
+                    <element signature="e#1234#1235#0" expanded="true" />
+                    <element signature="e#1261#1262#0" expanded="true" />
+                    <element signature="e#1299#1300#0" expanded="true" />
+                    <element signature="e#1331#1332#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -195,11 +242,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/User.java">
+          <file leaf-file-name="CommentRepository.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/CommentRepository.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+                <state relative-caret-position="153">
+                  <caret line="9" column="72" lean-forward="false" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -627,7 +674,17 @@
         <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/DrugRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/UserRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/EncryptionKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Experiences.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/ExperiencesRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Drug.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/DrugRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/CommentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/ExperienceRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Comment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Experience.java" />
         <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Data.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/DataRepository.java" />
       </list>
     </option>
   </component>
@@ -777,7 +834,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -850,6 +906,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1201,7 +1258,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1212,19 +1269,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20693392" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24946696" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17217484" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32819724" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29685807" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1242,7 +1299,6 @@
     <breakpoint-manager />
     <watches-manager />
   </component>
-<<<<<<< HEAD
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -1313,14 +1369,16 @@
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/User.java">
       <provider selected="true" editor-type-id="text-editor">
-=======
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
->>>>>>> parent of 78cc3d0... Server Version 1: mySQL & API done
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1328,9 +1386,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1348,7 +1404,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1356,9 +1411,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1378,7 +1431,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1386,9 +1438,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1408,7 +1458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1442,7 +1491,6 @@
 =======
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1460,6 +1508,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/EncryptionKey.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/UserRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1468,9 +1524,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/EncryptionKey.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/DrugRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="153">
           <caret line="9" column="68" lean-forward="true" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
           <folding>
@@ -1484,15 +1539,10 @@
         <state relative-caret-position="136">
           <caret line="11" column="78" lean-forward="false" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
 >>>>>>> master
-=======
-        <state relative-caret-position="187">
-          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
->>>>>>> parent of 78cc3d0... Server Version 1: mySQL & API done
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Drug.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -1551,19 +1601,26 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Experience.java">
-=======
-    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/Application.java">
->>>>>>> parent of 78cc3d0... Server Version 1: mySQL & API done
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="238">
+          <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#934#943#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="e#1111#1112#0" expanded="true" />
+            <element signature="e#1165#1166#0" expanded="true" />
+            <element signature="e#1205#1206#0" expanded="true" />
+            <element signature="e#1234#1235#0" expanded="true" />
+            <element signature="e#1261#1262#0" expanded="true" />
+            <element signature="e#1299#1300#0" expanded="true" />
+            <element signature="e#1331#1332#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/johnabbott/cs616/server/User.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="238">
           <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
           <folding>
@@ -1607,10 +1664,6 @@
         <state relative-caret-position="221">
           <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
 >>>>>>> master
-=======
-        <state relative-caret-position="289">
-          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
->>>>>>> parent of 78cc3d0... Server Version 1: mySQL & API done
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
