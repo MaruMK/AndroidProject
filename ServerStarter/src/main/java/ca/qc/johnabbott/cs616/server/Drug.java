@@ -1,5 +1,22 @@
 package ca.qc.johnabbott.cs616.server;
 
+<<<<<<< HEAD
+
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
+public class Drug {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long drugId;
+
+    private String drugName;
+    private String drugUrl;
+=======
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +33,7 @@ public class Drug {
     private long drugId;
     private String name;
     private String url;
+>>>>>>> master
 
     public long getDrugId() {
         return drugId;
@@ -25,6 +43,22 @@ public class Drug {
         this.drugId = drugId;
     }
 
+<<<<<<< HEAD
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getDrugUrl() {
+        return drugUrl;
+    }
+
+    public void setDrugUrl(String drugUrl) {
+        this.drugUrl = drugUrl;
+=======
     public String getName() {
         return name;
     }
@@ -39,5 +73,6 @@ public class Drug {
 
     public void setUrl(String url) {
         this.url = url;
+>>>>>>> master
     }
 }

@@ -47,6 +47,7 @@ public class CustomDrugReminderAdapter extends ArrayAdapter<String> {
             root = inflater.inflate(R.layout.drug_reminder_listitem, parent, false);
         }
 
+        TextView substanceTxt = root.findViewById(R.id.substanceTxt);
         final TextView substanceTxt = root.findViewById(R.id.substanceTxt);
         Button removeButton = root.findViewById(R.id.deleteSubstanceBtn);
 

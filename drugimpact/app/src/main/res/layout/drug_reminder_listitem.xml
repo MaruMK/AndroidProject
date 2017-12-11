@@ -8,6 +8,8 @@
     <ImageView
         android:id="@+id/category_view_left"
         android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_weight="7"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/colorAccent" />
@@ -16,6 +18,7 @@
         android:id="@+id/substanceTxt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="3"
         android:layout_weight="1"
         android:clickable="false"
         android:gravity="center"
@@ -26,15 +29,21 @@
         android:id="@+id/quantityTxt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="5"
         android:layout_weight="1"
         android:clickable="false"
         android:gravity="center"
         android:padding="10dp"
         android:text="0.02%" />
 
+    <ImageView
+        android:id="@+id/category_view_right"
     <Button
         android:id="@+id/deleteSubstanceBtn"
         android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_weight="7"
+        android:background="@color/colorAccent" />
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Remove" />
