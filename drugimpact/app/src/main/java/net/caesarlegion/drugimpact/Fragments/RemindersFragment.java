@@ -82,7 +82,7 @@ public class RemindersFragment extends Fragment {
                         case "Alcohol":
                             if (concentrationBox.getText().toString() != null && !concentrationBox.getText().toString().isEmpty()) {
                                 Double concentration = Double.parseDouble(concentrationBox.getText().toString());
-                                historyData.add(new History(historyData.size(), DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
+                                historyData.add(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
                             }
                             else{
                                 Toast.makeText(getContext(), "Please enter a concentration (0-100%)", Toast.LENGTH_SHORT).show();

@@ -22,6 +22,7 @@ import net.caesarlegion.drugimpact.Fragments.BrowseDrugsFragment;
 import net.caesarlegion.drugimpact.Fragments.BrowseExperiencesFragment;
 import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
 import net.caesarlegion.drugimpact.Fragments.WelcomeFragment;
+import net.caesarlegion.drugimpact.Model.HistoryTable;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 4 total pages.
             return 4;
         }
     }
