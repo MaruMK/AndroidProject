@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -75,6 +76,7 @@ public class RemindersFragment extends Fragment {
             public void onClick(View v) {
                 EditText amountBox = root.findViewById(R.id.amt_consumed_box);
                 EditText concentrationBox = root.findViewById(R.id.concentration_box);
+                CheckBox reminder = root.findViewById(R.id.checkBox);
 
                 if(amountBox.getText().toString() != null && !amountBox.getText().toString().isEmpty()) {
                     Double amount = Double.parseDouble(amountBox.getText().toString());
@@ -82,6 +84,7 @@ public class RemindersFragment extends Fragment {
                         case "Alcohol":
                             if (concentrationBox.getText().toString() != null && !concentrationBox.getText().toString().isEmpty()) {
                                 Double concentration = Double.parseDouble(concentrationBox.getText().toString());
+
                                 historyData.add(new History(historyData.size(), DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
                             }
                             else{
@@ -109,6 +112,11 @@ public class RemindersFragment extends Fragment {
         TextView timeTxt = root.findViewById(R.id.time_to_sober_txt);
         int time = historyData.size()*75;
         timeTxt.setText((time/60)+"h"+(time%60));
+    }
+
+    //This function will send a push notification to the user
+    public void onSubstanceSober(Drug drug){
+        //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
     }
     //=======================================================================================================================================
 
@@ -179,6 +187,8 @@ public class RemindersFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 TextView text = (TextView) selectedItemView;
+                if(text == null)
+                    return;
 
                 //The following section modifies the UI to reflect the substance selected in the spinner. For example, alcohol will have
                 //concentration, caffeine will have different means of consumption (Soft drink, Coffee, Energy drinks, etc)
