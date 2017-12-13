@@ -12,13 +12,13 @@ public class Drug {
 
 
     @Id
-    private long drugId;
+    private Integer drugId;
 
-    public long getDrugId() {
+    public Integer getDrugId() {
         return drugId;
     }
 
-    public void setDrugId(long drugId) {
+    public void setDrugId(Integer drugId) {
         this.drugId = drugId;
     }
 
