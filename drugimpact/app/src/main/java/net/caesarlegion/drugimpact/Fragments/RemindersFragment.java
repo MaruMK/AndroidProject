@@ -47,7 +47,6 @@ public class RemindersFragment extends Fragment {
     private View root;
 
     //This is the arraylist that will store all of the history data
-    //TODO: (EXTRA) ENCRYPT THIS DATA)
     public static ArrayList<History> historyData = new ArrayList<>();
     public HistoryDatabaseHandler historyDatabase = new HistoryDatabaseHandler(getContext());
 
@@ -236,7 +235,8 @@ public class RemindersFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 TextView text = (TextView) selectedItemView;
-                if(text == null)
+
+                if (text == null)
                     return;
 
                 //The following section modifies the UI to reflect the substance selected in the spinner. For example, alcohol will have

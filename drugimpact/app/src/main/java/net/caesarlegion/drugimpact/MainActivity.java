@@ -10,38 +10,37 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import android.widget.Toast;
 
+import net.caesarlegion.drugimpact.Control.GETObject;
+import net.caesarlegion.drugimpact.Control.OnDownloadedListener;
 import net.caesarlegion.drugimpact.Fragments.BrowseDrugsFragment;
 import net.caesarlegion.drugimpact.Fragments.BrowseExperiencesFragment;
 import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
 import net.caesarlegion.drugimpact.Fragments.SettingsFragment;
 import net.caesarlegion.drugimpact.Fragments.WelcomeFragment;
-import net.caesarlegion.drugimpact.Model.HistoryTable;
+import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+
+    public HistoryDatabaseHandler historyDatabaseHandler;
+
+
+    public static String URL = "http://192.168.2.11";
+    public static String PORT = "9999";
+    public static String ADDRESS = URL + ":" + PORT + "/";
+    public static Integer CURRENT_USER_ID = 2;
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+
+
     private ViewPager mViewPager;
 
     @Override
@@ -67,14 +66,11 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        historyDatabaseHandler = new HistoryDatabaseHandler(this);
     }
 
 
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {

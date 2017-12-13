@@ -46,9 +46,6 @@ public class RecentActivityAdapter extends ArrayAdapter<RecentActivity> {
         textViewAbstract.setText(item.abstrct);
 
         switch(item.type){
-            case REMINDER:
-                root.setBackgroundResource(R.color.welcome_reminder);
-                break;
             case NEW_COMMENT:
                 root.setBackgroundResource(R.color.welcome_newcomment);
                 image.setImageDrawable(null);

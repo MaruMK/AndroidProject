@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class  RecentActivity {
     public enum activityType {
-        REMINDER,
         NEW_COMMENT,
         SELF_POST
     }
@@ -27,8 +26,6 @@ public class  RecentActivity {
 
     public String constructTitle(){
         switch(this.type){
-            case REMINDER:
-                return "<b>Set reminder</b> '" + specifics + "'";
             case NEW_COMMENT:
                 return "<u>New</u> comment on '" + specifics + "'";
             case SELF_POST:
