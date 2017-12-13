@@ -2,6 +2,7 @@ package net.caesarlegion.drugimpact.Fragments;
 
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Comments for this part are a little out of touch since it was based off of the notes application,
@@ -44,6 +46,7 @@ public class RemindersFragment extends Fragment {
     //This is the arraylist that will store all of the history data
     //TODO: (EXTRA) ENCRYPT THIS DATA)
     public static ArrayList<History> historyData = new ArrayList<>();
+    
 
     public RemindersFragment() {
     }
@@ -84,6 +87,7 @@ public class RemindersFragment extends Fragment {
                         case "Alcohol":
                             if (concentrationBox.getText().toString() != null && !concentrationBox.getText().toString().isEmpty()) {
                                 Double concentration = Double.parseDouble(concentrationBox.getText().toString());
+                                if()
                                 historyData.add(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
                             }
                             else{
@@ -108,13 +112,38 @@ public class RemindersFragment extends Fragment {
     //This function will update the APPROXIMATE time until sober based on the history of substances consumed
     //TODO IMPLEMENT THE ACTUAL CALCULATIONS INSTEAD OF DUMMY VALUES
     public void updateTime() {
-        TextView timeTxt = root.findViewById(R.id.time_to_sober_txt);
-        int time = historyData.size()*75;
-        timeTxt.setText((time/60)+"h"+(time%60));
+        int biggestTime = 0;
+        long biggestSubstance = 0;
+        for(History h:
+            historyData){
+            int time = DrugSafetyData.CalculateMinutesTillSober(historyData.get(0));
+            if(time > biggestTime){
+                biggestTime = time;
+                biggestSubstance = h.getDrugId();
+            }
+        }
+
+        final long finalBiggestSubstance = biggestSubstance;
+
+        final TextView timeTxt = root.findViewById(R.id.time_to_sober_txt);
+        new CountDownTimer(biggestTime*60*1000, 1000){
+            public void onTick(long millisUntiFinished){
+                int hours = (int)millisUntiFinished/3600000;
+                millisUntiFinished %= 3600000;
+                int minutes = (int)millisUntiFinished/60000;
+                millisUntiFinished %= 60000;
+                int seconds = (int)millisUntiFinished/1000;
+                timeTxt.setText((hours)+":"+(minutes)+":"+(seconds));
+            }
+            public void onFinish(){
+                onSubstanceSober(finalBiggestSubstance);
+            }
+        }.start();
     }
 
     //This function will send a push notification to the user
-    public void onSubstanceSober(Drug drug){
+    public void onSubstanceSober(long drugId){
+        Toast.makeText(getContext(), "THIS WILL BE A PUSH NOTIFICATION", Toast.LENGTH_SHORT).show();
         //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
     }
     //=======================================================================================================================================
