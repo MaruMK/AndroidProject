@@ -37,7 +37,7 @@ public class HistoryTable extends Table<History> {
         values.put(COLUMN_DRUG_ID, element.getDrugId());
         values.put(COLUMN_AMOUNT, element.getAmount());
         values.put(COLUMN_TIME_OF_CONSUMPTION, iso8601.format(element.getTimeOfConsumption()));
-        return super.toContentValues(element);
+        return values;
     }
 
     @Override
