@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+
+        android:drawable="@mipmap/emergency_text_icon_round"
+        android:drawablePadding="25dp"
+        android:drawableTop="@mipmap/emergency_text_icon"
+        android:elevation="@android:dimen/app_icon_size"
+        android:filterTouchesWhenObscured="false"
+        android:textSize="5dp" />
+
+</RelativeLayout>
