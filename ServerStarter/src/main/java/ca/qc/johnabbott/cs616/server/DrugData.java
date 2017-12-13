@@ -2,20 +2,18 @@ package ca.qc.johnabbott.cs616.server;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
  * Created by Gabriel Charlebois on 2017-12-10.
  */
 @Entity
-public class Drug {
-
+public class DrugData {
 
     @Id
-    @GeneratedValue
     private long drugId;
-    private String name;
-    private String url;
+    private Integer count;
 
     public long getDrugId() {
         return drugId;
@@ -25,19 +23,11 @@ public class Drug {
         this.drugId = drugId;
     }
 
-    public String getName() {
-        return name;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

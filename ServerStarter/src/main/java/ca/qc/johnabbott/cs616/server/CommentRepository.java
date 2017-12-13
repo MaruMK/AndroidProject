@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 /**
  * Created by Gabriel Charlebois on 2017-12-10.
  */
-@RepositoryRestResource(collectionResourceRel = "drug", path = "drug")
-public interface DrugRepository  extends CrudRepository<Drug,Long> {
+@RepositoryRestResource(collectionResourceRel = "comment", path = "comment")
+public interface CommentRepository extends CrudRepository<Comment, Long>{
 }
