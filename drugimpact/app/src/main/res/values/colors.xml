@@ -3,6 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="welcome_reminder">#95edba</color>
+
+    <color name="main_theme_primary">#ffffff</color>
+    <color name="main_theme_secondary1">#51dcff</color>
+    <color name="main_theme_secondary2">#515151</color>
+    <color name="main_theme_secondary3">#808080</color>
+
     <color name="welcome_newcomment">#e2e6f4</color>
     <color name="welcome_selfpost">#fcf3ec</color>
+
 </resources>
