@@ -2,6 +2,8 @@ package net.caesarlegion.drugimpact.Model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ public class DrugSafetyData {
     public final static int WARNING = 1;
     public final static int LETHAL = 2;
 
-    final static int MIN_REALISTIC_WEIGHT = 0;
+    final static int WEIGHT_FOR_TESTING = 150;
 
     //This part will contain the constants for every drugs
     public final static long ALCOHOL_ID = 1;
@@ -60,17 +62,24 @@ public class DrugSafetyData {
     static {
         data = new ArrayList<>();
         data.add(new DrugSafety(ALCOHOL_ID,
-                2,
-                0.016,
                 0,
-                1,
+                0.5,
+                0,
+                NO_WARNING,
+                ""
+        ));
+        data.add(new DrugSafety(ALCOHOL_ID,
+                2,
+                0.5,
+                0,
+                WARNING,
                 "Driving significantly impaired"
                 ));
         data.add(new DrugSafety(ALCOHOL_ID,
                 3,
-                0.016,
+                0.5,
                 120,
-                1,
+                WARNING,
                 "Driving significantly impaired"
         ));
     }
@@ -88,6 +97,43 @@ public class DrugSafetyData {
         caffeineMethods.add("Green Tea");
         caffeineMethods.add("Black Tea");
     }
+
+    //ALL SUBSTANCES FUNCTIONS ************************************************************************************************************************
+    public static int CalculateMinutesTillSober(History h){
+        DrugSafety currentSafetyBracket;
+        int minutes = 0;
+        double amountLeft = h.getAmount();
+        while(amountLeft > 0){
+             currentSafetyBracket = FindSafetyBracket(h.getDrugId(), amountLeft, WEIGHT_FOR_TESTING);
+             if(currentSafetyBracket.getMetabolizationRate() < amountLeft) {
+                 amountLeft -= currentSafetyBracket.getMetabolizationRate();
+                 minutes+=60;
+             }
+             else{
+                 minutes+=amountLeft*2*60;
+                 amountLeft = 0;
+             }
+        }
+        return minutes;
+    }
+
+    //This function will take a substance id, the amount consumed and the weight of the user and
+    //it will find the correct data associated with it
+    public static DrugSafety FindSafetyBracket(long substanceId, double amount, double weight){
+        DrugSafety dsMatch = new DrugSafety();
+        for (DrugSafety ds:
+             data) {
+            if(substanceId == ds.getSubstanceId()){
+                if(amount > ds.getAmount()){
+                    if(weight > ds.getWeightMin()){
+                        dsMatch = ds;
+                    }
+                }
+            }
+        }
+        return dsMatch;
+    }
+    //*************************************************************************************************************************************************
 
     //LIQUID SUBSTANCES *******************************************************************************************************************************
     //These methods will convert back and forth between ounces
