@@ -21,6 +21,7 @@ import android.widget.Toast;
 import net.caesarlegion.drugimpact.Fragments.BrowseDrugsFragment;
 import net.caesarlegion.drugimpact.Fragments.BrowseExperiencesFragment;
 import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
+import net.caesarlegion.drugimpact.Fragments.SettingsFragment;
 import net.caesarlegion.drugimpact.Fragments.WelcomeFragment;
 import net.caesarlegion.drugimpact.Model.HistoryTable;
 
@@ -47,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -60,33 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_welcome));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_drugs));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_history));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_exp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_settings));
+
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                break;
-        }
-
-
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -112,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     return new RemindersFragment();
                 case 3:
                     return new BrowseExperiencesFragment();
+                case 4:
+                    return new SettingsFragment();
                 default:
                     return new WelcomeFragment();
             }
@@ -120,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 4 total pages.
-            return 4;
+            return 5;
         }
     }
 }

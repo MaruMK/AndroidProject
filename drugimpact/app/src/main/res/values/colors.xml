@@ -6,4 +6,8 @@
     <color name="welcome_reminder">#95edba</color>
     <color name="welcome_newcomment">#dbe3ff</color>
     <color name="welcome_selfpost">#ffebdb</color>
+    <color name="main_theme_primary">#ffffff</color>
+    <color name="main_theme_secondary1">#51dcff</color>
+    <color name="main_theme_secondary2">#515151</color>
+    <color name="main_theme_secondary3">#808080</color>
 </resources>
