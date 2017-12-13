@@ -10,23 +10,33 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import android.widget.Toast;
 
+import net.caesarlegion.drugimpact.Control.GETObject;
+import net.caesarlegion.drugimpact.Control.OnDownloadedListener;
 import net.caesarlegion.drugimpact.Fragments.BrowseDrugsFragment;
 import net.caesarlegion.drugimpact.Fragments.BrowseExperiencesFragment;
 import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
 import net.caesarlegion.drugimpact.Fragments.WelcomeFragment;
-import net.caesarlegion.drugimpact.Model.HistoryTable;
+import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private BrowseDrugsFragment browseDrugsFragment;
+    private RemindersFragment remindersFragment;
+    private BrowseExperiencesFragment browseExperiencesFragment;
+    private WelcomeFragment welcomeFragment;
+    public HistoryDatabaseHandler historyDatabaseHandler;
+
+
+    public static String URL = "http://192.168.2.11";
+    public static String PORT = "9999";
+    public static String ADDRESS = URL + ":" + PORT + "/";
+    public static Integer CURRENT_USER_ID = 2;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -59,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        TabLayout.TabLayoutOnPageChangeListener tabChangeListener = new TabLayout.TabLayoutOnPageChangeListener(tabLayout);
+        mViewPager.addOnPageChangeListener(tabChangeListener);
+
+        historyDatabaseHandler = new HistoryDatabaseHandler(this);
     }
 
 
@@ -78,23 +90,22 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
         switch (item.getItemId()) {
             case R.id.action_settings:
                 break;
+            case R.id.action_history:
+                //TODO: Decrypt data
+                break;
+            case R.id.action_get_something:
+
+
+
+                break;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
 
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -107,13 +118,21 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 1:
-                    return new BrowseDrugsFragment();
+                    if (browseDrugsFragment == null)
+                        browseDrugsFragment = new BrowseDrugsFragment();
+                    return browseDrugsFragment;
                 case 2:
-                    return new RemindersFragment();
+                    if (remindersFragment == null)
+                        remindersFragment = new RemindersFragment();
+                    return remindersFragment;
                 case 3:
-                    return new BrowseExperiencesFragment();
+                    if (browseExperiencesFragment == null)
+                        browseExperiencesFragment = new BrowseExperiencesFragment();
+                    return browseExperiencesFragment;
                 default:
-                    return new WelcomeFragment();
+                    if (welcomeFragment == null)
+                        welcomeFragment = new WelcomeFragment();
+                    return welcomeFragment;
             }
         }
 
