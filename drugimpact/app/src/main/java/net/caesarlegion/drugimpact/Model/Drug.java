@@ -24,7 +24,6 @@ public class Drug {
     }
 
     public Drug(long drugId, String name, String unit, URL url) {
-
         DrugId = drugId;
         Name = name;
         Unit = unit;
