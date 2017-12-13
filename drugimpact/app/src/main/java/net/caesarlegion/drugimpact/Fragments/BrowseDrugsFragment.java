@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,36 +49,40 @@ public class BrowseDrugsFragment extends Fragment {
         searchTerm = rootView.findViewById(R.id.searchText);
         drugListAdapter = new DrugListAdapter(getContext(), sampleDrugs);
 
-
-
         refreshListView(sampleDrugs);
 
         searchTerm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 drugListAdapter.getFilter().filter(s.toString());
+                for (Drug d : drugListAdapter.filteredDrugList)
+                    Log.d("DEBUG_FILTERED_LIST",d.getName());
+                refreshListView(drugListAdapter.filteredDrugList);
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
+
+
 
         return rootView;
     }
 
     private void refreshListView(List<Drug> data) {
-        drugListAdapter = new DrugListAdapter(getContext());
-        drugListAdapter.addAll(data);
+        DrugListAdapter newAdapter = new DrugListAdapter(getContext());
+        newAdapter.addAll(data);
         //Fill list with the adapter's content
-        drugList.setAdapter(drugListAdapter);
+        drugList.setAdapter(newAdapter);
+
+        for (Drug d : drugListAdapter.filteredDrugList)
+            Log.d("DEBUG_REFRESH_LIST",d.getName());
 
         // EventListener for sorting
         sortOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

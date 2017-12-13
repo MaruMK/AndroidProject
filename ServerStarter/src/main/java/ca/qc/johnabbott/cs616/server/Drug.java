@@ -13,8 +13,8 @@ public class Drug {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long drugId;
 
-    private String drugName;
-    private String drugUrl;
+    private String name;
+    private String url;
 
     public long getDrugId() {
         return drugId;
@@ -25,18 +25,18 @@ public class Drug {
     }
 
     public String getDrugName() {
-        return drugName;
+        return name;
     }
 
     public void setDrugName(String drugName) {
-        this.drugName = drugName;
+        this.name = drugName;
     }
 
-    public String getDrugUrl() {
-        return drugUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDrugUrl(String drugUrl) {
-        this.drugUrl = drugUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

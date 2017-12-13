@@ -3,6 +3,7 @@ package net.caesarlegion.drugimpact.Control;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.R;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,7 +66,7 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
                 }
             }
             results.values = newList;
-            results.count = count;
+            results.count = newList.size();
 
             return results;
         }
@@ -72,11 +74,15 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             filteredDrugList = (List<Drug>) results.values;
+            for (Iterator<Drug> it = ((List<Drug>) results.values).iterator(); it.hasNext(); ) {
+                Drug d = it.next();
+                Log.d("DEBUG",d.getName());
+            }
+            Log.d("DEBUG_COUNT", String.valueOf(results.count));
 
-            if(results.count > 0)
-                notifyDataSetChanged();
-            else
-                notifyDataSetInvalidated();
+            notifyDataSetChanged();
+
+
         }
     }
     /*==================================================================================================*/
