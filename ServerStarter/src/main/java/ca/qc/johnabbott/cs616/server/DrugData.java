@@ -1,9 +1,8 @@
 package ca.qc.johnabbott.cs616.server;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.rest.core.annotation.RestResource;
+
+import javax.persistence.*;
 
 /**
  * Created by Gabriel Charlebois on 2017-12-10.

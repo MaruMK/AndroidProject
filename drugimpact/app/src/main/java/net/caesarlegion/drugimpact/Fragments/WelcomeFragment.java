@@ -38,12 +38,11 @@ public class WelcomeFragment extends Fragment {
         textViewWarning.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
 
         //Fill the list of recent activities
-        final ListView listViewRecent = rootView.findViewById(R.id.listView_recent);
-        final RecentActivityAdapter adapter = new RecentActivityAdapter(getContext());
-        RecentActivityData.getServerData(new OnDownloadedListener<String>() {
+        //final ListView listViewRecent = rootView.findViewById(R.id.listView_recent);
+        //final RecentActivityAdapter adapter = new RecentActivityAdapter(getContext());
+      /*  RecentActivityData.getServerData(new OnDownloadedListener<String>() {
             @Override
             public void onDownloaded(String s) {
-                //TODO: Covert server output to recent stuff
 
 
                 List<RecentActivity> recent = RecentActivityData.parseServerDataToList(s);
@@ -56,7 +55,7 @@ public class WelcomeFragment extends Fragment {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
-        });
+        });*/
 
 
 
