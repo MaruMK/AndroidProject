@@ -24,24 +24,25 @@ import net.caesarlegion.drugimpact.Fragments.SettingsFragment;
 import net.caesarlegion.drugimpact.Fragments.WelcomeFragment;
 import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 
-
+/**
+ * Author: Gabriel Charlebois
+ * Purpose: Initialize the main UI components and globals of the app
+ */
 public class MainActivity extends AppCompatActivity {
 
-
-    public HistoryDatabaseHandler historyDatabaseHandler;
-
-
+    //Declare some global variables
     public static String URL = "http://192.168.2.11";
     public static String PORT = "9999";
     public static String ADDRESS = URL + ":" + PORT + "/";
     public static Integer CURRENT_USER_ID = 2;
 
+
+    //Declare some UI elements
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-
-
-
     private ViewPager mViewPager;
+
+    //Declare the local database handler
+    public HistoryDatabaseHandler historyDatabaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,14 @@ public class MainActivity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        //Initialize our local database handler
+        historyDatabaseHandler = new HistoryDatabaseHandler(this);
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        //Get out tab layout object and fill it with the appropriate tab icons
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_welcome));
@@ -63,24 +68,31 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_exp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_tab_settings));
 
+        //Add the dynamic components to our tabbed layout
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        historyDatabaseHandler = new HistoryDatabaseHandler(this);
+
+
     }
 
 
-
+    /**
+     * Purpose: Map a tab id to a specific fragment
+     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
+        /**
+         * Purpose: Given a position in the tab layout, return a fragment.
+         * @param position
+         * @return
+         */
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 1:
                     return new BrowseDrugsFragment();
@@ -95,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Is called to instantiate the fragment for the given page.
+         * @return
+         */
         @Override
         public int getCount() {
             // Show 4 total pages.
