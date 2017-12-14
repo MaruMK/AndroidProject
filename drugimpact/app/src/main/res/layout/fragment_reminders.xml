@@ -91,7 +91,8 @@
             android:id="@+id/caffeine_method_spinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/time_when_consumed_txt"
@@ -113,7 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Display as Notification" />
+            android:text="Display as Notification"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/ok_btn"

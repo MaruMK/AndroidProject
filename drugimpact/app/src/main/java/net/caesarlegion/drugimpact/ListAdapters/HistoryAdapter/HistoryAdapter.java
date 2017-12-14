@@ -22,6 +22,9 @@ import net.caesarlegion.drugimpact.R;
 
 import net.caesarlegion.drugimpact.Model.DatabaseException;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 
 /**
  * Created by Main on 2017-11-26.
@@ -30,6 +33,11 @@ import net.caesarlegion.drugimpact.Model.DatabaseException;
 public class HistoryAdapter extends ArrayAdapter<History> {
 
     public onDrugClickedListener adapterListener;
+
+
+    //This will be used to format the amount of susbtance consumed displayed
+    //in the history listview
+    NumberFormat historyAmountFormat = new DecimalFormat("##.##");
 
     public HistoryAdapter(Context context, onDrugClickedListener listener) {
         super(context, -1);
@@ -56,7 +64,7 @@ public class HistoryAdapter extends ArrayAdapter<History> {
         History h = getItem(position);
 
         substanceTxt.setText(DrugSafetyData.GetDrugById(h.getDrugId()).getName());
-        amountTxt.setText(Double.toString(h.getAmount()));
+        amountTxt.setText(historyAmountFormat.format(h.getAmount()) + " " + DrugSafetyData.GetDrugById(h.getDrugId()).getUnit());
 
         //When the removebutton is clicked, remove that particular element
         View.OnClickListener removePressedListener = new View.OnClickListener() {

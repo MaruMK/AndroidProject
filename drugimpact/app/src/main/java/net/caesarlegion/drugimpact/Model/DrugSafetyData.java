@@ -37,10 +37,10 @@ public class DrugSafetyData {
         knownDrugs = new ArrayList<>();
         knownDrugs.add(new Drug(DrugSafetyData.ALCOHOL_ID,
                 "Alcohol",
-                "Drinks-Ml"));
+                "Drinks"));
         knownDrugs.add(new Drug(DrugSafetyData.CAFFEINE_ID,
                 "Caffeine",
-                "Cups-Ml"));
+                "Cups"));
         knownDrugs.add(new Drug(DrugSafetyData.NICOTINE_CIGARETTE_ID,
                 "Nicotine - Cigarette",
                 "Cigarettes"));
@@ -48,6 +48,7 @@ public class DrugSafetyData {
                 "Nicotine - Vaporizer",
                 "Mg/Ml"));
     }
+
 
     public static Drug GetDrugById(long id){
         for(Drug drug : knownDrugs){

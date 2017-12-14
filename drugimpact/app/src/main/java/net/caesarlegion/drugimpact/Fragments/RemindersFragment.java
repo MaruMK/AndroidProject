@@ -26,14 +26,11 @@ import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 import net.caesarlegion.drugimpact.Model.onDrugClickedListener;
 import net.caesarlegion.drugimpact.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-/**
- * Comments for this part are a little out of touch since it was based off of the notes application,
- * TODO: (WIP) Fix the comments to make them more relevant
- */
 
 public class RemindersFragment extends Fragment {
 
@@ -43,9 +40,13 @@ public class RemindersFragment extends Fragment {
     public static ArrayList<History> historyData = new ArrayList<>();
     public static History elementToDelete;
 
+    //Whenever a substance is on countdown till substance, this variable will
+    //hold the timer with the highest value
     public static CountDownTimer currentTimer;
 
+    //This database will hold the history valuess. It is (will be) encrypted
     public HistoryDatabaseHandler historyDatabase = new HistoryDatabaseHandler(getContext());
+
 
     public RemindersFragment() {
     }
@@ -64,16 +65,13 @@ public class RemindersFragment extends Fragment {
         //Sets the custom adapter (drug_reminder_listitem) to the listview for substances consumed
         setCustomAdapter();
         refreshAdapter();
-
         updateTime();
-
-        Toast.makeText(getContext(), Double.toString(getHistoryByDrugId(historyData, DrugSafetyData.ALCOHOL_ID).getAmount()), Toast.LENGTH_LONG).show();
 
         return root;
     }
 
     //=======================================================================================================================================
-    //This function will update the listview to matche the database
+    //This function will be called whenever the ok button is pressed to add a substance
     public void setOkBtn() {
         Button button = root.findViewById(R.id.ok_btn);
         final Spinner spinner = root.findViewById(R.id.substances_spinner);
@@ -83,7 +81,6 @@ public class RemindersFragment extends Fragment {
             public void onClick(View v) {
                 EditText amountBox = root.findViewById(R.id.amt_consumed_box);
                 EditText concentrationBox = root.findViewById(R.id.concentration_box);
-                CheckBox reminder = root.findViewById(R.id.checkBox);
                 try {
                     List<History> historyData = historyDatabase.historyTable.readAll();
 
@@ -93,16 +90,13 @@ public class RemindersFragment extends Fragment {
                             case "Alcohol":
                                 if (concentrationBox.getText().toString() != null && !concentrationBox.getText().toString().isEmpty()) {
                                     Double concentration = Double.parseDouble(concentrationBox.getText().toString());
-                                    History existingElement = getHistoryByDrugId(historyData, DrugSafetyData.ALCOHOL_ID);
+                                    History existingElement = getHistoryByDrugId(DrugSafetyData.ALCOHOL_ID);
                                     //If the drug is already within the database, don't create a new one, update the old one instead
                                     if( existingElement.getReminderId() != -1) {
                                         History newElement = new History();
-                                        newElement.setReminderId(existingElement.getReminderId());
-                                        newElement.setDrugId(DrugSafetyData.ALCOHOL_ID);
-                                        //Toast.makeText(getContext(), Double.toString(existingElement.getAmount()), Toast.LENGTH_LONG).show();
-                                        newElement.setAmount(existingElement.getAmount() + DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration));
-                                        newElement.setTimeOfConsumption(new Date());
-                                        historyDatabase.historyTable.update(newElement);
+                                        existingElement.setAmount(existingElement.getAmount() + DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration));
+                                        existingElement.setTimeOfConsumption(new Date());
+                                        historyDatabase.historyTable.update(existingElement);
                                     }
                                     else{
                                         historyDatabase.historyTable.create(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
@@ -112,9 +106,11 @@ public class RemindersFragment extends Fragment {
                                     Toast.makeText(getContext(), "Please enter a concentration (0-100%)", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
+                            case "Caffeine":
+
+                                break;
                             //TODO: ALL THE OTHER SUBSTANCES
                         }
-
                         updateTime();
                         refreshAdapter();
                     } else {
@@ -149,41 +145,50 @@ public class RemindersFragment extends Fragment {
             if(biggestTime == 0){
                 timeTxt.setText("00h00m00");
             }
+            else{
+                final History finalBiggestSubstance = biggestSubstance;
+                final int finalBiggestTime = biggestTime;
+
+
+                if(currentTimer != null){
+                    currentTimer.cancel();
+                }
+                currentTimer = new CountDownTimer(biggestTime*1000, 1000){
+                    public void onTick(long millisUntiFinished) {
+                        finalBiggestSubstance.setAmount(finalBiggestSubstance.getAmount() * (finalBiggestTime / (millisUntiFinished/1000)));
+                        int hours = (int) millisUntiFinished / 3600000;
+                        millisUntiFinished %= 3600000;
+                        int minutes = (int) millisUntiFinished / 60000;
+                        millisUntiFinished %= 60000;
+                        int seconds = (int) millisUntiFinished / 1000;
+                        timeTxt.setText((String.format("%02d", hours)) + "h" + (String.format("%02d", minutes)) + "m" + (String.format("%02d", seconds)));
+
+                        try {
+                            historyDatabase.historyTable.update(finalBiggestSubstance);
+                            refreshAdapter();
+                        }
+                        catch(DatabaseException e){Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();}
+                    }
+                    public void onFinish(){
+                        onSubstanceSober(finalBiggestSubstance);
+                    }
+                }.start();
+            }
         }
         catch(DatabaseException e){}
-
-        final History finalBiggestSubstance = biggestSubstance;
-        final int finalBiggestTime = biggestTime*1000;
-
-
-        if(currentTimer != null){
-            currentTimer.cancel();
-        }
-        currentTimer = new CountDownTimer(biggestTime*1000, 1000){
-            public void onTick(long millisUntiFinished) {
-                finalBiggestSubstance.setAmount(finalBiggestSubstance.getAmount() * (finalBiggestTime / millisUntiFinished));
-                int hours = (int) millisUntiFinished / 3600000;
-                millisUntiFinished %= 3600000;
-                int minutes = (int) millisUntiFinished / 60000;
-                millisUntiFinished %= 60000;
-                int seconds = (int) millisUntiFinished / 1000;
-                timeTxt.setText((hours) + "h" + (minutes) + "m" + (seconds));
-
-                try {
-                    historyDatabase.historyTable.update(finalBiggestSubstance);
-                }
-                catch(DatabaseException e){Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();}
-            }
-            public void onFinish(){
-                onSubstanceSober(finalBiggestSubstance.DrugId);
-            }
-        }.start();
     }
 
     //This function will send a push notification to the user
-    public void onSubstanceSober(long drugId){
-        Toast.makeText(getContext(), "THIS WILL BE A PUSH NOTIFICATION", Toast.LENGTH_SHORT).show();
+    public void onSubstanceSober(History h){
+        try {
+            //First off, once the substance has reached its' time till sober, we remove the substance from the database
+            historyDatabase.historyTable.delete(h);
+            refreshAdapter();
+        }
+        catch (DatabaseException e){}
+
         //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
+        Toast.makeText(getContext(), "THIS WILL BE A PUSH NOTIFICATION", Toast.LENGTH_SHORT).show();
     }
     //=======================================================================================================================================
 
@@ -220,7 +225,6 @@ public class RemindersFragment extends Fragment {
         }
         //Toast.makeText(getContext(), "Yay", Toast.LENGTH_SHORT).show();
         drugList.setAdapter(adapter);
-        updateTime();
     }
 
     //When the remove button is pressed for a particular drug, we refresh with the new list
@@ -229,6 +233,7 @@ public class RemindersFragment extends Fragment {
         public void onDrugClicked() {
             try {
                 historyDatabase.historyTable.delete(elementToDelete);
+                updateTime();
                 refreshAdapter();
             }
             catch (DatabaseException e){}
@@ -250,7 +255,7 @@ public class RemindersFragment extends Fragment {
         }
 
         //Set the first element as the default choice
-        spinner.setSelection(1);
+        spinner.setSelection(0);
 
         //Set the adapter for the substances spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
@@ -328,13 +333,18 @@ public class RemindersFragment extends Fragment {
     //=======================================================================================================================================
 
     //=======================================================================================================================================
-    public History getHistoryByDrugId(List<History> hlist, long id){
-        for(History h:
-            hlist){
-            if(h.DrugId == id) {
-                return h;
+    //This function will allow us to search the database for any given drug. The exact element will then be returned. If no match is found,
+    //the returned item will have a reminderId of -1
+    public History getHistoryByDrugId(long id){
+        try {
+            List<History> hlist = historyDatabase.historyTable.readAll();
+            for(History h:
+                    hlist){
+                if(h.DrugId == id) {
+                    return h;
+                }
             }
-        }
+        } catch (DatabaseException e){}
         return new History();
     }
     //=======================================================================================================================================
