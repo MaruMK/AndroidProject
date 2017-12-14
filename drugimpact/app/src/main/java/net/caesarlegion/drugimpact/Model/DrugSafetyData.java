@@ -19,7 +19,7 @@ public class DrugSafetyData {
     public final static int WARNING = 1;
     public final static int LETHAL = 2;
 
-    final static int WEIGHT_FOR_TESTING = 150;
+    public final static int WEIGHT_FOR_TESTING = 150;
 
     //This part will contain the constants for every drugs
     public final static long ALCOHOL_ID = 1;
@@ -29,6 +29,9 @@ public class DrugSafetyData {
 
     final static double OZ_TO_ML = 29.5735;
 
+    public static String EMERGENCY_NUMBER = "555-555-5555";
+    public static String EMERGENCY_MESSAGE = "Emergency";
+
     public static List<Drug> knownDrugs;
     static {
 
@@ -37,10 +40,10 @@ public class DrugSafetyData {
         knownDrugs = new ArrayList<>();
         knownDrugs.add(new Drug(DrugSafetyData.ALCOHOL_ID,
                 "Alcohol",
-                "Drinks-Ml"));
+                "Drinks"));
         knownDrugs.add(new Drug(DrugSafetyData.CAFFEINE_ID,
                 "Caffeine",
-                "Cups-Ml"));
+                "mg"));
         knownDrugs.add(new Drug(DrugSafetyData.NICOTINE_CIGARETTE_ID,
                 "Nicotine - Cigarette",
                 "Cigarettes"));
@@ -48,6 +51,7 @@ public class DrugSafetyData {
                 "Nicotine - Vaporizer",
                 "Mg/Ml"));
     }
+
 
     public static Drug GetDrugById(long id){
         for(Drug drug : knownDrugs){
@@ -82,6 +86,45 @@ public class DrugSafetyData {
                 WARNING,
                 "Driving significantly impaired"
         ));
+        data.add(new DrugSafety(ALCOHOL_ID,
+                6,
+                0.5,
+                0,
+                WARNING,
+                "You are now considered legally intoxicated"
+        ));
+        data.add(new DrugSafety(ALCOHOL_ID,
+                10,
+                0.5,
+                0,
+                LETHAL,
+                "DANGER: Possible death"
+        ));
+        data.add(new DrugSafety(CAFFEINE_ID,
+                0,
+                (5),
+                0,
+                NO_WARNING,
+                ""));
+        data.add(new DrugSafety(CAFFEINE_ID,
+                 50,
+                (10),
+                0,
+                NO_WARNING,
+                ""));
+        data.add(new DrugSafety(CAFFEINE_ID,
+                200,
+                (15),
+                0,
+                WARNING,
+                "You've reached the maximum recommended daily caffeine dosage"));
+
+        data.add(new DrugSafety(CAFFEINE_ID,
+                400,
+                (15),
+                0,
+                LETHAL,
+                "DANGER: Your risks of heart issues are elevated"));
     }
 
     //This list will contain the methods of input for caffeine
@@ -105,13 +148,18 @@ public class DrugSafetyData {
         double amountLeft = h.getAmount();
         while(amountLeft > 0){
              currentSafetyBracket = FindSafetyBracket(h.getDrugId(), amountLeft, WEIGHT_FOR_TESTING);
-             if(currentSafetyBracket.getMetabolizationRate() < amountLeft) {
-                 amountLeft -= currentSafetyBracket.getMetabolizationRate();
-                 seconds+=60*60;
+             if(h.getDrugId() == CAFFEINE_ID){
+                seconds = (int)currentSafetyBracket.getMetabolizationRate()*60*60;
+                amountLeft = 0;
              }
-             else{
-                 seconds+=amountLeft*2*60*60;
-                 amountLeft = 0;
+             else {
+                 if (currentSafetyBracket.getMetabolizationRate() < amountLeft) {
+                     amountLeft -= currentSafetyBracket.getMetabolizationRate();
+                     seconds += 60 * 60;
+                 } else {
+                     seconds += amountLeft * 2 * 60 * 60;
+                     amountLeft = 0;
+                 }
              }
         }
         seconds = seconds + h.getTimeOfConsumption().getSeconds() - new Date().getSeconds();
