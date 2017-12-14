@@ -1,6 +1,8 @@
 package net.caesarlegion.drugimpact.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -17,9 +19,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.caesarlegion.drugimpact.EmergencyText;
 import net.caesarlegion.drugimpact.ListAdapters.HistoryAdapter.HistoryAdapter;
 import net.caesarlegion.drugimpact.Model.DatabaseException;
 import net.caesarlegion.drugimpact.Model.Drug;
+import net.caesarlegion.drugimpact.Model.DrugSafety;
 import net.caesarlegion.drugimpact.Model.DrugSafetyData;
 import net.caesarlegion.drugimpact.Model.History;
 import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
@@ -82,24 +86,24 @@ public class RemindersFragment extends Fragment {
                 EditText amountBox = root.findViewById(R.id.amt_consumed_box);
                 EditText concentrationBox = root.findViewById(R.id.concentration_box);
                 try {
+                    History element = new History();
                     List<History> historyData = historyDatabase.historyTable.readAll();
-
                     if (amountBox.getText().toString() != null && !amountBox.getText().toString().isEmpty()) {
                         Double amount = Double.parseDouble(amountBox.getText().toString());
                         switch (spinner.getSelectedItem().toString()) {
                             case "Alcohol":
                                 if (concentrationBox.getText().toString() != null && !concentrationBox.getText().toString().isEmpty()) {
                                     Double concentration = Double.parseDouble(concentrationBox.getText().toString());
-                                    History existingElement = getHistoryByDrugId(DrugSafetyData.ALCOHOL_ID);
+                                    element = getHistoryByDrugId(DrugSafetyData.ALCOHOL_ID);
                                     //If the drug is already within the database, don't create a new one, update the old one instead
-                                    if( existingElement.getReminderId() != -1) {
-                                        History newElement = new History();
-                                        existingElement.setAmount(existingElement.getAmount() + DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration));
-                                        existingElement.setTimeOfConsumption(new Date());
-                                        historyDatabase.historyTable.update(existingElement);
+                                    if( element.getReminderId() != -1) {
+                                        element.setAmount(element.getAmount() + DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration));
+                                        element.setTimeOfConsumption(new Date());
+                                        historyDatabase.historyTable.update(element);
                                     }
                                     else{
-                                        historyDatabase.historyTable.create(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
+                                        element = new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date());
+                                        historyDatabase.historyTable.create(element);
                                     }
                                     //historyData.add(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
                                 } else {
@@ -107,10 +111,50 @@ public class RemindersFragment extends Fragment {
                                 }
                                 break;
                             case "Caffeine":
-
+                                Spinner caffeineSpinner = root.findViewById(R.id.caffeine_method_spinner);
+                                element = getHistoryByDrugId(DrugSafetyData.CAFFEINE_ID);
+                                if( element.getReminderId() != -1) {
+                                    element.setAmount(element.getAmount() + DrugSafetyData.GetCaffeineInMg(caffeineSpinner.getSelectedItem().toString(), amount));
+                                    element.setTimeOfConsumption(new Date());
+                                    historyDatabase.historyTable.update(element);
+                                }
+                                else{
+                                    element = new History(DrugSafetyData.CAFFEINE_ID, DrugSafetyData.GetCaffeineInMg(caffeineSpinner.getSelectedItem().toString(), amount), new Date());
+                                    historyDatabase.historyTable.create(element);
+                                }
                                 break;
                             //TODO: ALL THE OTHER SUBSTANCES
                         }
+                        DrugSafety ds = DrugSafetyData.FindSafetyBracket(element.getDrugId(), element.getAmount(), DrugSafetyData.WEIGHT_FOR_TESTING);
+                        if(ds.getWarningLevel() == DrugSafetyData.WARNING){
+                            Toast.makeText(getContext(), ds.getWarningMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        //If the warning is of lethal level, pop up an alert box offering to contact the emergency contact
+                        else if(ds.getWarningLevel() == DrugSafetyData.LETHAL){
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                            builder1.setMessage(ds.getWarningMessage()+", Would you like to send an emergency message to your preset contact?");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "Yes",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            startActivity(EmergencyText.SendText(getContext(), DrugSafetyData.EMERGENCY_NUMBER, DrugSafetyData.EMERGENCY_MESSAGE));
+                                        }
+                                    });
+
+                            builder1.setNegativeButton(
+                                    "No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                        }
+
                         updateTime();
                         refreshAdapter();
                     } else {
