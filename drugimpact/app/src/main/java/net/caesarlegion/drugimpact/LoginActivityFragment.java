@@ -40,9 +40,8 @@ public class LoginActivityFragment extends Fragment {
 
                     @Override
                     public void onResponse(String data) {
-                        //Toast toast = Toast.makeText(getActivity().getApplicationContext(), data, Toast.LENGTH_SHORT);
-                        //toast.show();
-                        EditText edit = root.findViewById(R.id.editText);
+
+                        EditText editEmail = root.findViewById(R.id.editText);
                         EditText editPass = root.findViewById(R.id.editText2);
 
                         try {
@@ -52,12 +51,20 @@ public class LoginActivityFragment extends Fragment {
 
                             for(int i = 0; i < arr.length();i++)
                             {
-                                JSONObject test = new JSONObject(arr.getString(i));
+                                JSONObject item = new JSONObject(arr.getString(i));
 
-                                if(test.getString("displayName").equals(edit.getText().toString()))
+                                if(item.getString("email").equals(editEmail.getText().toString()))
                                 {
-                                    Intent intent = new Intent(getActivity(),MainActivity.class);
-                                    startActivity(intent);
+                                    if(item.getString("pass").equals(editPass.getText().toString()))
+                                    {
+                                        Intent intent = new Intent(getActivity(),MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                    else
+                                    {
+                                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Bad Password", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
                                 }
                             }
                         }
@@ -68,11 +75,6 @@ public class LoginActivityFragment extends Fragment {
                     }
                 });
                 loginTask.execute(loginApp.PREFIX+"/user");
-
-                //Intent intent = new Intent(getActivity(),MainActivity.class);
-                //startActivity(intent);
-                //Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You are logging in", Toast.LENGTH_SHORT);
-                //toast.show();
             }
         });
         return root;

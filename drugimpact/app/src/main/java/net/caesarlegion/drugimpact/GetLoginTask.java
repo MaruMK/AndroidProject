@@ -24,7 +24,7 @@ import java.net.URL;
  * Created by 1555220 on 2017-11-06.
  */
 
-class GetLoginTask extends AsyncTask<String,Void,String>{
+public class GetLoginTask extends AsyncTask<String,Void,String>{
 
     private OnResponseListener<String> listener;
 
@@ -34,30 +34,23 @@ class GetLoginTask extends AsyncTask<String,Void,String>{
 
     @Override
     protected String doInBackground(String... urls) {
-        Log.d("aaaaaaaaaaaaaaaaaaaaa","testBad");
         String urlStr = urls[0];
         String line="";
         StringBuilder result = new StringBuilder(100);
         try
         {
-            Log.d("aaaaaaaaaaaaaaaaaaaaa","IN THE TRY");
-            Log.d("aaaaaaaaaaaaaaaaaaaaa",urlStr);
             URL url = new URL(urlStr);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            Log.d("aaaaaaaaaaaaaaaaaaaaa","URL CREATED");
-            /*if(con.getResponseCode() != 200)
+            if(con.getResponseCode() != 200)
             {
-                Log.d("aaaaaaaaaaaaaaaaaaaaa","SOMETHING WENT WRONG");
                 throw new IOException("Not Found:");
-            }*/
-            Log.d("aaaaaaaaaaaaaaaaaaaaa","AFTER IO EXCEPTION");
+            }
             BufferedReader read = new BufferedReader(new InputStreamReader(con.getInputStream()));
             while((line = read.readLine()) != null)
             {
                 result.append(line);
             }
-            Log.d("AAAAAAAAAAAAAAAAAAA",result.toString());
             return result.toString();
 
 
