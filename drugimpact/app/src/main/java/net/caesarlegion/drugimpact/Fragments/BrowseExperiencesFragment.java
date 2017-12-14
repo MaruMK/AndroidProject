@@ -50,33 +50,6 @@ public class BrowseExperiencesFragment extends Fragment {
         adapter.addAll(data);
         experienceList.setAdapter(adapter);
 
-        GetLoginTask loginTask = new GetLoginTask();
-        loginTask.setOnResponseListener(new OnResponseListener<String>() {
-
-            @Override
-            public void onResponse(String data) {
-
-                try {
-                    JSONObject info = new JSONObject(data);
-                    info = info.getJSONObject("_embedded");
-                    JSONArray arr = info.getJSONArray("experience");
-
-                    for(int i = 0; i < arr.length();i++)
-                    {
-                        JSONObject item = new JSONObject(arr.getString(i));
-                        Log.d("aaaaaaaaaaaaa",item.getString("title"));
-                    }
-                    //Toast toast = Toast.makeText(getActivity().getApplicationContext(), data, Toast.LENGTH_SHORT);
-                    //toast.show();
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
-        loginTask.execute(loginApp.PREFIX+"/experience");
-
         return root;
     }
 }
