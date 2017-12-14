@@ -4,7 +4,6 @@ package net.caesarlegion.drugimpact.Fragments;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,24 +17,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.caesarlegion.drugimpact.Control.CustomDrugReminderAdapter;
+import net.caesarlegion.drugimpact.ListAdapters.HistoryAdapter.HistoryAdapter;
 import net.caesarlegion.drugimpact.Model.DatabaseException;
 import net.caesarlegion.drugimpact.Model.Drug;
-import net.caesarlegion.drugimpact.Model.DrugSafety;
 import net.caesarlegion.drugimpact.Model.DrugSafetyData;
 import net.caesarlegion.drugimpact.Model.History;
 import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 import net.caesarlegion.drugimpact.Model.onDrugClickedListener;
 import net.caesarlegion.drugimpact.R;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Comments for this part are a little out of touch since it was based off of the notes application,
@@ -48,6 +41,10 @@ public class RemindersFragment extends Fragment {
 
     //This is the arraylist that will store all of the history data
     public static ArrayList<History> historyData = new ArrayList<>();
+    public static History elementToDelete;
+
+    public static CountDownTimer currentTimer;
+
     public HistoryDatabaseHandler historyDatabase = new HistoryDatabaseHandler(getContext());
 
     public RemindersFragment() {
@@ -66,6 +63,11 @@ public class RemindersFragment extends Fragment {
 
         //Sets the custom adapter (drug_reminder_listitem) to the listview for substances consumed
         setCustomAdapter();
+        refreshAdapter();
+
+        updateTime();
+
+        Toast.makeText(getContext(), Double.toString(getHistoryByDrugId(historyData, DrugSafetyData.ALCOHOL_ID).getAmount()), Toast.LENGTH_LONG).show();
 
         return root;
     }
@@ -93,8 +95,14 @@ public class RemindersFragment extends Fragment {
                                     Double concentration = Double.parseDouble(concentrationBox.getText().toString());
                                     History existingElement = getHistoryByDrugId(historyData, DrugSafetyData.ALCOHOL_ID);
                                     //If the drug is already within the database, don't create a new one, update the old one instead
-                                    if( existingElement != new History()) {
-                                        historyDatabase.historyTable.create(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration) + existingElement.Amount, new Date()));
+                                    if( existingElement.getReminderId() != -1) {
+                                        History newElement = new History();
+                                        newElement.setReminderId(existingElement.getReminderId());
+                                        newElement.setDrugId(DrugSafetyData.ALCOHOL_ID);
+                                        //Toast.makeText(getContext(), Double.toString(existingElement.getAmount()), Toast.LENGTH_LONG).show();
+                                        newElement.setAmount(existingElement.getAmount() + DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration));
+                                        newElement.setTimeOfConsumption(new Date());
+                                        historyDatabase.historyTable.update(newElement);
                                     }
                                     else{
                                         historyDatabase.historyTable.create(new History(DrugSafetyData.ALCOHOL_ID, DrugSafetyData.ConvertAlcoholVolumeToDrinks(amount, concentration), new Date()));
@@ -125,34 +133,49 @@ public class RemindersFragment extends Fragment {
     //This function will update the APPROXIMATE time until sober based on the history of substances consumed
     //TODO IMPLEMENT THE ACTUAL CALCULATIONS INSTEAD OF DUMMY VALUES
     public void updateTime() {
+        final TextView timeTxt = root.findViewById(R.id.time_to_sober_txt);
+
         int biggestTime = 0;
-        long biggestSubstance = 0;
+        History biggestSubstance = new History();
         try {
             for (History h :
                     historyDatabase.historyTable.readAll()) {
-                int time = DrugSafetyData.CalculateMinutesTillSober(h);
+                int time = DrugSafetyData.CalculateSecondsTillSober(h);
                 if (time > biggestTime) {
                     biggestTime = time;
-                    biggestSubstance = h.getDrugId();
+                    biggestSubstance = h;
                 }
+            }
+            if(biggestTime == 0){
+                timeTxt.setText("00h00m00");
             }
         }
         catch(DatabaseException e){}
 
-        final long finalBiggestSubstance = biggestSubstance;
+        final History finalBiggestSubstance = biggestSubstance;
+        final int finalBiggestTime = biggestTime*1000;
 
-        final TextView timeTxt = root.findViewById(R.id.time_to_sober_txt);
-        new CountDownTimer(biggestTime*60*1000, 1000){
-            public void onTick(long millisUntiFinished){
-                int hours = (int)millisUntiFinished/3600000;
+
+        if(currentTimer != null){
+            currentTimer.cancel();
+        }
+        currentTimer = new CountDownTimer(biggestTime*1000, 1000){
+            public void onTick(long millisUntiFinished) {
+                finalBiggestSubstance.setAmount(finalBiggestSubstance.getAmount() * (finalBiggestTime / millisUntiFinished));
+                int hours = (int) millisUntiFinished / 3600000;
                 millisUntiFinished %= 3600000;
-                int minutes = (int)millisUntiFinished/60000;
+                int minutes = (int) millisUntiFinished / 60000;
                 millisUntiFinished %= 60000;
-                int seconds = (int)millisUntiFinished/1000;
-                timeTxt.setText((hours)+":"+(minutes)+":"+(seconds));
+                int seconds = (int) millisUntiFinished / 1000;
+                timeTxt.setText((hours) + "h" + (minutes) + "m" + (seconds));
+
+                try {
+                    historyDatabase.historyTable.update(finalBiggestSubstance);
+                }
+                catch(DatabaseException e){Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();}
             }
             public void onFinish(){
-                onSubstanceSober(finalBiggestSubstance);
+                onSubstanceSober(finalBiggestSubstance.DrugId);
             }
         }.start();
     }
@@ -172,7 +195,7 @@ public class RemindersFragment extends Fragment {
         //Get the view element in which to add
         ListView drugsList = root.findViewById(R.id.drugs_list_view);
 
-        CustomDrugReminderAdapter adapter = new CustomDrugReminderAdapter(getContext(), adapterListener);
+        HistoryAdapter adapter = new HistoryAdapter(getContext(), adapterListener);
         //adapter.addAll(historyData);
 
         drugsList.setAdapter(adapter);
@@ -186,7 +209,7 @@ public class RemindersFragment extends Fragment {
         //Get the view element in which to add
         ListView drugList = root.findViewById(R.id.drugs_list_view);
 
-        CustomDrugReminderAdapter adapter = new CustomDrugReminderAdapter(getContext(), adapterListener);
+        HistoryAdapter adapter = new HistoryAdapter(getContext(), adapterListener);
 
         try {
             //Insert random data for now, drugs from database later
@@ -204,7 +227,11 @@ public class RemindersFragment extends Fragment {
     public onDrugClickedListener adapterListener = new onDrugClickedListener() {
         @Override
         public void onDrugClicked() {
-            refreshAdapter();
+            try {
+                historyDatabase.historyTable.delete(elementToDelete);
+                refreshAdapter();
+            }
+            catch (DatabaseException e){}
         }
     };
     //=======================================================================================================================================
@@ -304,8 +331,9 @@ public class RemindersFragment extends Fragment {
     public History getHistoryByDrugId(List<History> hlist, long id){
         for(History h:
             hlist){
-            if(h.DrugId == id)
+            if(h.DrugId == id) {
                 return h;
+            }
         }
         return new History();
     }
