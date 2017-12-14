@@ -99,22 +99,23 @@ public class DrugSafetyData {
     }
 
     //ALL SUBSTANCES FUNCTIONS ************************************************************************************************************************
-    public static int CalculateMinutesTillSober(History h){
+    public static int CalculateSecondsTillSober(History h){
         DrugSafety currentSafetyBracket;
-        int minutes = 0;
+        int seconds = 0;
         double amountLeft = h.getAmount();
         while(amountLeft > 0){
              currentSafetyBracket = FindSafetyBracket(h.getDrugId(), amountLeft, WEIGHT_FOR_TESTING);
              if(currentSafetyBracket.getMetabolizationRate() < amountLeft) {
                  amountLeft -= currentSafetyBracket.getMetabolizationRate();
-                 minutes+=60;
+                 seconds+=60*60;
              }
              else{
-                 minutes+=amountLeft*2*60;
+                 seconds+=amountLeft*2*60*60;
                  amountLeft = 0;
              }
         }
-        return minutes;
+        seconds = seconds + h.getTimeOfConsumption().getSeconds() - new Date().getSeconds();
+        return seconds;
     }
 
     //This function will take a substance id, the amount consumed and the weight of the user and

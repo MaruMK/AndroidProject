@@ -1,4 +1,4 @@
-package net.caesarlegion.drugimpact.Control;
+package net.caesarlegion.drugimpact.ListAdapters.HistoryAdapter;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -27,11 +27,11 @@ import net.caesarlegion.drugimpact.Model.DatabaseException;
  * Created by Main on 2017-11-26.
  */
 
-public class CustomDrugReminderAdapter extends ArrayAdapter<History> {
+public class HistoryAdapter extends ArrayAdapter<History> {
 
     public onDrugClickedListener adapterListener;
 
-    public CustomDrugReminderAdapter(Context context, onDrugClickedListener listener) {
+    public HistoryAdapter(Context context, onDrugClickedListener listener) {
         super(context, -1);
         adapterListener = listener;
     }
@@ -62,8 +62,9 @@ public class CustomDrugReminderAdapter extends ArrayAdapter<History> {
         View.OnClickListener removePressedListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RemindersFragment.historyData.remove(getItem(position));
+                RemindersFragment.elementToDelete = getItem(position);
                 try{
+                    RemindersFragment.currentTimer.cancel();
                     adapterListener.onDrugClicked();
                 }
                 catch (Exception e){
