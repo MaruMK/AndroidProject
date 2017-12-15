@@ -1,13 +1,16 @@
 package ca.qc.johnabbott.cs616.server;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlIDREF;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * Created by Connor King & Gabriel Charlebois on 2017-12-8.
+ */
 @Entity
 public class Experience {
 
@@ -22,6 +25,7 @@ public class Experience {
             joinColumns = @JoinColumn(name = "experience_id", referencedColumnName = "experience_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     )*/
+
     private Integer drug1;
     private Integer drug2;
     private String title;

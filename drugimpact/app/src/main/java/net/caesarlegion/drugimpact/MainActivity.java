@@ -1,6 +1,8 @@
 package net.caesarlegion.drugimpact;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +24,8 @@ import net.caesarlegion.drugimpact.Fragments.BrowseExperiencesFragment;
 import net.caesarlegion.drugimpact.Fragments.RemindersFragment;
 import net.caesarlegion.drugimpact.Fragments.SettingsFragment;
 import net.caesarlegion.drugimpact.Fragments.WelcomeFragment;
+import net.caesarlegion.drugimpact.Model.DrugSafety;
+import net.caesarlegion.drugimpact.Model.DrugSafetyData;
 import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 
 /**
@@ -31,10 +35,15 @@ import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 public class MainActivity extends AppCompatActivity {
 
     //Declare some global variables
-    public static String URL = "http://192.168.2.11";
+    public static String URL = "http://192.168.2.11"; //"http://10.0.2.2"
     public static String PORT = "9999";
     public static String ADDRESS = URL + ":" + PORT + "/";
     public static Integer CURRENT_USER_ID = 2;
+
+    //Used to permanently store user's emergency info
+    SharedPreferences emergencyPrefs;
+
+    public static boolean foreground = true;
 
 
     //Declare some UI elements
@@ -48,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        emergencyPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -71,9 +82,32 @@ public class MainActivity extends AppCompatActivity {
         //Add the dynamic components to our tabbed layout
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        SharedPreferences.Editor edit = emergencyPrefs.edit();
+        edit.putString("EmergencyNumber", DrugSafetyData.EMERGENCY_NUMBER);
+        edit.putString("EmergencyMessage", DrugSafetyData.EMERGENCY_MESSAGE);
+        edit.commit();
+        foreground = false;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        DrugSafetyData.EMERGENCY_NUMBER = emergencyPrefs.getString("EmergencyNumber", "555-555-5555");
+        DrugSafetyData.EMERGENCY_MESSAGE = emergencyPrefs.getString("EmergencyMessage", "Emergency Message");
+        foreground = true;
+    }
 
 
-
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        DrugSafetyData.EMERGENCY_NUMBER = savedInstanceState.getString("EmergencyNumber");
+        DrugSafetyData.EMERGENCY_MESSAGE = savedInstanceState.getString("EmergencyMessage");
     }
 
 
