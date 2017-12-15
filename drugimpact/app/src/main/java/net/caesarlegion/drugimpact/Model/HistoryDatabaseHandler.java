@@ -17,6 +17,7 @@ public class HistoryDatabaseHandler extends SQLiteOpenHelper {
 
     public HistoryDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
+        historyTable = new HistoryTable(this, "give the password/key here");
     }
 
     @Override
