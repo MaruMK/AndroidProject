@@ -6,10 +6,13 @@
     <string name="tab_text_3">Reminders</string>
     <string name="tab_text_4">Community</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="action_history">History</string>
+    <string name="action_get_something">Talk to server</string>
     <!--Welcome Fragment strings-->
     <string name="welcome_warning_preface">WARNING:</string>
     <string name="welcome_warning_text">We do not promote the usage of legal or illegal substances, nor do we glorify any use of drugs.</string>
     <string name="welcome_recent_activity">Recent Activity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="desc">desc</string>
 </resources>
