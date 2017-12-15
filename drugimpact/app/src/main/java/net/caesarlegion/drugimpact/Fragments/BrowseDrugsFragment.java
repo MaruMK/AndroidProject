@@ -42,8 +42,6 @@ public class BrowseDrugsFragment extends Fragment {
     //sample data
     List<Drug> sampleDrugs = Druglist.getData();
 
-
-
     public BrowseDrugsFragment() {
     }
 
@@ -60,7 +58,6 @@ public class BrowseDrugsFragment extends Fragment {
         final List<Drug> drugListFromServer = new ArrayList<>();
 
 
-
         /*====== Getting List of Drugs From Server ========================================================*/
         DownloadTask downloadTask = new DownloadTask();
 
@@ -68,6 +65,7 @@ public class BrowseDrugsFragment extends Fragment {
             @Override
             public void onResponse(String data) {
                 try{
+                    Log.d("DEBUG_STR_DATA",data);
                     JSONArray jsonArray = new JSONArray(data);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -108,8 +106,6 @@ public class BrowseDrugsFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-
-
 
         return rootView;
     }

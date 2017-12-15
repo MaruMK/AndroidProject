@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +24,7 @@ import java.net.URL;
 
 public class DownloadTask extends AsyncTask<String, Void , String> {
 
+    final int BUFFER_SIZE = 1024;
     private OnResponseListener<String> listener;
 
     public void setOnResponseListener(OnResponseListener<String> listener) {
@@ -32,7 +34,6 @@ public class DownloadTask extends AsyncTask<String, Void , String> {
     @Override
     protected String doInBackground(String... urls) {
         String urlStr = urls[0];
-        String parsedString = "";
 
         try {
             URL url = new URL(urlStr);
@@ -43,13 +44,12 @@ public class DownloadTask extends AsyncTask<String, Void , String> {
             if(connection.getResponseCode() != 200)
                 throw new IOException("Not found");
 
-
             //Got from https://stackoverflow.com/questions/13196234/simple-parse-json-from-url-on-android-and-display-in-listview
-            InputStream in = connection.getInputStream();
+            /*InputStream in = connection.getInputStream();
             BufferedReader bReader = new BufferedReader(new InputStreamReader(in, "utf-8"), 8);
             StringBuilder sBuilder = new StringBuilder();
 
-            String line = null;
+            String line;
 
             while ((line = bReader.readLine()) != null) {
                 sBuilder.append(line + "\n");
@@ -57,7 +57,22 @@ public class DownloadTask extends AsyncTask<String, Void , String> {
 
             in.close();
 
-            return sBuilder.toString();
+            return sBuilder.toString();*/
+
+            BufferedInputStream in = new BufferedInputStream(connection.getInputStream(), BUFFER_SIZE);
+
+            ByteArrayOutputStream bytes= new ByteArrayOutputStream();
+            BufferedOutputStream out = new BufferedOutputStream(bytes);
+
+            int i;
+            while((i = in.read()) >= 0)
+                out.write(i);
+
+            in.close();
+            out.close();
+
+            return bytes.toString();
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
