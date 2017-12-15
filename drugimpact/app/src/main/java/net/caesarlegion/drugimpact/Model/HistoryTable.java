@@ -38,7 +38,11 @@ public class HistoryTable extends Table<History> {
      */
     public HistoryTable(SQLiteOpenHelper dbh, String key) {
         super(dbh, TABLE_NAME);
-        encryptionManager = new EncryptionManager(); //pass the key here
+
+        //We create a new encryption manager by passing it the user's encryption key
+        encryptionManager = new EncryptionManager(key);
+
+        //We initialize our table object
         addColumn((new Column(COLUMN_DRUG_ID, "TEXT").notNull()));
         addColumn((new Column(COLUMN_AMOUNT, "TEXT").notNull()));
         addColumn((new Column(COLUMN_TIME_OF_CONSUMPTION, "TEXT").notNull()));
@@ -53,7 +57,7 @@ public class HistoryTable extends Table<History> {
     @Override
     public ContentValues toContentValues(History element) {
         ContentValues values = new ContentValues();
-        Log.d("JOB",Long.toString(element.getDrugId()));
+        //Put into the table each of the object's elements, encrypted by our manager.
         values.put( COLUMN_DRUG_ID, encryptionManager.encryptMsg( Long.toString(element.getDrugId()) ) );
         values.put( COLUMN_AMOUNT, encryptionManager.encryptMsg( Double.toString(element.getAmount()) ) );
         values.put( COLUMN_TIME_OF_CONSUMPTION, encryptionManager.encryptMsg( iso8601.format(element.getTimeOfConsumption()) ) );
