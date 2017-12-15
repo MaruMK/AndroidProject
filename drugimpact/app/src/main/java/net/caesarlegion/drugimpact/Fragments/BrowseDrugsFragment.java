@@ -13,11 +13,18 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import net.caesarlegion.drugimpact.Control.DownloadTask;
 import net.caesarlegion.drugimpact.Control.DrugListAdapter;
+import net.caesarlegion.drugimpact.Control.OnResponseListener;
 import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.Druglist;
 import net.caesarlegion.drugimpact.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,6 +43,7 @@ public class BrowseDrugsFragment extends Fragment {
     List<Drug> sampleDrugs = Druglist.getData();
 
 
+
     public BrowseDrugsFragment() {
     }
 
@@ -47,7 +55,38 @@ public class BrowseDrugsFragment extends Fragment {
         sortOptions = (Spinner) rootView.findViewById(R.id.sortBySpinner);
         drugList = rootView.findViewById(R.id.drugListView);
         searchTerm = rootView.findViewById(R.id.searchText);
-        drugListAdapter = new DrugListAdapter(getContext(), sampleDrugs);
+        //drugListAdapter = new DrugListAdapter(getContext(), sampleDrugs);
+
+        final List<Drug> drugListFromServer = new ArrayList<>();
+
+
+
+        /*====== Getting List of Drugs From Server ========================================================*/
+        DownloadTask downloadTask = new DownloadTask();
+
+        downloadTask.setOnResponseListener(new OnResponseListener<String>() {
+            @Override
+            public void onResponse(String data) {
+                try{
+                    JSONArray jsonArray = new JSONArray(data);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        jsonObject = jsonObject.getJSONObject("_embedded");
+                        drugListFromServer.add(Drug.parse(jsonObject.toString()));
+                        Log.d("DEBUG_JSON",jsonObject.toString());
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        downloadTask.execute("localhost:9999/drug");
+        /*=================================================================================================*/
+
+        drugListAdapter = new DrugListAdapter(getContext(), drugListFromServer);
 
         refreshListView(sampleDrugs);
 

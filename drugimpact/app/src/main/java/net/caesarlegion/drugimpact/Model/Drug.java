@@ -1,15 +1,19 @@
 package net.caesarlegion.drugimpact.Model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONObject;
+
 /**
  * Created by Maru on 2017-11-27.
  */
 
 public class Drug {
     /*========== Class Fields =============================*/
-    private int DrugID;
-    private int TypeID;
-    private String Name;
-    private String Description;
+    private int drugId;
+    private String name;
+    private String url;
     /*=====================================================*/
 
     /*========== Constructors =============================*/
@@ -17,42 +21,42 @@ public class Drug {
     /*=====================================================*/
 
     /*========== Getters and Setters ======================*/
-    public int getDrugID() {
-        return DrugID;
+    public int getDrugId() {
+        return drugId;
     }
 
-    public Drug setDrugID(int drugID) {
-        DrugID = drugID;
-        return this;
-    }
-
-    public int getTypeID() {
-        return TypeID;
-    }
-
-    public Drug setTypeID(int typeID) {
-        TypeID = typeID;
+    public Drug setDrugId(int drugId) {
+        this.drugId = drugId;
         return this;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public Drug setName(String name) {
-        Name = name;
+        this.name = name;
         return this;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getUrl() {
+        return url;
     }
 
-    public Drug setDescription(String description) {
-        Description = description;
+    public Drug setUrl(String url) {
+        this.url = url;
         return this;
     }
     /*========================================================*/
 
 
+    /*============== Methods =================================*/
+    public static Drug parse(String json) {
+        Gson gson = new GsonBuilder()
+                        .create();
+
+        return gson.fromJson(json, Drug.class);
+    }
+
+    /*========================================================*/
 }

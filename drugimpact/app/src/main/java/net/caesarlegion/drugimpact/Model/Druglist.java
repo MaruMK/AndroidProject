@@ -1,6 +1,5 @@
 package net.caesarlegion.drugimpact.Model;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,64 +15,54 @@ public class Druglist {
 
         // Temporary data
         drugList.add(new Drug()
-                .setDrugID(1)
-                .setTypeID(1)
+                .setDrugId(1)
                 .setName("AAA")
-                .setDescription("AAA desc")
+                .setUrl("AAA desc")
         );
         drugList.add(new Drug()
-                .setDrugID(2)
-                .setTypeID(2)
+                .setDrugId(2)
                 .setName("AAB")
-                .setDescription("AAB desc")
+                .setUrl("AAB desc")
         );
         drugList.add(new Drug()
-                .setDrugID(3)
-                .setTypeID(2)
+                .setDrugId(3)
                 .setName("AAC")
-                .setDescription("AAC desc")
+                .setUrl("AAC desc")
         );
         drugList.add(new Drug()
-                .setDrugID(4)
-                .setTypeID(4)
+                .setDrugId(4)
                 .setName("AB")
-                .setDescription("AB desc")
+                .setUrl("AB desc")
         );
         drugList.add(new Drug()
-                .setDrugID(5)
-                .setTypeID(5)
+                .setDrugId(5)
                 .setName("ABA")
-                .setDescription("ABA desc")
+                .setUrl("ABA desc")
         );
         drugList.add(new Drug()
-                .setDrugID(6)
-                .setTypeID(6)
+                .setDrugId(6)
                 .setName("ABB")
-                .setDescription("ABB desc")
+                .setUrl("ABB desc")
         );
         drugList.add(new Drug()
-                .setDrugID(7)
-                .setTypeID(7)
+                .setDrugId(7)
                 .setName("AC")
-                .setDescription("AC desc")
+                .setUrl("AC desc")
         );
         drugList.add(new Drug()
-                .setDrugID(8)
-                .setTypeID(8)
+                .setDrugId(8)
                 .setName("ACA")
-                .setDescription("ACA desc")
+                .setUrl("ACA desc")
         );
         drugList.add(new Drug()
-                .setDrugID(9)
-                .setTypeID(9)
+                .setDrugId(9)
                 .setName("ACB")
-                .setDescription("ACB desc")
+                .setUrl("ACB desc")
         );
         drugList.add(new Drug()
-                .setDrugID(10)
-                .setTypeID(10)
+                .setDrugId(10)
                 .setName("AF")
-                .setDescription("AF desc")
+                .setUrl("AF desc")
         );
     }
 
