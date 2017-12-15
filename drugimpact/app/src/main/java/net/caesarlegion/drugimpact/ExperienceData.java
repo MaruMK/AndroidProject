@@ -1,7 +1,9 @@
 package net.caesarlegion.drugimpact;
 
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
@@ -35,26 +37,38 @@ public class ExperienceData extends Application{
 
                     String test = item.getString("title");
                     ENDME = test;
-                    Log.d("bbbbbbbbbbbbbbbbbbb",test);
-                    Log.d("ccccccccccccccccccc",ExperienceData.ENDME);
+                    //Log.d("bbbbbbbbbbbbbbbbbbb",test);
+                    //Log.d("ccccccccccccccccccc",ENDME);
                 }
             }
             catch (JSONException e)
             {
                 e.printStackTrace();
             }
-            testLog();
         }
     };
 
 
-    public static List<ExperienceActivity> getData() {
-        GetFromServer();
+    public static List<ExperienceActivity> getData(String dataSent) {
         List<ExperienceActivity> data = new ArrayList<>();
-        data.add(new ExperienceActivity("Timmy","Weed","This stuff was pretty good",new Date()));
+        //data.add(new ExperienceActivity("Timmy","Weed","This stuff was pretty good",new Date()));
         //data.add(new ExperienceActivity("Bill","Coco","We going back to the future",new Date()));
         //data.add(new ExperienceActivity("KABOOM","OXY CLEAN","WASH YOUR DETERGENT NOW",new Date()));
+        try {
+            JSONObject info = new JSONObject(dataSent);
+            info = info.getJSONObject("_embedded");
+            JSONArray arr = info.getJSONArray("experience");
 
+            for(int i = 0; i < arr.length();i++)
+            {
+                JSONObject item = new JSONObject(arr.getString(i));
+                Log.d("aaaaaaaaaaaaaaaa",item.getString("title"));
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
 
         Log.d("aaaaaaaaaaaaaaaa",ENDME);
         data.add(new ExperienceActivity(ENDME,"Weeeeed","This stuff wasaaaa pretty good",new Date()));
@@ -62,16 +76,12 @@ public class ExperienceData extends Application{
     }
 
 
-    public static void GetFromServer()
+    public static void GetFromServer(OnResponseListener<String> onResponseListener)
     {
         GetLoginTask loginTask = new GetLoginTask();
-        loginTask.setOnResponseListener(listener);
+        loginTask.setOnResponseListener(onResponseListener);
 
         LoginApplication loginApp = new LoginApplication();
         loginTask.execute(loginApp.PREFIX+"/experience");
-    }
-    public static void testLog()
-    {
-        Log.d("eeeeeeeeeeeeeeeeeeee",ENDME);
     }
 }
