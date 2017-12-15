@@ -21,7 +21,6 @@ import java.util.List;
  */
 
 public class ExperienceData extends Application{
-    public static String ENDME = "test";
     public static OnResponseListener listener = new OnResponseListener<String>() {
         @Override
         public void onResponse(String data) {
@@ -34,11 +33,6 @@ public class ExperienceData extends Application{
                 for(int i = 0; i < arr.length();i++)
                 {
                     JSONObject item = new JSONObject(arr.getString(i));
-
-                    String test = item.getString("title");
-                    ENDME = test;
-                    //Log.d("bbbbbbbbbbbbbbbbbbb",test);
-                    //Log.d("ccccccccccccccccccc",ENDME);
                 }
             }
             catch (JSONException e)
@@ -51,9 +45,6 @@ public class ExperienceData extends Application{
 
     public static List<ExperienceActivity> getData(String dataSent) {
         List<ExperienceActivity> data = new ArrayList<>();
-        //data.add(new ExperienceActivity("Timmy","Weed","This stuff was pretty good",new Date()));
-        //data.add(new ExperienceActivity("Bill","Coco","We going back to the future",new Date()));
-        //data.add(new ExperienceActivity("KABOOM","OXY CLEAN","WASH YOUR DETERGENT NOW",new Date()));
         try {
             JSONObject info = new JSONObject(dataSent);
             info = info.getJSONObject("_embedded");
@@ -62,16 +53,17 @@ public class ExperienceData extends Application{
             for(int i = 0; i < arr.length();i++)
             {
                 JSONObject item = new JSONObject(arr.getString(i));
-                Log.d("aaaaaaaaaaaaaaaa",item.getString("title"));
+                String title = item.getString("title");
+                String drug1 = item.getString("drug1");
+                String drug2 = item.getString("drug2");
+                String content = item.getString("content");
+                data.add(new ExperienceActivity(title,drug1,drug2,new Date()));
             }
         }
         catch (JSONException e)
         {
             e.printStackTrace();
         }
-
-        Log.d("aaaaaaaaaaaaaaaa",ENDME);
-        data.add(new ExperienceActivity(ENDME,"Weeeeed","This stuff wasaaaa pretty good",new Date()));
         return data;
     }
 
