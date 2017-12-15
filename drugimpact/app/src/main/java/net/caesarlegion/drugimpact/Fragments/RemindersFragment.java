@@ -53,9 +53,11 @@ public class RemindersFragment extends Fragment {
     public static CountDownTimer currentTimer;
     public static List<CountDownTimer> timersList = new ArrayList<>();
 
-    //This database will hold the history values. It is (will be) encrypted
-    public HistoryDatabaseHandler historyDatabase = new HistoryDatabaseHandler(getContext());
-
+    //This database will hold the history values. It is encrypted
+    public HistoryDatabaseHandler historyDatabase;
+    //This is used to identify and encrypt it
+    public String userId;
+    public String key;
 
 
     public RemindersFragment() {
@@ -64,8 +66,11 @@ public class RemindersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_reminders, container, false);
+        //Get the desired user data to initialize the database;
+        userId = getArguments().getString(MainActivity.params.USER_ID);
+        key = getArguments().getString(MainActivity.params.KEY);
 
+        root = inflater.inflate(R.layout.fragment_reminders, container, false);
         //Sets what to do when the ok button is pressed
         setOkBtn();
 
@@ -85,7 +90,7 @@ public class RemindersFragment extends Fragment {
     public void setOkBtn() {
         Button button = root.findViewById(R.id.ok_btn);
         final Spinner spinner = root.findViewById(R.id.substances_spinner);
-        historyDatabase = new HistoryDatabaseHandler(getContext());
+        historyDatabase = new HistoryDatabaseHandler(getContext(), userId, key);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

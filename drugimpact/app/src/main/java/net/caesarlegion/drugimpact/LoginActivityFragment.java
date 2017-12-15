@@ -60,6 +60,9 @@ public class LoginActivityFragment extends Fragment {
                                     if(item.getString("pass").equals(editPass.getText().toString()))
                                     {
                                         Intent intent = new Intent(getActivity(),MainActivity.class);
+                                        //Give the user id and the password to activity so it can initialize the database accordingly
+                                        intent.putExtra(MainActivity.params.USER_ID, i + 1 );
+                                        intent.putExtra(MainActivity.params.KEY, item.getString("encryptionKey") );
                                         startActivity(intent);
                                     }
                                     else

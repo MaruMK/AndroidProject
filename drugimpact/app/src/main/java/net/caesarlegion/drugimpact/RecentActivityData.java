@@ -20,10 +20,10 @@ public class RecentActivityData {
 
     private static final int DATA_AMOUNT = 7;
 
-    public static List<RecentActivity> getServerData(OnDownloadedListener<String> onDownloadedListener) {
+    public static List<RecentActivity> getServerData(OnDownloadedListener<String> onDownloadedListener, String userId) {
         GETObject task = new GETObject();
         task.setListener(onDownloadedListener);
-        task.execute( MainActivity.ADDRESS + "user/" + MainActivity.CURRENT_USER_ID + "/experiences");
+        task.execute( MainActivity.ADDRESS + "user/" + userId + "/experiences");
         return null;
     }
 
