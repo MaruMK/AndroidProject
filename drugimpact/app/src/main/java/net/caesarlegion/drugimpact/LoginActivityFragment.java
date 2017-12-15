@@ -3,6 +3,7 @@ package net.caesarlegion.drugimpact;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,11 +63,6 @@ public class LoginActivityFragment extends Fragment {
                                         Intent intent = new Intent(getActivity(),MainActivity.class);
                                         startActivity(intent);
                                     }
-                                    else
-                                    {
-                                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Bad Password", Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
                                 }
                             }
                         }
@@ -76,41 +72,12 @@ public class LoginActivityFragment extends Fragment {
                         }
                     }
                 });
-                loginTask.execute(MainActivity.ADDRESS+"user");
+                LoginApplication loginApp = new LoginApplication();
+                Log.d("GGGGGGGGGGGGGGGGGGGGGGG",loginApp.PREFIX);
+                loginTask.execute(loginApp.PREFIX+"/user");
             }
         });
         return root;
     }
 
-
-/*
-    //This Hash Function was taken from
-    //https://stackoverflow.com/questions/4846484/md5-hashing-in-android
-    public static final String md5(final String s)
-    {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-}
-*/
 }
