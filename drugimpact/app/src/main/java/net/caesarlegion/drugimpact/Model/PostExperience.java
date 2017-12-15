@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class PostExperience {
 
+    private long experienceId;
     private Integer drug1;
     private Integer drug2;
     private String title;
@@ -23,6 +24,7 @@ public class PostExperience {
     private Links _links;
 
     public PostExperience(Integer drug1,Integer drug2,String title,Integer userRating,Integer othersRating,String content) {
+        this.experienceId = 3;
         this.drug1 = drug1;
         this.drug2 = drug2;
         this.title = title;
@@ -32,7 +34,7 @@ public class PostExperience {
         this.content = content;
         this._links = new Links();
 
-       /* _links.self = new Self();
+        _links.self = new Self();
         _links.self.href = "ha";
 
         _links.experience = new Experience();
@@ -42,7 +44,7 @@ public class PostExperience {
         _links.user.href = "ha";
 
         _links.comments = new Comments();
-        _links.comments.href = "ha";*/
+        _links.comments.href = "ha";
     }
     private static class Links
     {
@@ -69,26 +71,6 @@ public class PostExperience {
     }
     public String toJSON()
     {
-
-        JSONObject jsonObject= new JSONObject();
-        try
-        {
-            jsonObject.put("drug1", this.drug1);
-            jsonObject.put("drug2", this.drug2);
-            jsonObject.put("title", this.title);
-            jsonObject.put("userRating", this.userRating);
-            jsonObject.put("otherRating", this.othersRating);
-            jsonObject.put("timeStamp", this.timeStamp);
-            jsonObject.put("content", this.content);
-            //jsonObject.put("_links", this._links.toString());
-
-            return jsonObject.toString();
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return "";
-        }
-
+        return "{\"drug1\":\"" + this.drug1 + "\", \"drug2\":\"" + this.drug2 + "\", \"title\":\"" + this.title + "\", \"userRating\":\"" + this.userRating + "\", \"othersRating\":\"" + this.othersRating + "\", \"timeStamp\":\"" + this.timeStamp + "\", \"content\":\"" + this.content +"\"}";
     }
 }

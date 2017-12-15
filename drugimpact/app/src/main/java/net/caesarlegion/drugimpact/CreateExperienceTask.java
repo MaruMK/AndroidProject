@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
+import net.caesarlegion.drugimpact.Model.OnUploadResponse;
 import net.caesarlegion.drugimpact.Model.PostExperience;
 
 import org.json.JSONException;
@@ -28,28 +29,32 @@ import java.net.URL;
 
 public class CreateExperienceTask extends AsyncTask<PostExperience,Void,String> {
 
-   private static final String PREFIX = "http://10.0.2.2:9999";
+    private OnUploadResponse<String> listener;
+    private String address = "http://192.168.0.44:9999/experience";
+
+    public void setListener(OnUploadResponse<String> listener) {
+        this.listener = listener;
+    }
+    public void setAddress(String address) {this.address = address + "experience";}
 
     @Override
     protected String doInBackground(PostExperience... postExp) {
         PostExperience PostInfo = postExp[0];
         try
         {
-            URL url = new URL(PREFIX + "/experience");
+            URL url = new URL(address);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
             Log.d("TTTTTTTTTTTTTTTTTTTTTT",url.toString());
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "multipart/form-data");
+            //Tell the server we're doing a POST request
             con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
 
+            Gson builder = new GsonBuilder().create();
             PrintStream out = new PrintStream(con.getOutputStream());
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-
-            Log.d("LLLLLLLLLLLLLLLLLLLL",gson.toJson(PostInfo));
-            //String str_JSON="{\"fields\": {\"first name\": [{\"value\": \"Jack\",\"modifier\": \"\"}],\"last name\": [{\"value\": \"Daniels\",\"modifier\": \"\"}],\"phone\": [{\"modifier\": \"work\",\"value\": \"123123123\"},{\"modifier\": \"work\",\"value\": \"2222\"}]},\"type\": \"person\",\"tags\": \"test\"}";
-            out.println(gson.toJson(PostInfo));
+            Log.d("SSSSSSSSSSSSSSSSSSSSSS",builder.toJson(PostInfo));
+            out.println(builder.toJson(PostInfo));
             out.close();
 
 
@@ -61,7 +66,7 @@ public class CreateExperienceTask extends AsyncTask<PostExperience,Void,String> 
                 Log.d("BBBBBBBBBAAAAAAAADDDD",piss);
                 throw new IOException("Not Created:");
             }
-
+            Log.d("DDDDDDDDDDDDDDDDD","done");
             return con.getHeaderField("Location");
 
         } catch (MalformedURLException e) {
@@ -72,5 +77,10 @@ public class CreateExperienceTask extends AsyncTask<PostExperience,Void,String> 
             e.printStackTrace();
         }
         return null;
+    }
+    @Override
+    protected void onPostExecute(String location) {
+        if(listener != null)
+            listener.onUploadResponse(location);
     }
 }
