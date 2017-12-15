@@ -139,29 +139,32 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public Fragment getItem(int position) {
+
+            //We want to bundle the necessary data to certain fragments
+            Bundle bundle = new Bundle();
+            bundle.putString(params.USER_ID, userId);
+            bundle.putString(params.KEY, key);
+            //Create the fragment according to a given position
             switch(position){
                 case 1:
                     return new BrowseDrugsFragment();
                 case 2:
-                    //For the reminder, we want to bundle the necessary user data for the database.
-                    Bundle bundle = new Bundle();
-                    bundle.putString(params.USER_ID, userId);
-                    bundle.putString(params.KEY, key);
-
                     RemindersFragment remindersFragment = new RemindersFragment();
                     remindersFragment.setArguments(bundle);
                     return remindersFragment;
                 case 3:
                     return new BrowseExperiencesFragment();
                 case 4:
-                    return new SettingsFragment();
+                    SettingsFragment settingsFragment = new SettingsFragment();
+                    settingsFragment.setArguments(bundle);
+                    return settingsFragment;
                 default:
                     return new WelcomeFragment();
             }
         }
 
         /**
-         * Is called to instantiate the fragment for the given page.
+         * Purpose: Is called to instantiate the fragment for the given page.
          * @return
          */
         @Override

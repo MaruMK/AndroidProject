@@ -3,22 +3,18 @@ package net.caesarlegion.drugimpact;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import net.caesarlegion.drugimpact.Fragments.BrowseDrugsFragment;
-import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -43,7 +39,7 @@ public class LoginActivityFragment extends Fragment {
                     @Override
                     public void onResponse(String data) {
 
-                        EditText editEmail = root.findViewById(R.id.editText);
+                        EditText editEmail = root.findViewById(R.id.feedback_edit);
                         EditText editPass = root.findViewById(R.id.editText2);
 
                         try {
@@ -61,7 +57,7 @@ public class LoginActivityFragment extends Fragment {
                                     {
                                         Intent intent = new Intent(getActivity(),MainActivity.class);
                                         //Give the user id and the password to activity so it can initialize the database accordingly
-                                        intent.putExtra(MainActivity.params.USER_ID, i + 1 );
+                                        intent.putExtra(MainActivity.params.USER_ID, Integer.toString(i + 1));
                                         intent.putExtra(MainActivity.params.KEY, item.getString("encryptionKey") );
                                         startActivity(intent);
                                     }

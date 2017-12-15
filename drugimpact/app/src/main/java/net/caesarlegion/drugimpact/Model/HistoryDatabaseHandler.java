@@ -23,12 +23,16 @@ public class HistoryDatabaseHandler extends SQLiteOpenHelper {
     public HistoryDatabaseHandler(Context context, String userId, String key) {
 
         //Using the given user id, we construct a specific name for the database.
+
         //super(context, DATABASE_PREFIX + userId + DATABASE_SUFFIX, null, VERSION);
+
         //But that causes errors upon changing user, so we use the same database for any user
         super(context, DATABASE_PREFIX + DATABASE_SUFFIX, null, VERSION);
 
         //We pass into the history table, the key that will encrypt all its data.
+
         //historyTable = new HistoryTable(this, key);
+
         //But that causes errors upon changing user, so we use the same key for any user
         historyTable = new HistoryTable(this, "invalidkey");
 
