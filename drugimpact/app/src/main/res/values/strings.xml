@@ -15,4 +15,5 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="desc">desc</string>
+    <string name="title_activity_post_experience">PostExperienceActivity</string>
 </resources>
