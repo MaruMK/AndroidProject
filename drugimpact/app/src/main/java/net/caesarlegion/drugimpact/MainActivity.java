@@ -35,7 +35,7 @@ import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 public class MainActivity extends AppCompatActivity {
 
     //Declare some global variables
-    public static String URL = "http://192.168.2.11";
+    public static String URL = "http://192.168.2.11"; //"http://10.0.2.2"
     public static String PORT = "9999";
     public static String ADDRESS = URL + ":" + PORT + "/";
     public static Integer CURRENT_USER_ID = 2;

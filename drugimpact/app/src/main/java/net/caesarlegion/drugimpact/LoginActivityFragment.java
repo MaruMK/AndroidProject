@@ -24,7 +24,6 @@ import java.security.NoSuchAlgorithmException;
  * A placeholder fragment containing a simple view.
  */
 public class LoginActivityFragment extends Fragment {
-    final LoginApplication loginApp = new LoginApplication();
 
     public LoginActivityFragment() {
     }
@@ -77,7 +76,7 @@ public class LoginActivityFragment extends Fragment {
                         }
                     }
                 });
-                loginTask.execute(loginApp.PREFIX+"/user");
+                loginTask.execute(MainActivity.ADDRESS+"user");
             }
         });
         return root;
