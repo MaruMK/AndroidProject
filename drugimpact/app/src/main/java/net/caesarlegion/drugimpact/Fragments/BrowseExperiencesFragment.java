@@ -1,6 +1,8 @@
 package net.caesarlegion.drugimpact.Fragments;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
@@ -13,20 +15,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.ExperienceData;
-import net.caesarlegion.drugimpact.GetLoginTask;
 import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
 import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivityAdapter;
-import net.caesarlegion.drugimpact.ListAdapters.RecentActivityAdapter.RecentActivity;
-import net.caesarlegion.drugimpact.ListAdapters.RecentActivityAdapter.RecentActivityAdapter;
 import net.caesarlegion.drugimpact.LoginApplication;
-import net.caesarlegion.drugimpact.MainActivity;
-import net.caesarlegion.drugimpact.Model.OnResponseListener;
 import net.caesarlegion.drugimpact.R;
-import net.caesarlegion.drugimpact.RecentActivityData;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -36,6 +29,8 @@ import java.util.List;
 
 public class BrowseExperiencesFragment extends Fragment {
     final LoginApplication loginApp = new LoginApplication();
+    private Handler handler = new Handler();
+    public View root2 = null;
     public BrowseExperiencesFragment() {
     }
 
@@ -43,8 +38,16 @@ public class BrowseExperiencesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_browse_exps, container, false);
+        root2 = root;
 
-        ListView experienceList = root.findViewById(R.id.listView_experiences);
+        //Time handler stuff
+        handler.postDelayed(runnable, 1000);
+
+
+
+
+        ListView experienceList = root2.findViewById(R.id.listView_experiences);
+        ExperienceData.GetFromServer();
         List<ExperienceActivity> data = ExperienceData.getData();
         ExperienceActivityAdapter adapter = new ExperienceActivityAdapter(getContext());
         adapter.addAll(data);
@@ -52,4 +55,19 @@ public class BrowseExperiencesFragment extends Fragment {
 
         return root;
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            ListView experienceList = root2.findViewById(R.id.listView_experiences);
+            ExperienceData.GetFromServer();
+            List<ExperienceActivity> data = ExperienceData.getData();
+            ExperienceActivityAdapter adapter = new ExperienceActivityAdapter(getContext());
+            adapter.addAll(data);
+            experienceList.setAdapter(adapter);
+            handler.postDelayed(this, 5000);
+        }
+    };
+
+
 }

@@ -54,6 +54,7 @@ public class ExperienceActivityAdapter extends ArrayAdapter<ExperienceActivity> 
         ExperienceActivity item = getItem(position);
 
         textViewName.setText(item.Username.toString());
+        textViewName.setText(item.Username.toString());
         textViewDrug.setText(item.Drug.toString());
         textViewDesc.setText( item.Description.toString());
         textViewTime.setText(item.TimeWritten.toString());
