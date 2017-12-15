@@ -40,7 +40,7 @@ public class WelcomeFragment extends Fragment {
         //Fill the list of recent activities
         //final ListView listViewRecent = rootView.findViewById(R.id.listView_recent);
         //final RecentActivityAdapter adapter = new RecentActivityAdapter(getContext());
-      RecentActivityData.getServerData(new OnDownloadedListener<String>() {
+        /*RecentActivityData.getServerData(new OnDownloadedListener<String>() {
             @Override
             public void onDownloaded(String s) {
 
@@ -57,7 +57,7 @@ public class WelcomeFragment extends Fragment {
                     toast.show();
                 }
             }
-        });
+        });*/
 
 
 
