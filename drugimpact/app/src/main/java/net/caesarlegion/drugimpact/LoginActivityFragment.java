@@ -77,6 +77,15 @@ public class LoginActivityFragment extends Fragment {
                 loginTask.execute(loginApp.PREFIX+"/user");
             }
         });
+
+        View button = root.findViewById(R.id.button5);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentlol = new Intent(getActivity(),CreateUserActivity.class);
+                startActivity(intentlol);
+            }
+        });
         return root;
     }
 

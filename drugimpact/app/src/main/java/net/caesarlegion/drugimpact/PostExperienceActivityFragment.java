@@ -1,7 +1,9 @@
 package net.caesarlegion.drugimpact;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
+import net.caesarlegion.drugimpact.Model.OnResponseListener;
 import net.caesarlegion.drugimpact.Model.PostExperience;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Date;
 
@@ -33,7 +40,6 @@ public class PostExperienceActivityFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] array = new String[4];
                 EditText Title = root.findViewById(R.id.editText3);
                 EditText Drug1 = root.findViewById(R.id.editText4);
                 EditText Drug2 = root.findViewById(R.id.editText5);
@@ -58,11 +64,9 @@ public class PostExperienceActivityFragment extends Fragment {
                 }
 
                 PostExperience test = new PostExperience(D1,D2,t,0,0,c);        //Create new object with all info we need
-                Gson gson = new GsonBuilder().create();
-
-
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), gson.toJson(test), Toast.LENGTH_LONG);
-                toast.show();
+                Send(test);
+                //Toast toast = Toast.makeText(getActivity().getApplicationContext(), gson.toJson(test), Toast.LENGTH_LONG);
+                //toast.show();
 
 
             }
@@ -70,4 +74,13 @@ public class PostExperienceActivityFragment extends Fragment {
 
         return root;
     }
+
+    public void Send(PostExperience test)
+    {
+        CreateExperienceTask createTask = new CreateExperienceTask();
+        LoginApplication loginApp = new LoginApplication();
+        Log.d("GGGGGGGGGGGGGGGGGGGGGGG",loginApp.PREFIX);
+        createTask.execute(test);
+    }
 }
+
