@@ -1,11 +1,16 @@
 package net.caesarlegion.drugimpact.Fragments;
 
+//Maxime Lachance
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +26,7 @@ import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.EmergencyText;
 import net.caesarlegion.drugimpact.ListAdapters.HistoryAdapter.HistoryAdapter;
+import net.caesarlegion.drugimpact.MainActivity;
 import net.caesarlegion.drugimpact.Model.DatabaseException;
 import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.DrugSafety;
@@ -40,16 +46,16 @@ public class RemindersFragment extends Fragment {
 
     private View root;
 
-    //This is the arraylist that will store all of the history data
-    public static ArrayList<History> historyData = new ArrayList<>();
     public static History elementToDelete;
 
     //Whenever a substance is on countdown till substance, this variable will
     //hold the timer with the highest value
     public static CountDownTimer currentTimer;
+    public static List<CountDownTimer> timersList = new ArrayList<>();
 
-    //This database will hold the history valuess. It is (will be) encrypted
+    //This database will hold the history values. It is (will be) encrypted
     public HistoryDatabaseHandler historyDatabase = new HistoryDatabaseHandler(getContext());
+
 
 
     public RemindersFragment() {
@@ -123,7 +129,18 @@ public class RemindersFragment extends Fragment {
                                     historyDatabase.historyTable.create(element);
                                 }
                                 break;
-                            //TODO: ALL THE OTHER SUBSTANCES
+                            case "Nicotine":
+                                element = getHistoryByDrugId(DrugSafetyData.NICOTINE_ID);
+                                if( element.getReminderId() != -1) {
+                                    element.setAmount(element.getAmount() + amount);
+                                    element.setTimeOfConsumption(new Date());
+                                    historyDatabase.historyTable.update(element);
+                                }
+                                else{
+                                    element = new History(DrugSafetyData.NICOTINE_ID, amount, new Date());
+                                    historyDatabase.historyTable.create(element);
+                                }
+                                break;
                         }
                         DrugSafety ds = DrugSafetyData.FindSafetyBracket(element.getDrugId(), element.getAmount(), DrugSafetyData.WEIGHT_FOR_TESTING);
                         if(ds.getWarningLevel() == DrugSafetyData.WARNING){
@@ -171,13 +188,14 @@ public class RemindersFragment extends Fragment {
 
     //=======================================================================================================================================
     //This function will update the APPROXIMATE time until sober based on the history of substances consumed
-    //TODO IMPLEMENT THE ACTUAL CALCULATIONS INSTEAD OF DUMMY VALUES
     public void updateTime() {
         final TextView timeTxt = root.findViewById(R.id.time_to_sober_txt);
 
         int biggestTime = 0;
         History biggestSubstance = new History();
         try {
+
+            //Determine the substance with the biggest countdown timer
             for (History h :
                     historyDatabase.historyTable.readAll()) {
                 int time = DrugSafetyData.CalculateSecondsTillSober(h);
@@ -186,20 +204,44 @@ public class RemindersFragment extends Fragment {
                     biggestSubstance = h;
                 }
             }
+
+            //Put background timers for all the other substances
+            for (CountDownTimer t:
+                    timersList) {
+                t.cancel();
+            }
+            timersList = new ArrayList<>();
+            for(final History h:
+                historyDatabase.historyTable.readAll()){
+                if(h.getDrugId() != biggestSubstance.getDrugId()) {
+                    timersList.add(new CountDownTimer(DrugSafetyData.CalculateSecondsTillSober(h) * 1000, 1000) {
+                        public void onTick(long millisUntiFinished) {
+                            h.setAmount(h.getAmount() - DrugSafetyData.FindSafetyBracket(h.getDrugId(), h.getAmount(), DrugSafetyData.WEIGHT_FOR_TESTING).getMetabolizationRate()/60/60);
+                            try {
+                                historyDatabase.historyTable.update(h);
+                            } catch (DatabaseException e) {
+                            } catch (NullPointerException e) {
+                            }
+                        }
+                        public void onFinish() {
+                            onSubstanceSober(h);
+                        }
+                    }.start());
+                }
+            }
+
             if(biggestTime == 0){
                 timeTxt.setText("00h00m00");
             }
             else{
                 final History finalBiggestSubstance = biggestSubstance;
-                final int finalBiggestTime = biggestTime;
-
 
                 if(currentTimer != null){
                     currentTimer.cancel();
                 }
                 currentTimer = new CountDownTimer(biggestTime*1000, 1000){
                     public void onTick(long millisUntiFinished) {
-                        finalBiggestSubstance.setAmount(finalBiggestSubstance.getAmount() * (finalBiggestTime / (millisUntiFinished/1000)));
+                        finalBiggestSubstance.setAmount(finalBiggestSubstance.getAmount() - DrugSafetyData.FindSafetyBracket(finalBiggestSubstance.getDrugId(), finalBiggestSubstance.getAmount(), DrugSafetyData.WEIGHT_FOR_TESTING).getMetabolizationRate()/60/60);
                         int hours = (int) millisUntiFinished / 3600000;
                         millisUntiFinished %= 3600000;
                         int minutes = (int) millisUntiFinished / 60000;
@@ -212,8 +254,10 @@ public class RemindersFragment extends Fragment {
                             refreshAdapter();
                         }
                         catch(DatabaseException e){Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();}
+                        catch ( NullPointerException e){}
                     }
                     public void onFinish(){
+                        timeTxt.setText("00h00m00");
                         onSubstanceSober(finalBiggestSubstance);
                     }
                 }.start();
@@ -230,9 +274,15 @@ public class RemindersFragment extends Fragment {
             refreshAdapter();
         }
         catch (DatabaseException e){}
+        catch (NullPointerException e){}
 
-        //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getContext(), "THIS WILL BE A PUSH NOTIFICATION", Toast.LENGTH_SHORT).show();
+        if(getContext() != null) {
+            Toast.makeText(getContext(), "Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName(), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
+            Log.d("Push", "This should be a push notif");
+        }
     }
     //=======================================================================================================================================
 
@@ -339,23 +389,13 @@ public class RemindersFragment extends Fragment {
                     TextView amount = root.findViewById(R.id.amt_consumed_box);
                     amount.setHint("Amount (ml)");
                 }
-                else if (text.getText() == "Nicotine - Cigarette"){
+                else if (text.getText() == "Nicotine"){
                     //When something else is selected, hide all the specific boxes
                     root.findViewById(R.id.concentration_box).setVisibility(View.GONE);
                     root.findViewById(R.id.caffeine_method_spinner).setVisibility(View.GONE);
                     //Change to hint to indicate that the amount will be in Mililliters
                     TextView amount = root.findViewById(R.id.amt_consumed_box);
                     amount.setHint("Amount (Cigarettes)");
-                }
-                else if (text.getText() == "Nicotine - Vaporizer"){
-                    //When something else is selected, hide all the specific boxes
-                    root.findViewById(R.id.concentration_box).setVisibility(View.VISIBLE);
-                    TextView concentration = root.findViewById(R.id.concentration_box);
-                    concentration.setHint("Concentration(mg/ml)");
-                    root.findViewById(R.id.caffeine_method_spinner).setVisibility(View.GONE);
-                    //Change to hint to indicate that the amount will be in Mililliters
-                    TextView amount = root.findViewById(R.id.amt_consumed_box);
-                    amount.setHint("Amount (ml)");
                 }
                 else{
                     //When something else is selected, hide all the specific boxes

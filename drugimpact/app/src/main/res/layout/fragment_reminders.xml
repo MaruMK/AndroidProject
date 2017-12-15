@@ -100,7 +100,8 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Time When Consumed" />
+            android:text="Time When Consumed"
+            android:visibility="gone" />
 
     </LinearLayout>
 
