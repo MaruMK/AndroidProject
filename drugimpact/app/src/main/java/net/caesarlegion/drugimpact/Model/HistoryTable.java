@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import net.caesarlegion.drugimpact.Encryption.EncryptionManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,14 +29,18 @@ public class HistoryTable extends Table<History> {
     private static final String COLUMN_AMOUNT = "amount";
     private static final String COLUMN_TIME_OF_CONSUMPTION = "toc";
 
+
+    //Declare the encryption manager we will use to encrypt database data NOTE: This is my extra
+    private EncryptionManager encryptionManager;
     /**
      * Creates a table that will store drug intake
      * @param dbh
      */
-    public HistoryTable(SQLiteOpenHelper dbh) {
+    public HistoryTable(SQLiteOpenHelper dbh, String key) {
         super(dbh, TABLE_NAME);
-        addColumn((new Column(COLUMN_DRUG_ID, "INTEGER").notNull()));
-        addColumn((new Column(COLUMN_AMOUNT, "DOUBLE").notNull()));
+        encryptionManager = new EncryptionManager(); //pass the key here
+        addColumn((new Column(COLUMN_DRUG_ID, "TEXT").notNull()));
+        addColumn((new Column(COLUMN_AMOUNT, "TEXT").notNull()));
         addColumn((new Column(COLUMN_TIME_OF_CONSUMPTION, "TEXT").notNull()));
     }
 
@@ -46,9 +53,10 @@ public class HistoryTable extends Table<History> {
     @Override
     public ContentValues toContentValues(History element) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_DRUG_ID, element.getDrugId());
-        values.put(COLUMN_AMOUNT, element.getAmount());
-        values.put(COLUMN_TIME_OF_CONSUMPTION, iso8601.format(element.getTimeOfConsumption()));
+        Log.d("JOB",Long.toString(element.getDrugId()));
+        values.put( COLUMN_DRUG_ID, encryptionManager.encryptMsg( Long.toString(element.getDrugId()) ) );
+        values.put( COLUMN_AMOUNT, encryptionManager.encryptMsg( Double.toString(element.getAmount()) ) );
+        values.put( COLUMN_TIME_OF_CONSUMPTION, encryptionManager.encryptMsg( iso8601.format(element.getTimeOfConsumption()) ) );
         return values;
     }
 
@@ -62,10 +70,10 @@ public class HistoryTable extends Table<History> {
     public History fromCursor(Cursor cursor) throws DatabaseException {
         History his = null;
         try{
-            his = new History((cursor.getLong(0)))
-                    .setDrugId(cursor.getLong(1))
-                    .setAmount(cursor.getDouble(2))
-                    .setTimeOfConsumption(iso8601.parse(cursor.getString(3)));
+            his = new History(Integer.parseInt(cursor.getString(0)))
+                    .setDrugId(Integer.parseInt( encryptionManager.decryptMsg(cursor.getString(1)) ))
+                    .setAmount(Double.parseDouble( encryptionManager.decryptMsg(cursor.getString(2)) ))
+                    .setTimeOfConsumption(iso8601.parse( encryptionManager.decryptMsg(cursor.getString(3)) ));
         } catch (ParseException e) {
             e.printStackTrace();
         }
