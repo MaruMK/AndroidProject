@@ -1,5 +1,8 @@
 package net.caesarlegion.drugimpact.Model;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,8 +32,8 @@ public class DrugSafetyData {
 
     final static double OZ_TO_ML = 29.5735;
 
-    public static String EMERGENCY_NUMBER = "555-555-5555";
-    public static String EMERGENCY_MESSAGE = "Emergency";
+    public static String EMERGENCY_NUMBER;
+    public static String EMERGENCY_MESSAGE;
 
     public static List<Drug> knownDrugs;
     static {

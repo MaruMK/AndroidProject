@@ -1,7 +1,9 @@
 package net.caesarlegion.drugimpact.Fragments;
 
+//Maxime Lachance
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -212,6 +214,7 @@ public class RemindersFragment extends Fragment {
                             refreshAdapter();
                         }
                         catch(DatabaseException e){Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();}
+                        catch ( NullPointerException e){}
                     }
                     public void onFinish(){
                         onSubstanceSober(finalBiggestSubstance);
