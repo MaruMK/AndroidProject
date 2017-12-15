@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     //Used to permanently store user's emergency info
     SharedPreferences emergencyPrefs;
 
+    public static boolean foreground = true;
+
 
     //Declare some UI elements
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         edit.putString("EmergencyNumber", DrugSafetyData.EMERGENCY_NUMBER);
         edit.putString("EmergencyMessage", DrugSafetyData.EMERGENCY_MESSAGE);
         edit.commit();
+        foreground = false;
     }
 
     @Override
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         DrugSafetyData.EMERGENCY_NUMBER = emergencyPrefs.getString("EmergencyNumber", "555-555-5555");
         DrugSafetyData.EMERGENCY_MESSAGE = emergencyPrefs.getString("EmergencyMessage", "Emergency Message");
+        foreground = true;
     }
 
 

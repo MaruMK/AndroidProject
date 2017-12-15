@@ -27,8 +27,7 @@ public class DrugSafetyData {
     //This part will contain the constants for every drugs
     public final static long ALCOHOL_ID = 1;
     public final static long CAFFEINE_ID = 2;
-    public final static long NICOTINE_CIGARETTE_ID = 3;
-    public final static long NICOTINE_VAPORIZER_ID = 4;
+    public final static long NICOTINE_ID = 3;
 
     final static double OZ_TO_ML = 29.5735;
 
@@ -47,15 +46,14 @@ public class DrugSafetyData {
         knownDrugs.add(new Drug(DrugSafetyData.CAFFEINE_ID,
                 "Caffeine",
                 "mg"));
-        knownDrugs.add(new Drug(DrugSafetyData.NICOTINE_CIGARETTE_ID,
-                "Nicotine - Cigarette",
+        knownDrugs.add(new Drug(DrugSafetyData.NICOTINE_ID,
+                "Nicotine",
                 "Cigarettes"));
-        knownDrugs.add(new Drug(DrugSafetyData.NICOTINE_VAPORIZER_ID,
-                "Nicotine - Vaporizer",
-                "Mg/Ml"));
     }
 
 
+    //Accepts a drug id as input and returns the matching
+    //drug object
     public static Drug GetDrugById(long id){
         for(Drug drug : knownDrugs){
             if(drug.getDrugId() == id)
@@ -128,6 +126,12 @@ public class DrugSafetyData {
                 0,
                 LETHAL,
                 "DANGER: Your risks of heart issues are elevated"));
+        data.add(new DrugSafety(NICOTINE_ID,
+                 0,
+                1,
+                0,
+                NO_WARNING,
+                ""));
     }
 
     //This list will contain the methods of input for caffeine
@@ -153,19 +157,19 @@ public class DrugSafetyData {
              currentSafetyBracket = FindSafetyBracket(h.getDrugId(), amountLeft, WEIGHT_FOR_TESTING);
              if(h.getDrugId() == CAFFEINE_ID){
                 seconds = (int)currentSafetyBracket.getMetabolizationRate()*60*60;
+                seconds = seconds + (int)(h.getTimeOfConsumption().getTime()/1000 - new Date().getTime()/1000);
                 amountLeft = 0;
              }
              else {
-                 if (currentSafetyBracket.getMetabolizationRate() < amountLeft) {
+                 if (currentSafetyBracket.getMetabolizationRate() <= amountLeft) {
                      amountLeft -= currentSafetyBracket.getMetabolizationRate();
                      seconds += 60 * 60;
                  } else {
-                     seconds += amountLeft * 2 * 60 * 60;
+                     seconds += amountLeft * 60 * 60;
                      amountLeft = 0;
                  }
              }
         }
-        seconds = seconds + h.getTimeOfConsumption().getSeconds() - new Date().getSeconds();
         return seconds;
     }
 

@@ -52,8 +52,10 @@ public class WelcomeFragment extends Fragment {
                 CharSequence text = s;
                 int duration = Toast.LENGTH_LONG;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                if(context != null){
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
         });
 
