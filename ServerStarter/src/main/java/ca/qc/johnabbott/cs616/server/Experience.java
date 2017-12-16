@@ -37,7 +37,10 @@ public class Experience {
     @OneToMany(mappedBy = "experience")
     private Set<Comment> comments = new HashSet<Comment>();
 
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonBackReference
+    private User user;
 
     public Set<Comment> getComments() {
         return comments;
@@ -47,12 +50,12 @@ public class Experience {
         this.comments = comments;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getExperienceId() {

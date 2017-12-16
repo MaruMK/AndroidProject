@@ -113,8 +113,8 @@ public class SettingsFragment extends Fragment {
                     @Override
                     public void onUploadResponse(String s) {
                         editText.setEnabled(true);
-                        //
-                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                        //Indicate to the user they have successfully submitted feedback
+                        Toast.makeText(getContext(), "Thank you for your feedback!", Toast.LENGTH_LONG).show();
                     }
                 });
                 sendFeedbackTask.execute(feedback);
