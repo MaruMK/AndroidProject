@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidProject-ServerStarter.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidProject-ServerStarter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidProject-ServerStarter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidProject-ServerStarter_main.iml" group="ServerStarter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidProject-ServerStarter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidProject-ServerStarter_test.iml" group="ServerStarter" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ServerStarter.iml" filepath="$PROJECT_DIR$/.idea/modules/ServerStarter.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ServerStarter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ServerStarter_main.iml" group="ServerStarter" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ServerStarter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ServerStarter_test.iml" group="ServerStarter" />

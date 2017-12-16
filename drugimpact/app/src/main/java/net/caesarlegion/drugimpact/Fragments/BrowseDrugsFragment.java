@@ -66,13 +66,16 @@ public class BrowseDrugsFragment extends Fragment {
             public void onResponse(String data) {
                 try{
                     Log.d("DEBUG_STR_DATA",data);
-                    JSONArray jsonArray = new JSONArray(data);
+                    JSONObject jsonObject = new JSONObject(data);
+                    Log.d("DEBUG_JSON_OBJ",jsonObject.toString());
+                    jsonObject = jsonObject.getJSONObject("_embedded");
+                    JSONArray jsonArray = jsonObject.getJSONArray("drug");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        jsonObject = jsonObject.getJSONObject("_embedded");
-                        drugListFromServer.add(Drug.parse(jsonObject.toString()));
-                        Log.d("DEBUG_JSON",jsonObject.toString());
+                        JSONObject object = new JSONObject(jsonArray.getString(i));
+
+                        drugListFromServer.add(Drug.parse(object.toString()));
+                        Log.d("DEBUG_JSON",drugListFromServer.get(i).getName());
                     }
 
                 } catch (JSONException e) {
@@ -81,7 +84,7 @@ public class BrowseDrugsFragment extends Fragment {
             }
         });
 
-        downloadTask.execute("localhost:9999/drug");
+        downloadTask.execute("http://192.168.2.14:9999/drug");
         /*=================================================================================================*/
 
         drugListAdapter = new DrugListAdapter(getContext(), drugListFromServer);

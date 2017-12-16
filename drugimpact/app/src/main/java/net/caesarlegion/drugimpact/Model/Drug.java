@@ -1,6 +1,6 @@
 package net.caesarlegion.drugimpact.Model;
 
-<<<<<<< HEAD
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,10 +15,25 @@ public class Drug {
     private int drugId;
     private String name;
     private String url;
+    private String unit;
+
     /*=====================================================*/
 
     /*========== Constructors =============================*/
     public Drug() {}
+
+    public Drug(long id, String name, String unit) {
+        this.drugId = (int) id;
+        this.name = name;
+        this.unit = unit;
+    }
+
+    public Drug(long id, String name, String unit, String url){
+        this.drugId = (int) id;
+        this.name = name;
+        this.unit = unit;
+        this.url = url;
+    }
     /*=====================================================*/
 
     /*========== Getters and Setters ======================*/
@@ -48,6 +63,14 @@ public class Drug {
         this.url = url;
         return this;
     }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
     /*========================================================*/
 
 
@@ -60,69 +83,4 @@ public class Drug {
     }
 
     /*========================================================*/
-=======
-import java.net.URL;
-
-/**
- * Created by Main on 2017-12-10.
- */
-
-//This class will be sued to locally hold
-public class Drug {
-
-    private long DrugId;
-    private String Name;
-    private String Unit;
-    private URL url;
-
-    public Drug() { }
-
-    public Drug(long drugId, String name, String unit) {
-
-        DrugId = drugId;
-        Name = name;
-        Unit = unit;
-    }
-
-    public Drug(long drugId, String name, String unit, URL url) {
-        DrugId = drugId;
-        Name = name;
-        Unit = unit;
-        this.url = url;
-    }
-
-    //Getters-Setters ****************************************************************************************************************************
-    public long getDrugId() {
-        return DrugId;
-    }
-
-    public void setDrugId(long drugId) {
-        DrugId = drugId;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getUnit() {
-        return Unit;
-    }
-
-    public void setUnit(String unit) {
-        Unit = unit;
-    }
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public void setUrl(URL url) {
-        this.url = url;
-    }
-    //********************************************************************************************************************************************
->>>>>>> master
 }

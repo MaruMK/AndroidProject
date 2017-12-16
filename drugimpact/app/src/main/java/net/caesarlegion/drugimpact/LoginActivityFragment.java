@@ -43,6 +43,7 @@ public class LoginActivityFragment extends Fragment {
                         EditText editPass = root.findViewById(R.id.editText2);
 
                         try {
+                            Log.d("DEBUG_DATA",data);
                             JSONObject info = new JSONObject(data);
                             info = info.getJSONObject("_embedded");
                             JSONArray arr = info.getJSONArray("user");

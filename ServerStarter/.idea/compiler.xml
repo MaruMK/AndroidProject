@@ -12,6 +12,8 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <bytecodeTargetLevel>
+      <module name="AndroidProject-ServerStarter_main" target="1.8" />
+      <module name="AndroidProject-ServerStarter_test" target="1.8" />
       <module name="ServerStarter_main" target="1.8" />
       <module name="ServerStarter_test" target="1.8" />
     </bytecodeTargetLevel>
