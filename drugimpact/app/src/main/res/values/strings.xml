@@ -12,7 +12,15 @@
     <string name="welcome_warning_preface">WARNING:</string>
     <string name="welcome_warning_text">We do not promote the usage of legal or illegal substances, nor do we glorify any use of drugs.</string>
     <string name="welcome_recent_activity">Recent Activity</string>
+<<<<<<< HEAD
+    <!--Drug Browsing Fragment Strings-->
+    <string-array name="sortingOptions">
+        <item>Alphabetical Ascending</item>
+        <item>Alphabetical Descending</item>
+    </string-array>
+=======
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="desc">desc</string>
+>>>>>>> master
 </resources>

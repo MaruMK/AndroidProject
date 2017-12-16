@@ -1,0 +1,94 @@
+commit becf8d56aaa74d9f8d48f1cd1ee10b6afd6366a1
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 8 22:54:48 2017 -0500
+
+    Revert "Sorting working but buggy"
+    
+    This reverts commit 111e49b73dcea591773b85e1353db41bcc16629e.
+
+commit 111e49b73dcea591773b85e1353db41bcc16629e
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 8 15:40:49 2017 -0500
+
+    Sorting working but buggy
+    
+    Working on PerformFiltering and PublishResults
+
+commit 8573eea5f3657dff1175a6224ce4a19b28854709
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 4 14:12:31 2017 -0500
+
+    Still working on searching
+    
+    -Made some fields public. Will revert later
+    -Implemented publishResults in DrugFilter
+    -Repositionned private classes
+
+commit 8a7f8c4ff8202bad96a84d32c25dc419c2f36295
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 4 13:29:18 2017 -0500
+
+    still trying to get Searching to work
+    
+    I don't know why fullDrugList becomes null when performFiltering happens
+
+commit b764a2ad3fcc1579e0f8df3dd34b9efa006da42e
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 4 13:00:58 2017 -0500
+
+    In the middle of doing Searching
+    
+    Working on DrugListAdapter
+
+commit 532f28492b569208ba44ff5fdbe291292dbe8302
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 1 20:30:48 2017 -0500
+
+    Made a log file for week 1
+
+commit f6a3f3c41a3d2a7d510e7dc5024f01ba20d94e48
+Merge: cec8983 7a14521
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 1 20:10:41 2017 -0500
+
+    Merge branch 'master' into MaruBranch
+
+commit cec8983311943f0e843ee5c77e625a67d7f7d0d0
+Merge: 8109e16 7dcbc0d
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 1 20:02:23 2017 -0500
+
+    Merge branch 'MaruBranch' of https://github.com/MaruMK/AndroidProject into MaruBranch
+
+commit 8109e164c1d3f84fc83fce98943808d32510cd23
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 1 20:00:49 2017 -0500
+
+    Fixed sorting
+    
+    Fixed a typo that caused a bug in sorting the DrugList
+
+commit 7dcbc0defc65083f43a1693db115fcae1a3ae307
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Nov 27 13:55:49 2017 -0500
+
+    In the middle of doing sorting.
+    
+    watch this https://www.youtube.com/watch?v=VTrQ4hRAwqI
+
+commit 34c92dcf3c3d1ff63049f2f272028db6dc7ffcff
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Nov 27 11:16:07 2017 -0500
+
+    did Sorting
+    
+    just do search last
+
+commit e6a08ba87ce4dfed2b5f696a4d01289d9aa023ad
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Nov 27 08:37:42 2017 -0500
+
+    Added Sample Data
+    
+    TODO: -Sorting
+                -Searchbox
