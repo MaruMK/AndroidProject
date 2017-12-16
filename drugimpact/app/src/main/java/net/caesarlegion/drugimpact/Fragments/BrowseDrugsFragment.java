@@ -18,6 +18,7 @@ import android.widget.Toast;
 import net.caesarlegion.drugimpact.Control.DownloadTask;
 import net.caesarlegion.drugimpact.Control.DrugListAdapter;
 import net.caesarlegion.drugimpact.Control.OnResponseListener;
+import net.caesarlegion.drugimpact.MainActivity;
 import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.Druglist;
 import net.caesarlegion.drugimpact.R;
@@ -89,7 +90,7 @@ public class BrowseDrugsFragment extends Fragment {
             }
         });
 
-        downloadTask.execute("http://192.168.2.14:9999/drug");
+        downloadTask.execute(MainActivity.ADDRESS + "drug");
         /*=================================================================================================*/
 
         drugListAdapter = new DrugListAdapter(getContext(), drugListFromServer);

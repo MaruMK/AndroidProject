@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         public static String KEY = "key";
     }
     //Declare some global variables
-    public static String URL = "http://192.168.2.14"; //"http://10.0.2.2"
+    public static String URL = "http://192.168.2.11"; //"http://10.0.2.2"
     public static String PORT = "9999";
     public static String ADDRESS = URL + ":" + PORT + "/";
 
