@@ -36,11 +36,15 @@ public class GetLoginTask extends AsyncTask<String,Void,String>{
     protected String doInBackground(String... urls) {
         String urlStr = urls[0];
         String line="";
+
         StringBuilder result = new StringBuilder(100);
         try
         {
+            //Create a new url using and string and then use that url to connect to our server
             URL url = new URL(urlStr);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+            //In this case we use GET because we're retrieving form the server
             con.setRequestMethod("GET");
             if(con.getResponseCode() != 200)
             {

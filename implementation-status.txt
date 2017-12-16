@@ -1,0 +1,137 @@
+Please fill out the below to help me out with correcting your project. Each team member fills out their "Team Member" section. Replace the ALL_CAPS with your info and check the relevant boxes [x]. No need for long answers unless necessary! Thanks!
+
+========================================
+Project
+----------------------------------------
+
+* Commit: COMMIT
+
+* Server - git repo of server (if not in this repo): REPO
+
+* SQL Script location in repo: PATH
+
+* App - server IP address is set in the following class: CLASS_NAME
+
+* Special Install/Setup Instructions. Only necessary for special server or app setup, i.e.: not necessary for standard spring.io server.
+
+INSTRUCTIONS
+
+========================================
+Team member: NAME
+----------------------------------------
+
+* Responsible Activity: CLASS_NAME
+
+ [ ] Complete.
+ [ ] Incomplete.
+
+ Remarks: REMARKS
+
+* Extra: DESCRIPTION
+
+ [ ] Complete
+ [ ] Incomplete
+
+ Remarks: REMARKS
+
+* Self-assessed Extra Difficulty
+
+ [ ] Easy
+ [ ] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  REMARKS
+
+========================================
+Team member: NAME
+----------------------------------------
+
+* Responsible Activity: CLASS_NAME
+
+ [ ] Complete.
+ [ ] Incomplete.
+
+ Remarks: REMARKS
+
+* Extra: DESCRIPTION
+
+ [ ] Complete
+ [ ] Incomplete
+
+ Remarks: REMARKS
+
+* Self-assessed Extra Difficulty
+
+ [ ] Easy
+ [ ] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  REMARKS
+
+
+========================================
+Team member: NAME
+----------------------------------------
+
+* Responsible Activity: CLASS_NAME
+
+ [ ] Complete.
+ [ ] Incomplete.
+
+ Remarks: REMARKS
+
+* Extra: DESCRIPTION
+
+ [ ] Complete
+ [ ] Incomplete
+
+ Remarks: REMARKS
+
+* Self-assessed Extra Difficulty
+
+ [ ] Easy
+ [ ] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  REMARKS
+
+
+========================================
+Team member: Mamoru-Maru Kajifusa
+----------------------------------------
+
+* Responsible Activity: BrowseDrugsFragment
+
+ [ ] Complete.
+ [x] Incomplete.
+
+ Remarks: Filtering is buggy
+
+* Extra: Get web content and put into a new fragment for the drug selected
+
+ [ ] Complete
+ [x] Incomplete
+
+ Remarks: Not done
+
+* Self-assessed Extra Difficulty
+
+ N/A
+ [ ] Easy
+ [ ] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  none
+
+
+
+
+

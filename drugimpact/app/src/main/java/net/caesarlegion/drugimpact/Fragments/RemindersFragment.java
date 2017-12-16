@@ -3,13 +3,21 @@ package net.caesarlegion.drugimpact.Fragments;
 //Maxime Lachance
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +34,7 @@ import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.EmergencyText;
 import net.caesarlegion.drugimpact.ListAdapters.HistoryAdapter.HistoryAdapter;
+import net.caesarlegion.drugimpact.LoginActivityFragment;
 import net.caesarlegion.drugimpact.MainActivity;
 import net.caesarlegion.drugimpact.Model.DatabaseException;
 import net.caesarlegion.drugimpact.Model.Drug;
@@ -35,12 +44,15 @@ import net.caesarlegion.drugimpact.Model.History;
 import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 import net.caesarlegion.drugimpact.Model.onDrugClickedListener;
 import net.caesarlegion.drugimpact.R;
+import net.caesarlegion.drugimpact.SecondNotificationClass;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class RemindersFragment extends Fragment {
 
@@ -53,12 +65,15 @@ public class RemindersFragment extends Fragment {
     public static CountDownTimer currentTimer;
     public static List<CountDownTimer> timersList = new ArrayList<>();
 
+    /*NotificationCompat.Builder notification = new NotificationCompat.Builder(this.getContext()).setSmallIcon(R.drawable.ic_action_tab_exp)
+            .setContentTitle("Hello").setContentText("Eat it");*/
+    private static final int UniqueId = 1243134;
+
     //This database will hold the history values. It is encrypted
     public HistoryDatabaseHandler historyDatabase;
     //This is used to identify and encrypt it
     public String userId;
     public String key;
-
 
     public RemindersFragment() {
     }
@@ -283,6 +298,27 @@ public class RemindersFragment extends Fragment {
 
         if(getContext() != null) {
             Toast.makeText(getContext(), "Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName(), Toast.LENGTH_SHORT).show();
+
+            //Get the context
+            Context c = getContext();
+            //What channel we use for push notifications
+            String NOTIFICATION_CHANNEL_ID = "my_channel_01";
+            NotificationManager notificationManager = (NotificationManager) c.getSystemService(NOTIFICATION_SERVICE);
+            //Checks if the sdk is a certain version, if it is we do this.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                // Configure the notification channel.
+                notificationChannel.setDescription("Channel description");
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+            //Build the notification and it's content
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(), NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("You are now Sober")
+                    .setContentText("Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName());
+
+            notificationManager.notify(1, builder.build());
         }
         else {
             //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
