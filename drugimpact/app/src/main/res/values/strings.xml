@@ -11,7 +11,13 @@
     <!--Welcome Fragment strings-->
     <string name="welcome_warning_preface">WARNING:</string>
     <string name="welcome_warning_text">We do not promote the usage of legal or illegal substances, nor do we glorify any use of drugs.</string>
-    <string name="welcome_recent_activity">Recent Activity</string>
+    <string name="welcome_words_of_advice">Words of advice</string>
+    <string name="welcome_rules_set">Set</string>
+    <string name="welcome_rules_setting">Setting</string>
+    <string name="welcome_rules_substance">Substance</string>
+    <string name="welcome_rules_def_set">Be aware of your mindset prior to taking any drug.</string>
+    <string name="welcome_rules_def_setting">Be in a confortable place, with few people that you know and trust.</string>
+    <string name="welcome_rules_def_substance">Buy your substances from trusted sources and test them using test kits.</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="desc">desc</string>
