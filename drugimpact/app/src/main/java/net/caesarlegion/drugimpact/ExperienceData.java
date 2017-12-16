@@ -54,10 +54,9 @@ public class ExperienceData extends Application{
             {
                 JSONObject item = new JSONObject(arr.getString(i));
                 String title = item.getString("title");
-                String drug1 = item.getString("drug1");
-                String drug2 = item.getString("drug2");
+                String time = item.getString("timeStamp");
                 String content = item.getString("content");
-                data.add(new ExperienceActivity(title,drug1,drug2,new Date()));
+                data.add(new ExperienceActivity(title,content,time.toString()));
             }
         }
         catch (JSONException e)

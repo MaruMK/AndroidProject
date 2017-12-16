@@ -29,6 +29,8 @@ import java.util.List;
  */
 
 public class BrowseExperiencesFragment extends Fragment {
+    private Handler handler = new Handler();
+    private View RootClone;
     public BrowseExperiencesFragment() {
     }
 
@@ -37,30 +39,49 @@ public class BrowseExperiencesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View root = inflater.inflate(R.layout.fragment_browse_exps, container, false);
-        final ExperienceActivityAdapter adapter = new ExperienceActivityAdapter(getContext());
-        final ListView experienceList = root.findViewById(R.id.listView_experiences);
+        RootClone = root;
 
-        ExperienceData.GetFromServer(new OnResponseListener<String>() {
-            @Override
-            public void onResponse(String data) {
-                Log.d("GGGGGGGGGGGGGGGGGGGGG",data);
-                List<ExperienceActivity> data2 = ExperienceData.getData(data);
-                adapter.addAll(data2);
-                experienceList.setAdapter(adapter);
-            }
-        });
+        UpdateList();
 
         View button = root.findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Where we send the user to a new activity where the submit their experience data
                 Intent intent = new Intent(getActivity(),PostExperienceActivity.class);
                 startActivity(intent);
             }
         });
 
+        View button2 = root.findViewById(R.id.button6);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateList();
+            }
+        });
+
+
+
 
         return root;
+    }
+
+    public void UpdateList()
+    {
+        final ExperienceActivityAdapter adapter = new ExperienceActivityAdapter(getContext());
+        final ListView experienceList = RootClone.findViewById(R.id.listView_experiences);
+
+
+        ExperienceData.GetFromServer(new OnResponseListener<String>() {
+            @Override
+            public void onResponse(String data) {
+                //This is where we populate the list via the adapter
+                List<ExperienceActivity> data2 = ExperienceData.getData(data);
+                adapter.addAll(data2);
+                experienceList.setAdapter(adapter);
+            }
+        });
     }
 
 }

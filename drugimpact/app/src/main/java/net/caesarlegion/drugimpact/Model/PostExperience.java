@@ -31,7 +31,8 @@ public class PostExperience {
         this.title = title;
         this.userRating = userRating;
         this.othersRating = othersRating;
-        this.timeStamp = "End me";
+        android.text.format.DateFormat df = new android.text.format.DateFormat();
+        this.timeStamp = df.format("yyyy-MM-dd", new java.util.Date()).toString();
         this.content = content;
         this._links = new Links();
     }

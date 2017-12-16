@@ -1,5 +1,8 @@
 package net.caesarlegion.drugimpact;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.PostExperience;
@@ -19,7 +23,7 @@ import java.net.URL;
  * A placeholder fragment containing a simple view.
  */
 public class CreateUserActivityFragment extends Fragment {
-
+    final Context c = getContext();
     public CreateUserActivityFragment() {
     }
 
@@ -27,6 +31,7 @@ public class CreateUserActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_create_user, container, false);
+
 
         View button = root.findViewById(R.id.button4);
         button.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +55,6 @@ public class CreateUserActivityFragment extends Fragment {
                     System.out.println("Could not parse " + nfe);
                 }
 
-
                 User user = new User(2,email,pass,display,dob,weight);
                 Send(user);
             }
@@ -63,5 +67,10 @@ public class CreateUserActivityFragment extends Fragment {
     {
         CreateUserTask createTask = new CreateUserTask();
         createTask.execute(user);
+
+        Toast toast = Toast.makeText(getActivity().getApplicationContext(),"Data Sent" , Toast.LENGTH_SHORT);
+        toast.show();
+        Context cont = getContext();
+        ((Activity)cont).finish();
     }
 }

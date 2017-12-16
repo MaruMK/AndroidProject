@@ -294,10 +294,12 @@ public class RemindersFragment extends Fragment {
         if(getContext() != null) {
             Toast.makeText(getContext(), "Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName(), Toast.LENGTH_SHORT).show();
 
+            //Get the context
             Context c = getContext();
-            //THE GREAT WALL
+            //What channel we use for push notifications
             String NOTIFICATION_CHANNEL_ID = "my_channel_01";
             NotificationManager notificationManager = (NotificationManager) c.getSystemService(NOTIFICATION_SERVICE);
+            //Checks if the sdk is a certain version, if it is we do this.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
 
@@ -305,7 +307,7 @@ public class RemindersFragment extends Fragment {
                 notificationChannel.setDescription("Channel description");
                 notificationManager.createNotificationChannel(notificationChannel);
             }
-
+            //Build the notification and it's content
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(), NOTIFICATION_CHANNEL_ID)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("You are now Sober")
