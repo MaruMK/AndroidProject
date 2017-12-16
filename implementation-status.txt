@@ -50,27 +50,34 @@ didn't allow me to fix unexpected bugs that happen when we switch user.
   N/A
 
 ========================================
-Team member: NAME
+Team member: Connor King
 ----------------------------------------
 
-* Responsible Activity: CLASS_NAME
+* Responsible Activity: Login Fragment,Create User Fragment,Browse Exp Fragment,Post Experience Fragment
 
- [ ] Complete.
+ [X] Complete.
  [ ] Incomplete.
 
- Remarks: REMARKS
+ Remarks: I was responsible for login and browsing experiences made from users retrieved from the server.
+ I was also responsible for creating users page and creating fragments page. They are both functional. However
+ they were not exactly what are orignal goal was. This mostly applied to comments. We wanted to allow users to
+ create comments on a experience. But this was very challenging and I could not get it to work. However you
+ can still see what people's experiences that are posted. Overall while these two activities could be much improved
+ they are both still fully functional.
 
-* Extra: DESCRIPTION
+* Extra: Push Notifications
 
- [ ] Complete
+ [X] Complete
  [ ] Incomplete
 
- Remarks: REMARKS
+ Remarks: This was a strange extra due it being very specific to which gradle version you were using and what phone.
+ It did indeed work in the end however it only seems to work on newer phones. They make it extremely difficult for
+ it to work on older phone without third party software. The Nexus 6 was the phone I worked with and it worked.
 
 * Self-assessed Extra Difficulty
 
  [ ] Easy
- [ ] Medium
+ [X] Medium
  [ ] Hard
 
 * Other (optional)
