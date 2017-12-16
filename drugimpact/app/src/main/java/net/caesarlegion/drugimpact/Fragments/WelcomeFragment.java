@@ -24,7 +24,7 @@ import java.util.List;
  * Created by Gabriel Charlebois on 2017-11-26.
  */
 
-public class    WelcomeFragment extends Fragment {
+public class WelcomeFragment extends Fragment {
     public WelcomeFragment() {
     }
 
