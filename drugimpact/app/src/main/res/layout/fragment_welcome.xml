@@ -28,21 +28,88 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView_recent_activity"
+        <LinearLayout
+            android:id="@+id/substance"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_weight="0.5"
-            android:gravity="center_vertical"
-            android:text="@string/welcome_recent_activity"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="24sp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="?attr/colorButtonNormal"
+            android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/listView_recent"
+            <TextView
+                android:id="@+id/title_substance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="12dp"
+                android:text="Substance"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/desc_substance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Make sure you get any substance from a trusted source. Even then, you should make sure to test chimical substances using a test kit. For any new substance, always start a lower dose than recommended, observe how your body reacts and go up from there."
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/div_set"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_weight="4" />
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="?attr/colorButtonNormal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="12dp"
+                android:text="Set"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/desc_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="You need to be aware of your current state of mind before taking any drug."
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dvi_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="?attr/colorButtonNormal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="12dp"
+                android:text="Setting"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/desc_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Consider the importance of your environment when you will be taking any substance. Minimize your disconfort by lowering the number of people you might be around and ensure trust in the ones that will be there for you. Be sure to be somewhere safe."
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
