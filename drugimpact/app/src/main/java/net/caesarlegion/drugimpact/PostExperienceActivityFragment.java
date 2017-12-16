@@ -81,7 +81,6 @@ public class PostExperienceActivityFragment extends Fragment {
     public void Send(PostExperience test)
     {
         CreateExperienceTask createTask = new CreateExperienceTask();
-        LoginApplication loginApp = new LoginApplication();
         String yep="Something went wrong";
         try {
             //This is what calls our get task **IMPORTANT**

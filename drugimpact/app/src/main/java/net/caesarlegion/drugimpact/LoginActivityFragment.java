@@ -73,7 +73,6 @@ public class LoginActivityFragment extends Fragment {
                         }
                     }
                 });
-                LoginApplication loginApp = new LoginApplication();
                 loginTask.execute(MainActivity.ADDRESS+"user");
             }
         });
