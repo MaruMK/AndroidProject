@@ -71,8 +71,6 @@ public class ExperienceData extends Application{
     {
         GetLoginTask loginTask = new GetLoginTask();
         loginTask.setOnResponseListener(onResponseListener);
-
-        LoginApplication loginApp = new LoginApplication();
-        loginTask.execute(loginApp.PREFIX+"/experience");
+        loginTask.execute(MainActivity.ADDRESS+"experience");
     }
 }

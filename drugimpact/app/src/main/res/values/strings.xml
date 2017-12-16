@@ -21,6 +21,11 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="desc">desc</string>
+    <!--Drug Browsing Fragment Strings-->
+    <string-array name="sortingOptions">
+        <item>Alphabetical Ascending</item>
+        <item>Alphabetical Descending</item>
+    </string-array>
     <string name="title_activity_post_experience">PostExperienceActivity</string>
     <string name="title_activity_create_user">CreateUserActivity</string>
     <string name="title_activity_create_notification">CreateNotificationActivity</string>

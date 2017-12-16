@@ -5,18 +5,14 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.ExperienceData;
 import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
 import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivityAdapter;
-import net.caesarlegion.drugimpact.LoginApplication;
-import net.caesarlegion.drugimpact.MainActivity;
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
 import net.caesarlegion.drugimpact.PostExperienceActivity;
 import net.caesarlegion.drugimpact.R;
