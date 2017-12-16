@@ -43,11 +43,15 @@ import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
  */
 public class MainActivity extends AppCompatActivity {
 
+    //Declare parameter identifiers used to communication between activities
+    public static class params {
+        public static String USER_ID = "user";
+        public static String KEY = "key";
+    }
     //Declare some global variables
-    public static String URL = "http://192.168.0.44"; //"http://10.0.2.2"
+    public static String URL = "http://192.168.2.11";
     public static String PORT = "9999";
     public static String ADDRESS = URL + ":" + PORT + "/";
-    public static Integer CURRENT_USER_ID = 2;
 
     //Used to permanently store user's emergency info
     SharedPreferences emergencyPrefs;
@@ -59,21 +63,29 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
-    //Declare the local database handler
-    public HistoryDatabaseHandler historyDatabaseHandler;
+
+    //Hold the userId and key for database identification and encryption
+    private String userId;
+    private String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         emergencyPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         showNotification();
+
+        //Initialize our id and key for the database
+        Intent fromLogin = getIntent();
+        userId = fromLogin.getStringExtra(params.USER_ID);
+        key = fromLogin.getStringExtra(params.KEY);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        //Initialize our local database handler
-        historyDatabaseHandler = new HistoryDatabaseHandler(this);
+
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -136,22 +148,32 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public Fragment getItem(int position) {
+
+            //We want to bundle the necessary data to certain fragments
+            Bundle bundle = new Bundle();
+            bundle.putString(params.USER_ID, userId);
+            bundle.putString(params.KEY, key);
+            //Create the fragment according to a given position
             switch(position){
                 case 1:
                     return new BrowseDrugsFragment();
                 case 2:
-                    return new RemindersFragment();
+                    RemindersFragment remindersFragment = new RemindersFragment();
+                    remindersFragment.setArguments(bundle);
+                    return remindersFragment;
                 case 3:
                     return new BrowseExperiencesFragment();
                 case 4:
-                    return new SettingsFragment();
+                    SettingsFragment settingsFragment = new SettingsFragment();
+                    settingsFragment.setArguments(bundle);
+                    return settingsFragment;
                 default:
                     return new WelcomeFragment();
             }
         }
 
         /**
-         * Is called to instantiate the fragment for the given page.
+         * Purpose: Is called to instantiate the fragment for the given page.
          * @return
          */
         @Override
@@ -163,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void showNotification()
     {
-        Log.d("Why","WWWWWWWWWWWWWWWWW");
 
     }
 }

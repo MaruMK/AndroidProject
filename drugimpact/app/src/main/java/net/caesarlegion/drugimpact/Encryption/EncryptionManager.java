@@ -36,7 +36,11 @@ public class EncryptionManager {
 
     public EncryptionManager() {}
 
-    public EncryptionManager(String key) {this.setKeyFromServer(key);}
+    public EncryptionManager(String key) {
+        //We will only accept keys that are 16, 24 or 32 bytes, because that's what AES can handle.
+        if (key.length() == 16 || key.length() == 24 || key.length() == 32)
+            this.setKeyFromServer(key);
+    }
 
     private SecretKey generateKey()
     {

@@ -1,31 +1,19 @@
 package net.caesarlegion.drugimpact;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import net.caesarlegion.drugimpact.Fragments.BrowseDrugsFragment;
-import net.caesarlegion.drugimpact.ListAdapters.ExperiencesAdapter.ExperienceActivity;
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,8 +42,8 @@ public class LoginActivityFragment extends Fragment {
                     @Override
                     public void onResponse(String data) {
 
-                        EditText editEmail = root.findViewById(R.id.editText);
-                        EditText editPass = root.findViewById(R.id.editText2);
+                        EditText editEmail = root.findViewById(R.id.editEmail);
+                        EditText editPass = root.findViewById(R.id.editPassword);
 
                         try {
                             JSONObject info = new JSONObject(data);
@@ -71,6 +59,9 @@ public class LoginActivityFragment extends Fragment {
                                     if(item.getString("pass").equals(editPass.getText().toString()))
                                     {
                                         Intent intent = new Intent(getActivity(),MainActivity.class);
+                                        //Give the user id and the password to activity so it can initialize the database accordingly
+                                        intent.putExtra(MainActivity.params.USER_ID, Integer.toString(i + 1));
+                                        intent.putExtra(MainActivity.params.KEY, item.getString("encryptionKey") );
                                         startActivity(intent);
                                     }
                                 }
@@ -83,8 +74,7 @@ public class LoginActivityFragment extends Fragment {
                     }
                 });
                 LoginApplication loginApp = new LoginApplication();
-                Log.d("GGGGGGGGGGGGGGGGGGGGGGG",loginApp.PREFIX);
-                loginTask.execute(loginApp.PREFIX+"/user");
+                loginTask.execute(MainActivity.ADDRESS+"user");
             }
         });
 
