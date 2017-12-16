@@ -103,32 +103,33 @@ Team member: NAME
 
 
 ========================================
-Team member: NAME
+Team member: Mamoru-Maru Kajifusa
 ----------------------------------------
 
-* Responsible Activity: CLASS_NAME
+* Responsible Activity: BrowseDrugsFragment
 
  [ ] Complete.
- [ ] Incomplete.
+ [x] Incomplete.
 
- Remarks: REMARKS
+ Remarks: Filtering is buggy
 
-* Extra: DESCRIPTION
+* Extra: Get web content and put into a new fragment for the drug selected
 
  [ ] Complete
- [ ] Incomplete
+ [x] Incomplete
 
- Remarks: REMARKS
+ Remarks: Not done
 
 * Self-assessed Extra Difficulty
 
+ N/A
  [ ] Easy
  [ ] Medium
  [ ] Hard
 
 * Other (optional)
 
-  REMARKS
+  none
 
 
 
