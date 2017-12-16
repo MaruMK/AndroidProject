@@ -1,7 +1,8 @@
 package net.caesarlegion.drugimpact.Fragments;
 
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.Control.DownloadTask;
 import net.caesarlegion.drugimpact.Control.DrugListAdapter;
@@ -27,6 +29,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * Created by Scowl Gulch on 2017-11-26.
@@ -77,6 +81,7 @@ public class BrowseDrugsFragment extends Fragment {
                         drugListFromServer.add(Drug.parse(object.toString()));
                         Log.d("DEBUG_JSON",drugListFromServer.get(i).getName());
                     }
+                    refreshListView(drugListFromServer);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -89,11 +94,26 @@ public class BrowseDrugsFragment extends Fragment {
 
         drugListAdapter = new DrugListAdapter(getContext(), drugListFromServer);
 
-        refreshListView(sampleDrugs);
+        /*===================================== Event Listener for items ==================================*/
+        drugList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Drug selectedDrug = (Drug) drugList.getItemAtPosition(position);
+                Toast.makeText(getContext(),selectedDrug.getName(), LENGTH_SHORT).show();
+
+
+                Intent intent = new Intent(getContext(), DrugInfoActivity.class);
+                intent.putExtra("drug_name",selectedDrug.getName());
+                intent.putExtra("drug_url",selectedDrug.getUrl());
+                startActivityForResult(intent,0);
+            }
+        });
+        /*=================================================================================================*/
 
         searchTerm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                refreshListView(drugListAdapter.filteredDrugList);
             }
 
             @Override
@@ -107,6 +127,7 @@ public class BrowseDrugsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                refreshListView(drugListAdapter.filteredDrugList);
             }
         });
 
@@ -114,7 +135,7 @@ public class BrowseDrugsFragment extends Fragment {
     }
 
     private void refreshListView(List<Drug> data) {
-        DrugListAdapter newAdapter = new DrugListAdapter(getContext());
+        final DrugListAdapter newAdapter = new DrugListAdapter(getContext());
         newAdapter.addAll(data);
         //Fill list with the adapter's content
         drugList.setAdapter(newAdapter);
@@ -130,9 +151,10 @@ public class BrowseDrugsFragment extends Fragment {
                 final int ALPHABETICAL_ASC=0;
                 final int ALPHABETICAL_DESC=1;
 
+                Log.d("DEBUG_POS", String.valueOf(pos));
                 switch (pos) {
                     case ALPHABETICAL_ASC:
-                        drugListAdapter.sort(new Comparator<Drug>() {
+                        newAdapter.sort(new Comparator<Drug>() {
                             @Override
                             public int compare(Drug o1, Drug o2) {
                                 return o1.getName().compareTo(o2.getName());
@@ -140,7 +162,7 @@ public class BrowseDrugsFragment extends Fragment {
                         });
                         break;
                     case ALPHABETICAL_DESC:
-                        drugListAdapter.sort(new Comparator<Drug>() {
+                        newAdapter.sort(new Comparator<Drug>() {
                             @Override
                             public int compare(Drug o1, Drug o2) {
                                 return o2.getName().compareTo(o1.getName());

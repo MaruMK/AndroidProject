@@ -73,16 +73,17 @@ public class DrugListAdapter extends ArrayAdapter<Drug> implements Filterable{
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filteredDrugList = (List<Drug>) results.values;
-            for (Iterator<Drug> it = ((List<Drug>) results.values).iterator(); it.hasNext(); ) {
-                Drug d = it.next();
-                Log.d("DEBUG",d.getName());
+            if(results.count > 0) {
+                filteredDrugList = (List<Drug>) results.values;
+                for (Iterator<Drug> it = ((List<Drug>) results.values).iterator(); it.hasNext(); ) {
+                    Drug d = it.next();
+                    Log.d("DEBUG",d.getName());
+                }
+                Log.d("DEBUG_COUNT", String.valueOf(results.count));
+
+                notifyDataSetChanged();
             }
-            Log.d("DEBUG_COUNT", String.valueOf(results.count));
-
-            notifyDataSetChanged();
-
-
+            notifyDataSetInvalidated();
         }
     }
     /*==================================================================================================*/
