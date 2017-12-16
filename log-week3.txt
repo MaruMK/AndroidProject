@@ -1,0 +1,114 @@
+commit bf8376791d1767441caed90ab0bd00ebe2418088
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Sat Dec 16 05:28:36 2017 -0500
+
+    Extra not done
+
+commit 64ba09f7ee5a23c8ebc51fb121be2ff976d0cba6
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Sat Dec 16 03:39:40 2017 -0500
+
+    Can now get Drugs from server and apporiately display them
+    
+    Made sorting choice not work
+
+commit 33d0176af8c4e5cf5104023d6a807fbc9dc8e5bc
+Merge: 9025a85 9a29eab
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 15 19:09:40 2017 -0500
+
+    Merge pull request #23 from MaruMK/Maru2
+    
+    Maru2
+
+commit 9a29eabbc0c540d91111dc5c0f6595fa15c31839
+Merge: ac7f7e2 9025a85
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 15 19:08:35 2017 -0500
+
+    Merge branch 'master' into Maru2
+
+commit ac7f7e2bc2ad4e145abb5ddb36eaffe3757e2b0a
+Merge: 057a8d2 fbc542f
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 15 18:06:45 2017 -0500
+
+    Merge branch 'master' into Maru2
+
+commit 057a8d29a89c42c8ef0dadb1bad06b7659681adb
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 15 17:53:12 2017 -0500
+
+    Getting json from server not working
+
+commit 22a00878e4054d97121adbccf3bea363020ea7ad
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Fri Dec 15 02:10:48 2017 -0500
+
+    Getting Data from server
+
+commit 682608d092b553b8ead9c2593659adf9e8ab4473
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Tue Dec 12 21:32:23 2017 -0500
+
+    Filtering 99% working
+    
+    Results show up 1 tick behind
+
+commit 30425347b50bb64628199c60754c7d53bf755060
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 16:43:42 2017 -0500
+
+    Revert "Server setup"
+    
+    This reverts commit 77170323842ee38cfe3b33a729f0a56ab34ab7ec.
+
+commit a2ea2ce57145e06f1898afbf06e77fe6986822ef
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 16:39:33 2017 -0500
+
+    New Branch created from master
+
+commit b1442b2fcc0d81794dd95428a18481f41b9cffef
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 14:25:59 2017 -0500
+
+    Revert "Revert "Server Version 1: mySQL & API done""
+    
+    This reverts commit 1ccd59549138c54d0f18271db86ac6e04c94e3a2.
+
+commit 1ccd59549138c54d0f18271db86ac6e04c94e3a2
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 13:37:07 2017 -0500
+
+    Revert "Server Version 1: mySQL & API done"
+    
+    This reverts commit 78cc3d049700992ccf9a14a30699acf67c311b78, reversing
+    changes made to 2fc11d110d91b339569b9262e8024274693df540.
+
+commit 5b5d6f8927b360b2399d85e82f09ce4e8cc236fa
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 13:09:55 2017 -0500
+
+    failed merge 2
+
+commit dc125c22fa06dae600709abd7d91ebd069e263a3
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 13:09:33 2017 -0500
+
+    failed merge
+    
+    -broke things
+
+commit f3d847f33cb9866ef96317e6ef7349f892f3a417
+Merge: 7717032 78cc3d0
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 12:51:12 2017 -0500
+
+    Merge branch 'master' into MaruBranch
+
+commit 77170323842ee38cfe3b33a729f0a56ab34ab7ec
+Author: MaruMK <31971396+MaruMK@users.noreply.github.com>
+Date:   Mon Dec 11 12:48:01 2017 -0500
+
+    Server setup
