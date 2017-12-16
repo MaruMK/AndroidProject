@@ -2,13 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.caesarlegion.drugimpact">
 
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-=======
 
     <uses-permission android:name="android.permission.INTERNET" />
 
->>>>>>> master
 
     <application
         android:allowBackup="true"
