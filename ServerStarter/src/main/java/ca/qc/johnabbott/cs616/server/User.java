@@ -20,7 +20,7 @@ public class User {
     private String dob;
     private double weight;
     private String encryptionKey;
-
+/* ----- Unused one to many relationships due to time constraints. -----
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments = new HashSet<Comment>();
 
@@ -42,7 +42,7 @@ public class User {
     public void setExperiences(Set<Experience> experiences) {
         this.experiences = experiences;
     }
-
+*/
     public long getUserId() {
         return userId;
     }
