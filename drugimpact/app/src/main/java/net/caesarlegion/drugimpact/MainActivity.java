@@ -1,7 +1,13 @@
 package net.caesarlegion.drugimpact;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NotificationCompat;
@@ -13,6 +19,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         emergencyPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
+        showNotification();
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -154,8 +161,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showNotification(View v)
+    public void showNotification()
     {
-        //NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        Log.d("Why","WWWWWWWWWWWWWWWWW");
+
     }
 }

@@ -44,6 +44,10 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+
+
+
+
                 GetLoginTask loginTask = new GetLoginTask();
                 loginTask.setOnResponseListener(new OnResponseListener<String>() {
 

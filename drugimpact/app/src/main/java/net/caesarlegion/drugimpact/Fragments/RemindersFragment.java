@@ -4,6 +4,7 @@ package net.caesarlegion.drugimpact.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -11,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -292,13 +294,24 @@ public class RemindersFragment extends Fragment {
         if(getContext() != null) {
             Toast.makeText(getContext(), "Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName(), Toast.LENGTH_SHORT).show();
 
-            String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(),NOTIFICATION_CHANNEL_ID);
-            builder.setSmallIcon(R.drawable.example_appwidget_preview);
-            builder.setContentTitle("My notification");
-            builder.setContentText("This is me ending it");
-            Intent intent = new Intent(this.getContext(), SecondNotificationClass.class);
-            
+            Context c = getContext();
+            //THE GREAT WALL
+            String NOTIFICATION_CHANNEL_ID = "my_channel_01";
+            NotificationManager notificationManager = (NotificationManager) c.getSystemService(NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                // Configure the notification channel.
+                notificationChannel.setDescription("Channel description");
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(), NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("You are now Sober")
+                    .setContentText("Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName());
+
+            notificationManager.notify(1, builder.build());
         }
         else {
             //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------
