@@ -3,13 +3,19 @@ package net.caesarlegion.drugimpact.Fragments;
 //Maxime Lachance
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +32,7 @@ import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.EmergencyText;
 import net.caesarlegion.drugimpact.ListAdapters.HistoryAdapter.HistoryAdapter;
+import net.caesarlegion.drugimpact.LoginActivityFragment;
 import net.caesarlegion.drugimpact.MainActivity;
 import net.caesarlegion.drugimpact.Model.DatabaseException;
 import net.caesarlegion.drugimpact.Model.Drug;
@@ -35,12 +42,15 @@ import net.caesarlegion.drugimpact.Model.History;
 import net.caesarlegion.drugimpact.Model.HistoryDatabaseHandler;
 import net.caesarlegion.drugimpact.Model.onDrugClickedListener;
 import net.caesarlegion.drugimpact.R;
+import net.caesarlegion.drugimpact.SecondNotificationClass;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class RemindersFragment extends Fragment {
 
@@ -56,6 +66,9 @@ public class RemindersFragment extends Fragment {
     //This database will hold the history values. It is (will be) encrypted
     public HistoryDatabaseHandler historyDatabase = new HistoryDatabaseHandler(getContext());
 
+    /*NotificationCompat.Builder notification = new NotificationCompat.Builder(this.getContext()).setSmallIcon(R.drawable.ic_action_tab_exp)
+            .setContentTitle("Hello").setContentText("Eat it");*/
+    private static final int UniqueId = 1243134;
 
 
     public RemindersFragment() {
@@ -278,6 +291,14 @@ public class RemindersFragment extends Fragment {
 
         if(getContext() != null) {
             Toast.makeText(getContext(), "Now sober from " + DrugSafetyData.GetDrugById(h.getDrugId()).getName(), Toast.LENGTH_SHORT).show();
+
+            String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(),NOTIFICATION_CHANNEL_ID);
+            builder.setSmallIcon(R.drawable.example_appwidget_preview);
+            builder.setContentTitle("My notification");
+            builder.setContentText("This is me ending it");
+            Intent intent = new Intent(this.getContext(), SecondNotificationClass.class);
+            
         }
         else {
             //TODO: IMPLEMENT PUSH NOTIFICATIONS HERE---------------------------------------------------------------------------------------------------------------------------------

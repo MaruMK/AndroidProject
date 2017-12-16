@@ -13,7 +13,8 @@ import java.util.Set;
 
 public class PostExperience {
 
-    private long experienceId;
+    private long userId;
+    //private long experienceId;
     private Integer drug1;
     private Integer drug2;
     private String title;
@@ -24,27 +25,15 @@ public class PostExperience {
     private Links _links;
 
     public PostExperience(Integer drug1,Integer drug2,String title,Integer userRating,Integer othersRating,String content) {
-        this.experienceId = 3;
+        this.userId = 3;
         this.drug1 = drug1;
         this.drug2 = drug2;
         this.title = title;
         this.userRating = userRating;
         this.othersRating = othersRating;
-        this.timeStamp = new Date().toString();
+        this.timeStamp = "End me";
         this.content = content;
         this._links = new Links();
-
-        _links.self = new Self();
-        _links.self.href = "ha";
-
-        _links.experience = new Experience();
-        _links.experience.href = "ha";
-
-        _links.user = new User();
-        _links.user.href = "ha";
-
-        _links.comments = new Comments();
-        _links.comments.href = "ha";
     }
     private static class Links
     {
@@ -68,9 +57,5 @@ public class PostExperience {
     private static class Comments
     {
         private String href;
-    }
-    public String toJSON()
-    {
-        return "{\"drug1\":\"" + this.drug1 + "\", \"drug2\":\"" + this.drug2 + "\", \"title\":\"" + this.title + "\", \"userRating\":\"" + this.userRating + "\", \"othersRating\":\"" + this.othersRating + "\", \"timeStamp\":\"" + this.timeStamp + "\", \"content\":\"" + this.content +"\"}";
     }
 }

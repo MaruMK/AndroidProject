@@ -11,6 +11,7 @@ import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
 import net.caesarlegion.drugimpact.Model.OnUploadResponse;
 import net.caesarlegion.drugimpact.Model.PostExperience;
+import net.caesarlegion.drugimpact.Model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,10 +29,10 @@ import java.net.URL;
  * Created by Connor on 2017-12-15.
  */
 
-public class CreateUserTask extends AsyncTask<Drug,Void,String> {
+public class CreateUserTask extends AsyncTask<User,Void,String> {
 
     private OnUploadResponse<String> listener;
-    private String address = "http://192.168.0.44:9999/drug";
+    private String address = "http://192.168.0.44:9999/user";
 
     public void setListener(OnUploadResponse<String> listener) {
         this.listener = listener;
@@ -39,8 +40,8 @@ public class CreateUserTask extends AsyncTask<Drug,Void,String> {
     public void setAddress(String address) {this.address = address + "drug";}
 
     @Override
-    protected String doInBackground(Drug... entry) {
-        Drug drug = entry[0];
+    protected String doInBackground(User... entry) {
+        User userData = entry[0];
         try
         {
             URL url = new URL(address);
@@ -54,8 +55,8 @@ public class CreateUserTask extends AsyncTask<Drug,Void,String> {
 
             Gson builder = new GsonBuilder().create();
             PrintStream out = new PrintStream(con.getOutputStream());
-            Log.d("SSSSSSSSSSSSSSSSSSSSSS",builder.toJson(drug));
-            out.println(builder.toJson(drug));
+            Log.d("SSSSSSSSSSSSSSSSSSSSSS",builder.toJson(userData));
+            out.println(builder.toJson(userData));
             out.close();
 
 

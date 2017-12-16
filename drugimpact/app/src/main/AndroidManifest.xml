@@ -26,6 +26,20 @@
             </intent-filter>
         </activity>
 
+
+
+        <activity
+            android:name=".SecondNotificationClass"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="second_filter" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <receiver android:name=".EmergencyText">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -43,7 +57,7 @@
         <activity
             android:name=".CreateUserActivity"
             android:label="@string/title_activity_create_user"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

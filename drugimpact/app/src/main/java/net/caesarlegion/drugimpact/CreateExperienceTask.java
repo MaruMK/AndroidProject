@@ -58,12 +58,12 @@ public class CreateExperienceTask extends AsyncTask<PostExperience,Void,String> 
             out.close();
 
 
-            int code = con.getResponseCode();
-            String piss = "LOL "+code;
+            //int code = con.getResponseCode();
+            //String piss = "LOL "+code;
 
             if(con.getResponseCode() != 201)
             {
-                Log.d("BBBBBBBBBAAAAAAAADDDD",piss);
+                //Log.d("BBBBBBBBBAAAAAAAADDDD",piss);
                 throw new IOException("Not Created:");
             }
             Log.d("DDDDDDDDDDDDDDDDD","done");

@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import net.caesarlegion.drugimpact.Model.Drug;
 import net.caesarlegion.drugimpact.Model.PostExperience;
+import net.caesarlegion.drugimpact.Model.User;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,24 +33,35 @@ public class CreateUserActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                URL url = null;
+                EditText e = root.findViewById(R.id.editEmail);
+                String email = e.getText().toString();
+                EditText p = root.findViewById(R.id.editPassword);
+                String pass = p.getText().toString();
+                EditText d = root.findViewById(R.id.editDisplay);
+                String display = d.getText().toString();
+                EditText b = root.findViewById(R.id.editBirth);
+                String dob = b.getText().toString();
+                EditText w = root.findViewById(R.id.editWeight);
+                String wei = w.getText().toString();
+                int weight = 1;
                 try {
-                    url = new URL("http://www.google.com");
+                    weight = Integer.parseInt(wei);
+                } catch(NumberFormatException nfe) {
+                    System.out.println("Could not parse " + nfe);
                 }
-                catch(MalformedURLException e) {
-                    Log.d("dddd","woops");
-                }
-                Drug drug = new Drug(2,"SpeedWeed","Lol",url);
-                Send(drug);
+
+
+                User user = new User(2,email,pass,display,dob,weight);
+                Send(user);
             }
         });
 
         return root;
     }
 
-    public void Send(Drug drug)
+    public void Send(User user)
     {
         CreateUserTask createTask = new CreateUserTask();
-        createTask.execute(drug);
+        createTask.execute(user);
     }
 }

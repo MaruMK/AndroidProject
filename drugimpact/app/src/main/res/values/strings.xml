@@ -17,4 +17,5 @@
     <string name="desc">desc</string>
     <string name="title_activity_post_experience">PostExperienceActivity</string>
     <string name="title_activity_create_user">CreateUserActivity</string>
+    <string name="title_activity_create_notification">CreateNotificationActivity</string>
 </resources>
