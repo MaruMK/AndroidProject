@@ -43,6 +43,7 @@ public class BrowseExperiencesFragment extends Fragment {
 
         UpdateList();
 
+        //This brings us to the post experience activity
         View button = root.findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,7 @@ public class BrowseExperiencesFragment extends Fragment {
             }
         });
 
+        //This will call the adapter again to update the list when we click a button
         View button2 = root.findViewById(R.id.button6);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +74,7 @@ public class BrowseExperiencesFragment extends Fragment {
         final ExperienceActivityAdapter adapter = new ExperienceActivityAdapter(getContext());
         final ListView experienceList = RootClone.findViewById(R.id.listView_experiences);
 
-
+        //Calls the adapter things again to update list
         ExperienceData.GetFromServer(new OnResponseListener<String>() {
             @Override
             public void onResponse(String data) {

@@ -45,28 +45,21 @@ public class CreateExperienceTask extends AsyncTask<PostExperience,Void,String> 
             URL url = new URL(address);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-            Log.d("TTTTTTTTTTTTTTTTTTTTTT",url.toString());
             //Tell the server we're doing a POST request
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setDoOutput(true);
-
+            //Gson builder to convert object to gson to json
             Gson builder = new GsonBuilder().create();
             PrintStream out = new PrintStream(con.getOutputStream());
-            Log.d("SSSSSSSSSSSSSSSSSSSSSS",builder.toJson(PostInfo));
+            //Send the data
             out.println(builder.toJson(PostInfo));
             out.close();
 
-
-            //int code = con.getResponseCode();
-            //String piss = "LOL "+code;
-
             if(con.getResponseCode() != 201)
             {
-                //Log.d("BBBBBBBBBAAAAAAAADDDD",piss);
                 throw new IOException("Not Created:");
             }
-            Log.d("DDDDDDDDDDDDDDDDD","done");
             return con.getHeaderField("Location");
 
         } catch (MalformedURLException e) {

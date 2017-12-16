@@ -38,6 +38,7 @@ public class CreateUserActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                //Get data from edit text that user filled in
                 EditText e = root.findViewById(R.id.editEmail);
                 String email = e.getText().toString();
                 EditText p = root.findViewById(R.id.editPassword);
@@ -54,7 +55,7 @@ public class CreateUserActivityFragment extends Fragment {
                 } catch(NumberFormatException nfe) {
                     System.out.println("Could not parse " + nfe);
                 }
-
+                //Create new object to send to asyntask
                 User user = new User(2,email,pass,display,dob,weight);
                 Send(user);
             }
@@ -66,8 +67,9 @@ public class CreateUserActivityFragment extends Fragment {
     public void Send(User user)
     {
         CreateUserTask createTask = new CreateUserTask();
+        //This si what executes the task and does all the work(POST or GET)
         createTask.execute(user);
-
+        //notify user
         Toast toast = Toast.makeText(getActivity().getApplicationContext(),"Data Sent" , Toast.LENGTH_SHORT);
         toast.show();
         Context cont = getContext();
