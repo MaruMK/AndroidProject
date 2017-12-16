@@ -14,17 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/experience_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:text="TextView"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/experience_drug"
+            android:id="@+id/experience_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,7 +36,7 @@
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/experience_descriction"
+            android:id="@+id/experience_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

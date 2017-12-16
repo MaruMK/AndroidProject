@@ -1,10 +1,16 @@
 package net.caesarlegion.drugimpact;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.Control.GETObject;
@@ -42,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         public static String KEY = "key";
     }
     //Declare some global variables
-    public static String URL = "http://192.168.2.11"; //"http://10.0.2.2"
+    public static String URL = "http://192.168.2.11";
     public static String PORT = "9999";
     public static String ADDRESS = URL + ":" + PORT + "/";
 
@@ -66,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         emergencyPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        showNotification();
 
         //Initialize our id and key for the database
         Intent fromLogin = getIntent();
@@ -172,5 +181,10 @@ public class MainActivity extends AppCompatActivity {
             // Show 4 total pages.
             return 5;
         }
+    }
+
+    public void showNotification()
+    {
+
     }
 }

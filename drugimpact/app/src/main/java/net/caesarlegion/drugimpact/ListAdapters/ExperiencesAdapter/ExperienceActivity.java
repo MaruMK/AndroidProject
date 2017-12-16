@@ -6,15 +6,13 @@ import java.util.Date;
  */
 
 public class ExperienceActivity {
-    public String Username;
-    public String Drug;
-    public String Description;
-    public Date TimeWritten;
+    public String Title;
+    public String Content;
+    public String TimeWritten;
 
-    public ExperienceActivity(String username,String drug,String Description,Date TimeWritten) {
-        this.Username = username;
-        this.Drug = drug;
-        this.Description = Description;
+    public ExperienceActivity(String title,String content,String TimeWritten) {
+        this.Title = title;
+        this.Content = content;
         this.TimeWritten = TimeWritten;
     }
 

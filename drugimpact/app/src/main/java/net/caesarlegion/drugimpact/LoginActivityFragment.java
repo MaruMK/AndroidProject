@@ -1,14 +1,13 @@
 package net.caesarlegion.drugimpact;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import net.caesarlegion.drugimpact.Model.OnResponseListener;
 
@@ -20,7 +19,7 @@ import org.json.JSONObject;
  * A placeholder fragment containing a simple view.
  */
 public class LoginActivityFragment extends Fragment {
-
+ private Context c = this.getContext();
     public LoginActivityFragment() {
     }
 
@@ -33,14 +32,18 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+
+
+
+
                 GetLoginTask loginTask = new GetLoginTask();
                 loginTask.setOnResponseListener(new OnResponseListener<String>() {
 
                     @Override
                     public void onResponse(String data) {
 
-                        EditText editEmail = root.findViewById(R.id.feedback_edit);
-                        EditText editPass = root.findViewById(R.id.editText2);
+                        EditText editEmail = root.findViewById(R.id.editEmail);
+                        EditText editPass = root.findViewById(R.id.editPassword);
 
                         try {
                             JSONObject info = new JSONObject(data);
@@ -61,11 +64,6 @@ public class LoginActivityFragment extends Fragment {
                                         intent.putExtra(MainActivity.params.KEY, item.getString("encryptionKey") );
                                         startActivity(intent);
                                     }
-                                    else
-                                    {
-                                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Bad Password", Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
                                 }
                             }
                         }
@@ -75,41 +73,20 @@ public class LoginActivityFragment extends Fragment {
                         }
                     }
                 });
+                LoginApplication loginApp = new LoginApplication();
                 loginTask.execute(MainActivity.ADDRESS+"user");
+            }
+        });
+
+        View button = root.findViewById(R.id.button5);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentlol = new Intent(getActivity(),CreateUserActivity.class);
+                startActivity(intentlol);
             }
         });
         return root;
     }
 
-
-/*
-    //This Hash Function was taken from
-    //https://stackoverflow.com/questions/4846484/md5-hashing-in-android
-    public static final String md5(final String s)
-    {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-}
-*/
 }
