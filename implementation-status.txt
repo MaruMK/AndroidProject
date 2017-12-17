@@ -86,18 +86,14 @@ Team member: Connor King
 
 
 ========================================
-Team member: NAME
 Team member: Maxime Lachance
 ----------------------------------------
 
-* Responsible Activity: CLASS_NAME
 * Responsible Activity: ReminderFragment, SettingsFragment(small part for my extra)
 
- [ ] Complete.
  [X] Complete.
  [ ] Incomplete.
 
- Remarks: REMARKS
  Remarks: It was really interesting to make the fragment. Mainly due to the fact that every susbtance is handled
  differently in many ways, for example, alcohol has concentration, caffeine comes in many different "formats" 
  but each format doesn't usually have the caffeine content readily available, so each of its possible forms had to
@@ -106,14 +102,11 @@ Team member: Maxime Lachance
  But it would have added much more work on the information itself and not the Android part, so I had to focus on the
  most common substances and their average instead.
 
-* Extra: DESCRIPTION
 * Extra: Widget + Emergency text message
 
- [ ] Complete
  [X] Complete
  [ ] Incomplete
 
- Remarks: REMARKS
  Remarks: The widget was surpringly not as much of a challenge as I originally thought, Android Studio was well made 
  in the sense that it guided you through the steps to create the widget the way you want it. The biggest challenge I
  encountered was storing the information entered in the app to also be available OUTSIDE of the app in the widget. 
@@ -126,13 +119,11 @@ Team member: Maxime Lachance
 * Self-assessed Extra Difficulty
 
  [ ] Easy
- [ ] Medium
  [X] Medium
  [ ] Hard
 
 * Other (optional)
 
-  REMARKS
   Very much enjoyed working on the project, as it is something that I can see myself using (For the caffeine and alcohol
   part, especially with tolerance 0 alcohol for driving). However, I would need to spend much more time refining the 
   calculations (and variables taken in consideration) before I would rely on it with confidence. I didn't want to spend 
