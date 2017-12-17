@@ -87,31 +87,61 @@ Team member: Connor King
 
 ========================================
 Team member: NAME
+Team member: Maxime Lachance
 ----------------------------------------
 
 * Responsible Activity: CLASS_NAME
+* Responsible Activity: ReminderFragment, SettingsFragment(small part for my extra)
 
  [ ] Complete.
+ [X] Complete.
  [ ] Incomplete.
 
  Remarks: REMARKS
+ Remarks: It was really interesting to make the fragment. Mainly due to the fact that every susbtance is handled
+ differently in many ways, for example, alcohol has concentration, caffeine comes in many different "formats" 
+ but each format doesn't usually have the caffeine content readily available, so each of its possible forms had to
+ have their own information stored, etc. My only regret is not having had time to implement more substances for the
+ calculations, or to implement a lot more variables in the calculations (user weight, user height, gender, age, etc)
+ But it would have added much more work on the information itself and not the Android part, so I had to focus on the
+ most common substances and their average instead.
 
 * Extra: DESCRIPTION
+* Extra: Widget + Emergency text message
 
  [ ] Complete
+ [X] Complete
  [ ] Incomplete
 
  Remarks: REMARKS
+ Remarks: The widget was surpringly not as much of a challenge as I originally thought, Android Studio was well made 
+ in the sense that it guided you through the steps to create the widget the way you want it. The biggest challenge I
+ encountered was storing the information entered in the app to also be available OUTSIDE of the app in the widget. 
+ Though that issue had to be fixed in order for the data to remain even after the app was closed (Didn't want to user
+ a database solely for one row of two fields). Also, after having implemented the widget text function, I figured it 
+ would be easy to implement the emergency function directly in the app if a dangerous amount of drugs was to be consumed.
+ (Try putting a ridiculous amount of alcohol for example, you'll get a notification that asks you if you want to contact
+ your emergency number)
 
 * Self-assessed Extra Difficulty
 
  [ ] Easy
  [ ] Medium
+ [X] Medium
  [ ] Hard
 
 * Other (optional)
 
   REMARKS
+  Very much enjoyed working on the project, as it is something that I can see myself using (For the caffeine and alcohol
+  part, especially with tolerance 0 alcohol for driving). However, I would need to spend much more time refining the 
+  calculations (and variables taken in consideration) before I would rely on it with confidence. I didn't want to spend 
+  more time on the "data" and to not have any time left to spend on the app, so I prefered to add more functionalities 
+  rather than static data. Also, I really think the emergency text widget can be useful in more than one situation, and
+  even though I wouldn't 100% rely on the timer/calculations (due to the lack of variables taken into consideration: weight,
+  age,gender, etc.) the emergency widget is the part of the app in which I'm the most confident, and even if it's not for a 
+  "drug" related situation, I think it can be truly useful to be able to preset a number and message in advance and to be 
+  able to send it in just a few presses.
 
 
 ========================================
