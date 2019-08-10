@@ -69,6 +69,7 @@ public class CreateUserActivityFragment extends Fragment {
         CreateUserTask createTask = new CreateUserTask();
         //This si what executes the task and does all the work(POST or GET)
         createTask.execute(user);
+        createTask.setAddress(MainActivity.ADDRESS);
         //notify user
         Toast toast = Toast.makeText(getActivity().getApplicationContext(),"Data Sent" , Toast.LENGTH_SHORT);
         toast.show();

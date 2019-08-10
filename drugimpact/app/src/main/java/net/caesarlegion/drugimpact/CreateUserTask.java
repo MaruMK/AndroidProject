@@ -32,12 +32,12 @@ import java.net.URL;
 public class CreateUserTask extends AsyncTask<User,Void,String> {
 
     private OnUploadResponse<String> listener;
-    private String address = "http://192.168.0.44:9999/user";
+    private String address = MainActivity.ADDRESS + "user";
 
     public void setListener(OnUploadResponse<String> listener) {
         this.listener = listener;
     }
-    public void setAddress(String address) {this.address = address + "drug";}
+    public void setAddress(String address) {this.address = address + "user";}
 
     @Override
     protected String doInBackground(User... entry) {

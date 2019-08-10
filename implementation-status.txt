@@ -1,0 +1,170 @@
+Please fill out the below to help me out with correcting your project. Each team member fills out their "Team Member" section. Replace the ALL_CAPS with your info and check the relevant boxes [x]. No need for long answers unless necessary! Thanks!
+
+========================================
+Project
+----------------------------------------
+
+* Commit: 763db863871dbf3b00bfd3fdc060e75eb5ec065b ( https://github.com/MaruMK/AndroidProject/commit/763db863871dbf3b00bfd3fdc060e75eb5ec065b )
+
+* Server - git repo of server (if not in this repo): Same repo ( https://github.com/MaruMK/AndroidProject/tree/master/ServerStarter )
+
+* SQL Script location in repo: /mySQL/charG_dbtest_v1.2.sql ( https://github.com/MaruMK/AndroidProject/blob/master/mySQL/charG_dbtest_v1.2.sql  )
+
+* App - server IP address is set in the following class: MainActivity.java ( https://github.com/MaruMK/AndroidProject/blob/master/drugimpact/app/src/main/java/net/caesarlegion/drugimpact/MainActivity.java )
+
+* Special Install/Setup Instructions. No special instructions.
+
+INSTRUCTIONS
+
+========================================
+Team member: Gabriel Charlebois
+----------------------------------------
+
+* Responsible Activity: WelcomeFragment.java , SettingsFragment.java
+
+ [ X ] Complete.
+ [ ] Incomplete.
+
+ Remarks: For the welcome fragment, I decided to give some words of advice
+about the safe usage of drugs instead of meshing togheter recent posts/comments
+becaus eit was overlapping too greatly with my teamates' parts. I worked on the
+"Send feedback" part of SettingsFragment.
+
+* Extra: Encryption of local database
+
+ [ X ] Complete
+ [ ] Incomplete
+
+ Remarks: If we look at the data by rooting the device, it is unreadable, gibberish!
+I wish I could have had user-dependent key (everything is in place for it) but time-constraints
+didn't allow me to fix unexpected bugs that happen when we switch user.
+
+* Self-assessed Extra Difficulty
+
+ [ ] Easy
+ [ X ] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  N/A
+
+========================================
+Team member: Connor King
+----------------------------------------
+
+* Responsible Activity: Login Fragment,Create User Fragment,Browse Exp Fragment,Post Experience Fragment
+
+ [X] Complete.
+ [ ] Incomplete.
+
+ Remarks: I was responsible for login and browsing experiences made from users retrieved from the server.
+ I was also responsible for creating users page and creating fragments page. They are both functional. However
+ they were not exactly what are orignal goal was. This mostly applied to comments. We wanted to allow users to
+ create comments on a experience. But this was very challenging and I could not get it to work. However you
+ can still see what people's experiences that are posted. Overall while these two activities could be much improved
+ they are both still fully functional.
+
+* Extra: Push Notifications
+
+ [X] Complete
+ [ ] Incomplete
+
+ Remarks: This was a strange extra due it being very specific to which gradle version you were using and what phone.
+ It did indeed work in the end however it only seems to work on newer phones. They make it extremely difficult for
+ it to work on older phone without third party software. The Nexus 6 was the phone I worked with and it worked.
+
+* Self-assessed Extra Difficulty
+
+ [ ] Easy
+ [X] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  REMARKS
+
+
+========================================
+Team member: Maxime Lachance
+----------------------------------------
+
+* Responsible Activity: ReminderFragment, SettingsFragment(small part for my extra)
+
+ [X] Complete.
+ [ ] Incomplete.
+
+ Remarks: It was really interesting to make the fragment. Mainly due to the fact that every susbtance is handled
+ differently in many ways, for example, alcohol has concentration, caffeine comes in many different "formats" 
+ but each format doesn't usually have the caffeine content readily available, so each of its possible forms had to
+ have their own information stored, etc. My only regret is not having had time to implement more substances for the
+ calculations, or to implement a lot more variables in the calculations (user weight, user height, gender, age, etc)
+ But it would have added much more work on the information itself and not the Android part, so I had to focus on the
+ most common substances and their average instead.
+
+* Extra: Widget + Emergency text message
+
+ [X] Complete
+ [ ] Incomplete
+
+ Remarks: The widget was surpringly not as much of a challenge as I originally thought, Android Studio was well made 
+ in the sense that it guided you through the steps to create the widget the way you want it. The biggest challenge I
+ encountered was storing the information entered in the app to also be available OUTSIDE of the app in the widget. 
+ Though that issue had to be fixed in order for the data to remain even after the app was closed (Didn't want to user
+ a database solely for one row of two fields). Also, after having implemented the widget text function, I figured it 
+ would be easy to implement the emergency function directly in the app if a dangerous amount of drugs was to be consumed.
+ (Try putting a ridiculous amount of alcohol for example, you'll get a notification that asks you if you want to contact
+ your emergency number)
+
+* Self-assessed Extra Difficulty
+
+ [ ] Easy
+ [X] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  Very much enjoyed working on the project, as it is something that I can see myself using (For the caffeine and alcohol
+  part, especially with tolerance 0 alcohol for driving). However, I would need to spend much more time refining the 
+  calculations (and variables taken in consideration) before I would rely on it with confidence. I didn't want to spend 
+  more time on the "data" and to not have any time left to spend on the app, so I prefered to add more functionalities 
+  rather than static data. Also, I really think the emergency text widget can be useful in more than one situation, and
+  even though I wouldn't 100% rely on the timer/calculations (due to the lack of variables taken into consideration: weight,
+  age,gender, etc.) the emergency widget is the part of the app in which I'm the most confident, and even if it's not for a 
+  "drug" related situation, I think it can be truly useful to be able to preset a number and message in advance and to be 
+  able to send it in just a few presses.
+
+
+========================================
+Team member: Mamoru-Maru Kajifusa
+----------------------------------------
+
+* Responsible Activity: BrowseDrugsFragment
+
+ [ ] Complete.
+ [x] Incomplete.
+
+ Remarks: Filtering is buggy
+
+* Extra: Get web content and put into a new fragment for the drug selected
+
+ [ ] Complete
+ [x] Incomplete
+
+ Remarks: Not done
+
+* Self-assessed Extra Difficulty
+
+ N/A
+ [ ] Easy
+ [ ] Medium
+ [ ] Hard
+
+* Other (optional)
+
+  none
+
+
+
+
+
